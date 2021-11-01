@@ -1,0 +1,9 @@
+package Abilities is
+
+type Ability_Category is (Physical, Mental, Social);
+
+record Ability : Localised is
+    key Category : Ability_Category;
+end Ability;
+
+end Abilities;

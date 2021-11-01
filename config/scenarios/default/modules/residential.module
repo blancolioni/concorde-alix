@@ -1,0 +1,49 @@
+1 = {
+    cost = 10
+    modules = {
+        hostel = { economy = 1 loyalty = 1 }
+        residency = { stability = 1 unrest = -1 }
+    }
+}
+
+2 = {
+    cost = 20
+    modules = {
+        hostel = { economy = 2 loyalty = 2 }
+        residency = { stability = 2 unrest = -2 }
+        complex = { stability = 4 }
+    }
+}
+
+3 = {
+    cost = 40
+    slots = 2
+    modules = {
+        hostel = { economy = 3 loyalty = 3 culture = 1 }
+        residency = { economy = 2 stability = 2 unrest = -1 law = 1 }
+        complex = { stability = 4 unrest = -1 law = 1 }
+        palace = { economy = 2 loyalty = 2 stability = 2 culture = 1 }
+    }
+}
+
+4 = {
+    cost = 60
+    slots = 2
+    modules = {
+        hostel = { economy = 4 loyalty = 4 culture = 2 }
+        residency = { economy = 2 loyalty = 2 stability = 2 unrest = -1 culture = 1 law = 1 }
+        complex = { economy = 2 stability = 4 unrest = -2 law = 2 }
+        palace = { economy = 2 loyalty = 4 stability = 2 culture = 1 law = 1 }
+    }
+}
+
+5 = {
+    cost = 80
+    slots = 4
+    modules = {
+        hostel = { economy = 4 loyalty = 4 stability = 2 culture = 4 }
+        complex = { economy = 2 loyalty = 2 stability = 4 unrest = -2 law = 2 culture = 2 }
+        palace = { economy = 2 loyalty = 6 stability = 2 culture = 2 law = 2 }
+    }
+}
+

@@ -1,0 +1,24 @@
+wealth-group = yes
+priority = 10000
+
+politics = {
+  democracy = { position = 0.7 strength = 0.8 }
+  equality = { position = 0.8 strength = 0.8 }
+  freedom = { position = 0.6 strength = 0.6 }
+  society = { position = 0.6 strength = 0.7 }
+#  religion = { position = 0.2 strength = 0.7 }
+}
+
+influences = {
+  self-employed = -1
+}
+
+demand = {
+    food = [ poor-population * (min (1 + poor-income) 1) * (1 - food-price / 2) ]
+    basic-electronics = [ poor-population * (max poor-income 0) ** 2 * ((1 - basic-electronics-price) / 2 + 0.1) ]
+}
+
+desire = {
+    food = [ poor-population ]
+    basic-electronics = [ poor-population ]
+}

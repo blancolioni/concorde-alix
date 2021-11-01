@@ -1,0 +1,26 @@
+category,Category
+climate,Climate
+command-name,Command
+earth-mass,Mass
+earth-radius,Radius
+execute-command,Execute
+g,Surface g
+galaxy-map,Galaxy Map
+lh2,LH₂
+login,Login
+login-name,Login
+name,Name
+password,Password
+pause-server,Pause Server
+resume-server,▶
+stop-server,Stop Server
+temperature,Temperature
+treasurer,Treasurer
+ambassador,Ambassador
+chief-justice,Attorney General
+ruler,Ruler
+prime-minister,Prime Minister
+security-head,Home Secretary
+general,General
+admiral,Admiral
+chief-scientist,Chief Scientist

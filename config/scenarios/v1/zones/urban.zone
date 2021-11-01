@@ -1,0 +1,17 @@
+zones = {
+	commercial = {
+	   base-price = 1000
+	}
+
+	business = {
+	   base-price = 1000
+	}
+
+	residential = {
+	   base-price = 100
+	}
+
+	industrial = {
+	   base-price = 50
+	}
+}

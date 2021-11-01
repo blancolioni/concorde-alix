@@ -1,0 +1,11 @@
+with Localisation;
+
+package Religions is
+
+record Religion_Group : Localised;
+
+record Religion : Localised is
+   key Religion_Group;
+end Religion;
+
+end Religions;

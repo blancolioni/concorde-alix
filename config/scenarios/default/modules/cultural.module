@@ -1,0 +1,53 @@
+1 = {
+    cost = 10
+    modules = {
+        meeting-place = { stability = 2 }
+        monument = { loyalty = 2 }
+    }
+}
+
+2 = {
+    cost = 20
+    modules = {
+        meeting-place = { stability = 4 }
+        monument = { loyalty = 4 }
+        temple = { loyalty = 2 stability = 2 }
+        theater = { economy = 2 stability = 2 }
+    }
+}
+
+3 = {
+    cost = 40
+    slots = 2
+    modules = {
+        meeting-place = { loyalty = 2 stability = 4 law = 1 }
+        monument = { loyalty = 6 culture = 1 }
+        temple = { loyalty = 4 stability = 2 culture = 1 }
+        theater = { economy = 2 loyalty = 2 stability = 2 culture = 1 }
+    }
+}
+
+4 = {
+    cost = 60
+    slots = 2
+    modules = {
+        arena = { economy = 2 loyalty = 2 stability = 4 capability = 1 law = 1 }
+        meeting-place = { loyalty = 4 stability = 4 law = 2 }
+        monument = { loyalty = 8 culture = 2 }
+        temple = { loyalty = 4 stability = 4 culture = 2 }
+        theater = { economy = 4 loyalty = 2 stability = 2 culture = 2 }
+    }
+}
+
+5 = {
+    cost = 80
+    slots = 4
+    modules = {
+        arena = { economy = 4 loyalty = 2 stability = 4 capability = 2 law = 2 }
+        meeting-place = { loyalty = 6 stability = 4 law = 4 }
+        monument = { loyalty = 10 culture = 4 }
+        temple = { economy = 2 loyalty = 4 stability = 4 culture = 2 law = 2 }
+        theater = { economy = 4 loyalty = 2 stability = 4 culture = 4 }
+    }
+}
+

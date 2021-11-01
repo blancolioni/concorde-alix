@@ -1,0 +1,27 @@
+with Abilities;
+with Attributes;
+with Skills;
+
+package Offices is
+
+record Office : Localised, Has_Attributes is
+    key Rank : Positive;
+end Office;
+
+record Office_Skill is
+    key Office;
+    key Skill;
+    unique key Office_Skill with Office, Skill;
+end Office_Skill;
+
+record Office_Ability is
+    key Office;
+    key Ability;
+    unique key Office_Ability with Office, Ability;
+end Office_Ability;
+
+record Office_Vacancy : Has_Attributes is
+    unique key Office;
+end Office_Vacancy;
+
+end Offices;

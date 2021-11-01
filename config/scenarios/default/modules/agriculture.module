@@ -1,0 +1,50 @@
+groups = {
+    farm = { habitable = 1 }
+    plantation = { habitable = 1 }
+}
+
+1 = {
+    cost = 10
+    modules = {
+        farm = { economy = 1 stability = 1 }
+        storehouse = { stability = 1 Loyalty = 1 }
+    }
+}
+
+2 = {
+    cost = 20
+    modules = {
+        farm = { economy = 2 stability = 2 }
+        storehouse = { stability = 2 Loyalty = 2 }
+    }
+}
+
+3 = {
+    cost = 40
+    slots = 2
+    modules = {
+        farm = { economy = 2 stability = 4 capability = 1 }
+        storehouse = { economy = 2 stability = 2 Loyalty = 2 capability = 1 }
+        plantation = { economy = 6 supply = 1 }
+    }
+}
+
+4 = {
+    cost = 60
+    slots = 2
+    modules = {
+        farm = { economy = 4 stability = 4 capability = 2 }
+        storehouse = { economy = 2 stability = 4 Loyalty = 2 capability = 1 law = 1 }
+        plantation = { economy = 6 loyalty = 2 culture = 1 supply = 1 }
+    }
+}
+
+5 = {
+    cost = 80
+    slots = 4
+    modules = {
+        farm = { economy = 4 stability = 6 capability = 2 supply = 2 }
+        plantation = { economy = 8 loyalty = 2 culture = 2 supply = 2 }
+    }
+}
+

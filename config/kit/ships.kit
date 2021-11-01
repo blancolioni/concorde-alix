@@ -1,0 +1,179 @@
+with Colonies;
+with Factions;
+with Locations;
+with Managed;
+with Names;
+with Owners;
+with Quantities;
+with Technology;
+with Worlds;
+
+package Ships is
+
+record Hull_Configuration : Localised is
+   Streamlining  : Long_Float;
+   Hull_Points   : Long_Float;
+   Armor_Tonnage : Long_Float;
+   Cost          : Long_Float;
+end Hull_Configuration;
+   
+record Hull_Armor : Localised, Technological is
+    Tonnage       : Long_Float;
+    Cost_Fraction : Long_Float;
+    Max_Armor     : Positive;
+end Hull_Armor;
+
+record Stealth : Localised, Technological is
+    Cost_Per_Ton : Long_Float;
+    Modifier     : Integer;
+end Stealth;
+
+record Reinforcement : Localised is
+    Cost_Scale       : Long_Float;
+    Hull_Point_Scale : Long_Float;
+end Reinforcement;
+
+record Component : Localised, Technological is
+    Minimum_Tonnage : Long_Float;
+    Price_Per_Ton   : Price_Type;
+end Component;
+
+record Fueled_Component : Component is
+    Fuel_Per_Ton : Long_Float;
+end Fueled_Component;
+
+record Powered_Component : Component is
+   Power_Per_Ton : Long_Float;
+end Powered_Component;
+
+record Engine : Powered_Component is
+    Hull_Fraction : Long_Float;
+    Impulse       : Long_Float;
+end Engine;
+
+record Jump_Drive : Powered_Component is
+    Hull_Fraction : Long_Float;
+    Jump          : Long_Float;
+end Jump_Drive;
+
+record Computer : Powered_Component is
+    Capacity : Positive;
+end Computer;
+
+record Sensor : Powered_Component is
+    Tonnage  : Long_Float;
+    Modifier : Integer;
+end Sensor;
+
+record Bridge : Powered_Component is
+    Tonnage        : Long_Float;
+    Ship_Tons_Low  : Long_Float;
+    Ship_Tons_High : Long_Float;
+end Bridge;
+
+record Quarters : Powered_Component is
+    Tonnage            : Long_Float;
+    Comfort_Level      : Natural;
+    Standard_Occupants : Positive;
+    Max_Occupants      : Positive;
+end Quarters;
+
+record Generator : Fueled_Component is
+    Power_Per_Ton : Long_Float;
+end Generator;
+
+type Weapon_Mount_Category is (Turret, Heavy_Turret, Bay, Spinal);
+
+record Weapon_Mount : Localised, Technological, Powered_Component is
+    Category     : Weapon_Mount_Category;
+    Fixed        : Boolean;
+    Hardpoints   : Positive;
+    Weapon_Count : Positive;
+    Tonnage      : Long_Float;
+end Weapon_Mount;
+
+record Weapon_Range_Band : Localised is
+    Base  : Long_Float;
+    Bound : Long_Float;
+end Weapon_Range_Band;
+
+record Ship_Weapon : Localised, Technological is
+    Mount_Category  : Weapon_Mount_Category;
+    Weapon_Range_Band;
+    Power  : Long_Float;
+    Damage : Positive;
+    Price  : Price_Type;
+end Ship_Weapon;
+
+record Ship_Design : Has_Name is
+   Hull_Configuration;
+   Hull_Armor;
+   Stealth;
+   Reinforcement;
+   Tonnage        : Long_Float;
+   Hull_Points    : Long_Float;
+   Fuel_Tank      : Long_Float;
+   Cargo_Space    : Long_Float;
+   Basic_Power    : Long_Float;
+   Engine_Power   : Long_Float;
+   Jump_Power     : Long_Float;
+   Firmpoints     : Natural;
+   Hardpoints     : Natural;
+end Ship_Design;
+
+record Ship_Design_Module is
+   key Ship_Design;
+   Component;
+   Tonnage    : Long_Float;
+   Concealed  : Boolean;
+end Ship_Design_Module;
+
+record Ship_Design_Weapon is
+   Ship_Design_Module;
+   Ship_Weapon;
+end Ship_Design_Weapon;
+
+type Ship_Status is
+  (Idle, Activating, Moving, Jumping, Surveying, Training, Repairing, Destroyed);
+  
+record Ship : Has_Name, Managed, Shared, Orbiting_Object is
+   key Faction;
+   key Home    : Colony;
+   Status      : Ship_Status;
+   Training    : Long_Float;
+   Fuel        : Long_Float;
+   Destination : World;
+   Departure   : Time;
+   Arrival     : Time;
+   Start       : Time;
+   key Ship_Status with Faction, Status;
+end Ship;
+
+record Ship_Module is
+   key Ship;
+   Component;
+   Condition  : Long_Float;
+   Tonnage    : Long_Float;
+end Ship_Module;
+
+record Engine_Module : Ship_Module is
+   Engine;
+end Engine_Module;
+
+record Jump_Module : Ship_Module is
+   Jump_Drive;
+end Jump_Module;
+
+record Generator_Module : Ship_Module is
+   Generator;
+end Generator_Module;
+
+record Cargo is
+   key Ship;
+   Commodity;
+   Quantity : Quantity_Type;
+   Value    : Money_Type;
+   unique key Cargo with Ship, Commodity;
+end Cargo;
+
+end Ships;

@@ -1,0 +1,94 @@
+cash = 100K
+
+gdp = ~10G
+total-population = ~10M
+tax-evasion = 0.1
+income-tax = 0.33
+luxury-tax = 0.1
+sales-tax = 0.2
+technology = 1
+worker-productivity = 0.5
+import-tariffs = 0.1
+state-health-service = 1
+state-pensions = 1
+state-schools = 1
+military-spending = 0.5
+research-spending = 0.2
+pollution-controls = 0.0
+voting-rights = 0.0
+poverty-rate = 0.1
+foreign-relations = 1
+poor-base-income = 1
+middle-class-base-income = 5
+rich-base-income = 20
+megarich-base-income = 100
+megarich-income-tax-rate = 5%
+rich-income-tax-rate = 50%
+middle-class-income-tax-rate = 40%
+poor-income-tax-rate = 30%
+equality = 50%
+birth-rate = 2%
+death-rate = 1%
+pop-size = 100K
+wages = 0.0
+education = 0.5
+gini = 0.3
+apathy = 0.1
+farming = 1
+mining = 1
+refining = 0.8
+manufacturing = 0.2
+service = 0.4
+knowledge = 0.2
+administration = 0.4
+
+ships = {
+   scout = 2
+   transport = 1
+   defender = 1
+}
+
+capital-sector = {
+   administration = 10 
+   commercial = 100
+   industrial = 100
+   residential = 1000
+}
+
+military = {
+   salary = 3
+   army = {
+      name = "1st Republican Army"
+      regiment = {
+         basic-infantry-unit
+      }
+   }
+}
+
+sector-use = {
+    urban = {
+        count = 20
+        zones = {
+           administration = 10 
+           commercial = 100
+           industrial = 100
+           residential = 1000
+        }
+    }
+   farmland = {
+      count = 12
+	  zones = { farm = 100 }
+	  }
+   mine = {
+      count = 16
+	  zones = { mine = 100 }
+      }
+}
+
+init-script = {
+   "load-galaxy-view"
+   "load-star-system-view --name=$CAPITAL_SYSTEM"
+   "load-world-view --world-name=$CAPITAL_WORLD"
+   "show-market $CAPITAL_WORLD"
+   "show-orbit $CAPITAL_WORLD"
+}

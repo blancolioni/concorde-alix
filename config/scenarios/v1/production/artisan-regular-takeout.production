@@ -1,0 +1,17 @@
+in = {
+  cooking = 2
+  grain = 3
+  vegetables = 2
+  fruit = 1
+}
+
+efficiency = {
+ administration = 1
+ }
+ 
+zone = commercial
+size = 0.01
+
+out = {
+  regular-takeout = 2
+}

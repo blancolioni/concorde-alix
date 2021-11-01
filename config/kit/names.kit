@@ -1,0 +1,15 @@
+package Names is
+
+record Has_Name is
+   key Name : String (64) is display;
+end Has_Name;
+
+record Has_Adjective : Has_Name is
+   Adjective : String (64);
+end Has_Adjective;
+
+record Has_Plural_Name : Has_Name is
+   Plural_Name : String (64);
+end Has_Plural_Name;
+
+end Names;

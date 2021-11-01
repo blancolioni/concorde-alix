@@ -1,0 +1,8 @@
+class = consumer-good
+name = Soda
+mass = 20
+quality = 2
+drink = true
+component = { water = 15
+              carbonite = 10
+            }

@@ -1,0 +1,55 @@
+with Angles;
+with Calendar;
+with Generated;
+with Identifiers;
+with Knowledge;
+with Locations;
+with Massive_Objects;
+with Names;
+
+package Star_Systems is
+
+   record Star_System : Has_Name, Knowable, Is_Generated is
+       X             : Long_Float;
+       Y             : Long_Float;
+       Z             : Long_Float;
+       Claimed       : Boolean;
+   end Star_System;
+   
+   record Serializable : Has_Name;
+   
+   record Orbiting_Object : Massive_Object, Serializable, Has_Identifier is
+      key Primary_Massive : Massive_Object;
+	  Semimajor_Axis  : Long_Float;
+	  Epoch           : Time;
+	  Eccentricity    : Long_Float;
+	  Period          : Long_Float;
+   end Orbiting_Object;
+   
+   record Star_System_Object : Knowable, Orbiting_Object, Has_Orbits is
+      key Star_System;
+      key Primary     : Star_System_Object;
+      Radius          : Long_Float;
+      Density         : Long_Float;
+      Rotation_Period : Long_Float;
+      Tilt            : Angle;
+      Surface_Gravity : Long_Float;
+   end Star_System_Object;
+   
+   record Star_Gate : Knowable is
+      key From : Star_System;
+	  X        : Long_Float;
+	  Y        : Long_Float;
+	  Z        : Long_Float;
+      To       : Star_System;
+      unique key Star_Gate with From, To;
+   end Star_Gate;
+   
+   record Star_System_Distance is
+      key Star_System;
+      To : Star_System;
+      Distance : Long_Float;
+      key Star_System_Range with Star_System, Distance;
+   end Star_System_Distance;
+   
+end Star_Systems;

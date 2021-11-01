@@ -1,0 +1,248 @@
+legumes = { class = resource
+            mass = 2
+            organic = yes
+            base_price = 3
+          }
+wool = { class = resource
+            mass = 2
+            organic = yes
+            base_price = 3
+          }
+cotton = { class = resource
+            mass = 2
+            organic = yes
+            base_price = 3
+          }
+silk = { class = resource
+            mass = 2
+            organic = yes
+            base_price = 20
+          }
+seafood = { class = resource
+            name = Seafood
+            mass = 1.5
+            organic = yes
+            base_price = 5
+          }
+fruit = { class = resource
+          name = Fruit
+          mass = 1.2
+          organic = yes
+          base_price = 2
+        }
+vegetables = { class = resource
+               name = vegetables
+               mass = 1.2
+               organic = yes
+               base_price = 0.5
+             }
+grains = { class = resource
+           name = Grains
+           mass = 1.6
+           organic = yes
+           base_price = 0.5
+         }
+herb = { class = resource
+         name = Herbs
+         mass = 1.2
+         organic = yes
+         base_price = 3
+       }
+fungi = { class = resource
+           name = fungi
+           mass = 1.2
+           organic = yes
+           base_price = 3
+         }
+salt = { class = resource
+         name = Salt
+         mass = 2.165
+         mineral = yes
+         base_price = 0.2
+       }
+silicon = { class = resource
+            name = Silicon
+            mass = 2.330
+            mineral = yes
+            base_price = 0.5
+          }
+carbonite = { class = resource
+              name = Carbonite
+              mass = 1
+              mineral = yes
+              base_price = 0.3
+            }
+rare-minerals = { class = resource
+                  name = "Rare minerals"
+                  mass = 1
+                  mineral = yes
+                  base_price = 10
+                }
+copper = { class = resource
+           name = Copper
+           mass = 1
+           metal = yes
+           base_price = 0.5
+         }
+iron = { class = resource
+         name = Iron
+         mass = 1
+         metal = yes
+         base_price = 1
+       }
+aluminium = { class = resource
+              name = Aluminium
+              mass = 1
+              metal = yes
+              base_price = 0.5
+            }
+precious = { class = resource
+             name = "Precious Metals"
+             mass = 1
+             metal = yes
+             base_price = 10
+           }
+fissile = { class = resource
+            name = Fissile
+            mass = 1
+            fissile = yes
+            base_price = 50
+          }
+oil = { class = resource
+        name = Oil
+        mass = 1
+        fuel = yes
+        base_price = 1
+      }
+coal = { class = resource
+         name = Coal
+         mass = 1
+         fuel = yes
+         base_price = 1
+       }
+hydrocarbon = { class = resource
+                name = "Hydrocarbon Gas"
+                mass = 1
+                gas = yes
+                base_price = 1
+              }
+noblegas = { class = resource
+             name = "Noble Gas"
+             mass = 1
+             gas = yes
+             base_price = 1
+           }
+water = { class = resource
+          name = Water
+          mass = 1
+          liquid = yes
+          base_price = 0.1
+        }
+		
+rations = { class = consumer
+            name = Rations
+            mass = 10
+            quality = 1
+            food = yes
+          }
+          
+readymeal = { class = consumer
+              name = "Ready Meal"
+              mass = 10
+              quality = 2
+              food = yes
+            }
+            
+luxuryfood = { class = consumer
+               name = "Luxury Food"
+               mass = 10
+               quality = 3
+               food = yes
+             }
+             
+bottled-water = { class = consumer
+                  name = "Bottled Water"
+                  mass = 20
+                  quality = 1
+                  drink = yes
+                }
+
+soda = { class = consumer
+         name = Soda
+         mass = 20
+         quality = 2
+         drink = yes
+       }
+
+ambrosia = { class = consumer
+             name = Ambrosia
+             mass = 20
+             quality = 3
+             drink = yes
+           }
+narcotics = { class = consumer
+              name = Narcotics
+              mass = 10
+              quality = 3
+              intoxicant = yes
+            }
+stimulants = { class = consumer
+               name = Stimulants
+               mass = 10
+               quality = 2
+               intoxicant = yes
+             }
+alcohol = { class = consumer
+            name = Alcohol
+            mass = 20
+            quality = 1
+            intoxicant = yes
+          }
+luxuryclothes = { class = consumer
+                  name = "Luxury Clothes"
+                  mass = 20
+                  quality = 3
+                  clothes = yes
+                }
+regularclothes = { class = consumer
+                   name = "Regular Clothes"
+                   mass = 20
+                   quality = 2
+                   clothes = yes
+                 }
+bargainclothes = { class = consumer
+                   name = "Bargain Clothes"
+                   mass = 20
+                   quality = 1
+                   clothes = yes
+                 }
+steel = { class = industrial
+          name = Steel
+          mass = 5
+          alloy = yes
+        }
+bronze = { class = industrial
+           name = Bronze
+           mass = 5
+           alloy = yes
+         }
+glass = { class = industrial
+          name = Glass
+          mass = 1
+          ceramic = yes
+        }
+cement = { class = industrial
+           name = Cement
+           mass = 1
+           ceramic = yes
+         }
+pvc = { class = industrial
+        name = PVC
+        mass = 1
+        plastic = yes
+      }
+nylon = { class = industrial
+          name = Nylon
+          mass = 1
+          plastic = yes
+        }

@@ -1,0 +1,24 @@
+with Agents;
+with Factions;
+with Managed;
+with Names;
+with Owners;
+with Worlds;
+
+package Companies is
+
+record Company : Agent, Has_Name, Owner, Managed is
+   Faction;
+   Headquarters : World;
+   Shares       : Positive;
+   Dividend     : Long_Float;
+end Company;
+
+record Shareholder is
+   key Company;
+   key Agent;
+   Shares : Natural;
+   unique key Shareholder with Company, Agent;
+end Shareholder;
+
+end Companies;

@@ -1,0 +1,2 @@
+terrain = { rock = 50% mountain = 50% }
+habitability = 75

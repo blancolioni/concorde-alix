@@ -1,0 +1,31 @@
+# Object file
+*.o
+
+# Ada Library Information
+*.ali
+
+# Build files
+build
+
+# Databases
+*.marlowe
+
+# Generated files
+concorde.gpr
+src/kit/*
+src/driver/concorde-paths.ads
+src/driver/concorde-options.ad[bs]
+config/delauny.txt
+factions.config
+
+# Log file
+log
+options.txt
+gmon.out
+gprof.txt
+test.txt
+config/voronoi.txt
+config/voronoi.txt
+.concorde-options
+nazar.log
+agora.log

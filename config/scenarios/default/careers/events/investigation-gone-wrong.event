@@ -1,0 +1,7 @@
+text = investigation-gone-wrong
+choices = {
+    oh-no (check = advocate difficulty = 8 stop) = {
+        event = evt-keep-benefits
+    }
+    oh-no
+}

@@ -1,0 +1,5 @@
+rank = 4
+skills = { profession admin }
+abilities = { int edu }
+vacancy = { economy = -4 }
+attributes = { economy }

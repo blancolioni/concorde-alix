@@ -1,0 +1,14 @@
+package Generated is
+
+   record Has_Random_Seed is
+      Seed : Integer;
+   end Has_Random_Seed;
+   
+   record Is_Generated;
+
+   record Generation is
+      unique key Is_Generated;
+      Ready : Boolean;
+   end Generation;
+   
+end Generated;

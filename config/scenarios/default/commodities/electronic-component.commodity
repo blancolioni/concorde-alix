@@ -1,0 +1,8 @@
+class = industrial-good
+name = "Electronic Component"
+mass = 5
+electronic = true
+component = { silicon = 2
+              aluminium = 2
+              pvc = 1
+            }

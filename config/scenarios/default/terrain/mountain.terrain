@@ -1,0 +1,15 @@
+hazard = 0.05
+priority = 5
+resource = { aluminium = 0.150
+             carbonite = 0.150
+             copper = 0.450
+             fissile = 0.100
+             iron = 0.450
+             precious = 0.100
+             water = 0.500
+           }
+
+module-costs = {
+  farm = 2.5
+  plantation = 5
+}

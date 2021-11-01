@@ -1,0 +1,15 @@
+hazard = 0.05
+priority = 10
+resource = { hydrocarbon = 0.250
+             oil = 0.250
+             rare-minerals = 0.100
+             salt = 0.500
+             seafood = 0.500
+             water = 1.00
+           }
+color = "#81a0f8"
+
+module-costs = {
+  farm = 0.5
+  plantation = 5
+}

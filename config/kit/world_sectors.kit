@@ -1,0 +1,51 @@
+with Commodities;
+with Factions;
+with Identifiers;
+with Resources;
+with Worlds;
+
+package World_Sectors is
+
+	record Sector_Use : Localised is
+		Parent : Sector_Use;
+	end Sector_Use;
+	
+	record District : Localised is
+		key Sector_Use;
+	end District;
+
+	record World_Sector : Sector, Has_Identifier is
+		key Faction;
+		key World;
+		Terrain;
+		Feature;
+		Sector_Use;
+		Height : Integer;
+		key Elevation       : Integer;
+		Average_Temperature : Long_Float;
+		Prevailing_Wind     : Long_Float;
+		Moisture            : Long_Float;
+		Habitability        : Long_Float;
+		key World_Sector_Use with World, Sector_Use;
+		key World_Temperature with World, Average_Temperature;
+	end World_Sector;
+	   
+	record Deposit : Knowable is
+		key World;
+		unique key World_Sector;
+		Resource;
+		Concentration : Long_Float;
+		Difficulty    : Long_Float;
+		Available     : Quantity_Type;
+		unique key Deposit with World_Sector, Resource;
+		key Accessible_Deposits with World, Difficulty;
+	end Deposit;
+   
+	record Deposit_Knowledge : Faction_Knowledge is
+		key Deposit;
+		Resource;
+		key Known_Resource with Faction, Resource;
+		unique key Deposit_Knowledge with Faction, Deposit;
+	end Deposit_Knowledge;
+   
+end World_Sectors;

@@ -1,0 +1,14 @@
+politics = {
+  corporate = { position = 0.3 strength = 0.5 }
+  democracy = { position = 0.5 strength = 0.5 }
+  order = { position = 0.6 strength = 0.5 }
+  society = { position = 0.6 strength = 0.7 }
+  spending = { position = 0.7 strength = 0.6 }
+  state = { position = 0.5 strength = 0.5 }
+}
+
+proportion = 20%
+
+influences = {
+  self-employed = -1
+}

@@ -1,0 +1,7 @@
+hull = streamlined
+tonnage = 20
+engine = impulse-1
+generator = { type = fusion-10 tonnage = 1 }
+bridge = { type = bridge-3 }
+computer = { type = capacity-5 }
+fuel_tank = 1

@@ -1,0 +1,13 @@
+in = {
+}
+
+efficiency = {
+  administration = 1
+}
+
+zone = mine
+size = 1
+
+out = {
+ resource = 10
+}

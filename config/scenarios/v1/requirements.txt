@@ -1,0 +1,53 @@
+requirements - pops
+   hours
+   entertainment
+   happiness
+   satisfaction?
+   stimulation?
+   health
+
+utility: real -> 0 ..1
+Uhours = utility(base=0.1,coeff=160) = \x -> utility(x-1) + 0.1 - x / 160
+Uhours: \x -> -0.1062 + 0.1094x - 0.0031x**2
+Uhappiness: \x -> 
+commodity-class:
+    V  : strength of need 0..1
+	R  : daily requirement > 0
+	W  : daily want >= R
+	Q  : current quantity >= 0
+	S  : historical daily supply
+	D  : historical daily demand2
+	Pr : price at which available ~= R
+	Pw : price at which available ~= W - R
+	C  : ready cash
+	L  : limit cash
+    B  : requirement budget
+	Bw : want budget
+    H  : wanted happiness
+	I  : historical daily income
+	
+cp : commodity -> price
+
+example: food
+
+food utility = \f x -> utility (x * hours (f)) - utility (prep (f)) + utility (x * happy (f))
+
+happiness: 2000
+requirement: 1000
+historical daily income 2000
+requirement budget 1225
+want budget 1600
+hour budget 2000
+
+grain: price 1.00 prep 2 quality 1 supply 10K demand 10K available 2K happy 1
+vegetables: price 1.20 prep 1 quality 2 supply 2K demand 2K available 400 happy 1.67
+fruit: price 1.30 quality 2 prep 0.5 supply 1K demand 2K available 200 happy 1.54
+basic-restaurant: price 2.00 prep 0 quality 2 supply 200 demand 200 available 200 happy 1
+median-restaurant: price 3.00 prep 0 quality 3 supply 100 demand 100 available 100 happy 1
+luxury-restaurant: price 10.00 prep 0 quality 4 supply 10 demand 20 available 10 happy 0.4
+
+700 grain + 100 vegetables + 100 fruit + 60 basic-restaurant + 35 median-restaurant + 5 luxury-restaurant
+700 + 120 + 130 + 120 + 105 + 50 = $1225
+happiness = 700 + 200 + 200 + 120 + 105 + 20 = 1325 = ~ $1.02 ea
+prep = 1400 + 100 + 50 = 1550
+

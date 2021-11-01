@@ -1,0 +1,8 @@
+class = building-module
+name = Military
+mass = 60
+military = true
+component = { structural = 1
+              electronic-component = 2
+              computer = 2
+            }

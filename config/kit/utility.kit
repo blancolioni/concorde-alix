@@ -1,0 +1,23 @@
+with Commodities;
+with Money;
+
+package Utility is
+
+   record Utility_Class is
+      unique key Name : String (20);
+   end Utility_Class;
+   
+   record Utility_Function is
+      key Utility_Class;
+      Commodity;
+      Tag : String (20);
+      A1 : Long_Float;
+      A2 : Long_Float;
+      A3 : Long_Float;
+      A4 : Long_Float;
+      A5 : Long_Float;
+      A6 : Long_Float;
+      key Commodity_Utility with Tag, Commodity;
+   end Utility_Function;
+
+end Utility;

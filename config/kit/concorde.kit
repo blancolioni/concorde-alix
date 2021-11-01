@@ -1,0 +1,26 @@
+with Armies;
+with Calendar;
+with Colonies;
+with Companies;
+with Events;
+with Factions;
+with Individuals;
+with Properties;
+with Ships;
+with Stars;
+with Surfaces;
+with Users;
+with Worlds;
+
+package Concorde is
+
+for Concorde'Database_Package_Name use "Accord.Db";
+for Concorde'Handle_Package_Name use "Accord";
+
+record Scenario is
+   unique key Id     : String (32);
+   unique key Active : Boolean;
+   Central_System    : Star_System;
+end Scenario;
+
+end Concorde;

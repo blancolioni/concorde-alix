@@ -1,0 +1,141 @@
+qualification = { ability = int score = 6 }
+advanced-education = { ability = edu score = 8 }
+has-commission
+
+benefits = {
+    1 = { cash = 1000 }
+    2 = { cash = 5000 int = 1 }
+    3 = { cash = 5000 edu = 1 }
+    4 = { cash = 10000 }
+    5 = { cash = 20000 }
+    6 = { cash = 50000 end = 1 }
+    7 = { cash = 50000 soc = 2 }
+}
+
+advancement-tables = {
+    personal-development = {
+        1 = { str }
+        2 = { dex }
+        3 = { end }
+        4 = { int }
+        5 = { edu }
+        6 = { soc }
+    }
+    service-skills = {
+        1 = { pilot }
+        2 = { spacesuit }
+        3 = { athletics }
+        4 = { gunner }
+        5 = { mechanic }
+        6 = { gun-combat }
+    }
+    advanced-education = {
+        1 = { electronics }
+        2 = { astrogation }
+        3 = { engineer }
+        4 = { drive }
+        5 = { navigation }
+        6 = { admin }
+    }
+    commission = {
+        1 = { leadership }
+        2 = { electronics }
+        3 = { pilot }
+        4 = { melee }
+        5 = { admin }
+        6 = { tactics }
+    }
+}
+
+mishaps = {
+    1 = evt-severely-injured
+    2 = evt-improperly-revived
+    3 = evt-battle-depends-on-you
+    4 = evt-blamed-for-accident
+    5 = evt-quarrel
+    6 = evt-injured
+}
+
+events = {
+    2 = mishap
+    3 = evt-gambling-circle
+    4 = evt-special-assignment
+    5 = evt-advanced-training
+    6 = evt-notable-military-engagement
+    7 = life-event
+    8 = evt-diplomatic-mission
+    9 = evt-foil-attempted-crime
+    10 = evt-abuse-for-profit
+    11 = evt-befriended-by-commander
+    12 = evt-save-ship
+}
+
+assignment = {
+    line-crew = {
+        survival = { end = 5 }
+        advance  = { edu = 7 }
+
+        advancement-table = {
+            1 = { electronics }
+            2 = { mechanic }
+            3 = { gun-combat }
+            4 = { flyer }
+            5 = { melee }
+            6 = { spacesuit }
+        }
+        
+        ranks = {
+            crew
+            able-spacehand = { mechanic = 1 }
+            petty-officer-3 = { spacesuit = 1 }
+            petty-officer-2
+            petty-officer-1 = { end }
+            chief-petty-officer
+            master-chief
+        }
+    }    
+    
+    engineer = {
+        survival = { str = 6 }
+        advance  = { edu = 6 }
+        advancement-table = {
+            1 = { gun-combat }
+            2 = { melee }
+            3 = { heavy-weapons }
+            4 = { stealth }
+            5 = { athletics }
+            6 = { recon }
+        }
+        ranks = {
+            crew
+            able-spacehand = { mechanic = 1 }
+            petty-officer-3 = { spacesuit = 1 }
+            petty-officer-2
+            petty-officer-1 = { end }
+            chief-petty-officer
+            master-chief
+        }
+    }
+    
+    pilot = {
+        survival = { int = 7 }
+        advance  = { int = 5 }
+        advancement-table = {
+            1 = { mechanic }
+            2 = { drive }
+            3 = { flyer }
+            4 = { recon }
+            5 = { heavy-weapons }
+            6 = { electronics }
+        }
+        ranks = {
+            crew
+            able-spacehand = { mechanic = 1 }
+            petty-officer-3 = { spacesuit = 1 }
+            petty-officer-2
+            petty-officer-1 = { end }
+            chief-petty-officer
+            master-chief
+        }
+    }
+}

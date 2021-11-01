@@ -1,0 +1,5 @@
+rank = 6
+skills = { heavy-weapons leadership }
+abilities = { soc cha }
+vacancy = { loyalty = -4 }
+attributes = { stability defense }

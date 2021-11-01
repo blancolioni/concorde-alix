@@ -1,0 +1,20 @@
+with Agents;
+
+package Owners is
+
+record Owner : Agent;
+
+record Has_Owner is
+   key Owner;
+end Has_Owner;
+
+record Shared;
+
+record Owner_Share is
+   key Shared;
+   key Owner;
+   Share : Float;
+   unique key Owner_Share with Shared, Owner;
+end Owner_Share;
+
+end Owners;

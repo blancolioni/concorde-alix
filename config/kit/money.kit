@@ -1,0 +1,15 @@
+package Money is
+
+type Concorde.Money.Money_Type is new Long_Float
+   with To_Database => To_Real,
+        From_Database => To_Money,
+        To_String => Image,
+        From_String => Value;
+
+type Concorde.Money.Price_Type is new Long_Float
+   with To_Database => To_Real,
+        From_Database => To_Price,
+        To_String => Image,
+        From_String => Value;
+
+end Money;

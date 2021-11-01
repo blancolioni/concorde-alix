@@ -1,0 +1,100 @@
+residential = {
+   in = {
+     power = 10
+	 }
+   efficiency = {
+     administration = 1
+	 operator = 1
+	 mechanic = 1
+	 }
+   zone = urban
+   out = {
+     residential = 100
+   }
+}
+
+artisan-grain-farm = {
+   in = {
+     farming = 10
+   }
+   efficiency = {
+     administration = 1
+	 }
+   zone = farmland
+   out = {
+     grain = 100
+	 }
+}
+
+artisan-fruit-farm = {
+   in = {
+     farming = 10
+   }
+   efficiency = {
+     administration = 1
+	 }
+   zone = farmland
+   out = {
+     fruit = 20
+	 }
+}
+
+artisan-vegetable-farm = {
+   in = {
+     farming = 10
+   }
+   efficiency = {
+     administration = 1
+	 }
+   zone = farmland
+   out = {
+     vegetables = 50
+	 }
+}
+
+artisan-basic-takeout = {
+   in = {
+      cooking = 1
+   }
+   efficiency = {
+     administration = 1
+	 }
+   with = {
+      commercial = 1
+   }
+   out = {
+      basic-takeout = 4
+   }
+}
+
+artisan-primary-school = {
+   in = {
+      primary-teacher = 1
+	  }
+   efficiency = {
+      administration = 0.1
+	  }
+   with = {
+      service = 1
+      }
+   out = {
+      primary = 10
+	  }
+}
+
+industrial-farm = {
+   in = {
+     labor = 2
+	 operator = 1
+   }
+   efficiency = {
+     administration = 1
+	 }
+   with = {
+   	 farmland = 1
+	 farm-machinery = 1
+   }
+   out = {
+     grain = 200
+   }
+}

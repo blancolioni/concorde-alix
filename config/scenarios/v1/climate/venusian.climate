@@ -1,0 +1,7 @@
+terrain = {
+   rock = 70%
+   hills = 20%
+   mouintains = 10%
+}
+
+habitability = 0

@@ -1,0 +1,37 @@
+choices = {
+    isolationist = {
+        sector-claims = -1
+        stability = 2
+        loyalty = 1
+        economy = -2
+        consumption = -1
+    }
+    cautious = {
+        sector-claims = 0
+        stability = 1
+        loyalty = 0
+        economy = -1
+        consumption = 0
+    }
+    standard = {
+        sector-claims = 0
+        stability = 0
+        loyalty = 0
+        economy = 0
+        consumption = 0
+    }
+    aggressive = {
+        sector-claims = 1
+        stability = -1
+        loyalty = -1
+        economy = 1
+        consumption = 1d4
+    }
+    imperialist = {
+        sector-claims = 2
+        stability = -2
+        loyalty = -2
+        economy = 2
+        consumption = 2d4
+    }
+}

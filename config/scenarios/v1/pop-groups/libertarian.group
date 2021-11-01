@@ -1,0 +1,14 @@
+politics = {
+  control = { position = 0.1 strength = 0.8 }
+  democracy = { position = 0.6 strength = 0.5 }
+  freedom = { position = 0.9 strength = 0.9 }
+  individual = { position = 0.9 strength = 0.9 }
+  spending = { position = 0.1 strength = 0.8 }
+  state = { position = 0.1 strength = 0.8 }
+}
+
+proportion = 25%
+
+influences = {
+  
+}

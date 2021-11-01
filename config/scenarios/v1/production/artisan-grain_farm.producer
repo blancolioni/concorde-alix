@@ -1,0 +1,5 @@
+producer Artisan.Grain_Farm is new Artisan.Farm_Template with
+
+   Outputs => Grain = 10
+			  
+end Artisan.Grain_Farm;

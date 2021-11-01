@@ -1,0 +1,67 @@
+with Agents;
+with Attributes;
+with Colors;
+with Generated;
+with Knowledge;
+with Managed;
+with Names;
+with Offices;
+with Orders;
+with Owners;
+with Star_Systems;
+with Users;
+with Worlds;
+
+package Factions is
+
+record Faction : Has_Name, Has_Adjective, Has_Plural_Name, Has_Color, Has_Knowledge, Has_Orders, Has_Attributes, Order_Target, Owner, Managed, Agent is
+   key Human : Boolean;
+   key User;
+   key Capital_System : Star_System;
+   key Capital_World  : World;
+   Fame       : Natural;
+   Infamy     : Natural;
+end Faction;
+
+record Faction_Knowledge : Knowledge is
+   key Faction;
+end Faction_Knowledge;
+
+record System_Knowledge : Faction_Knowledge is
+   key Star_System;
+   unique key System_Knowledge with Faction, Star_System;
+end System_Knowledge;
+
+record Star_Gate_Knowledge : Faction_Knowledge is
+   key Star_Gate;
+   From_System : Boolean;
+   To_System   : Boolean;
+   unique key Star_Gate_Knowledge with Faction, Star_Gate;
+end Star_Gate_Knowledge;
+
+record World_Knowledge : Faction_Knowledge is
+   key World;
+   Classification : Boolean;
+   Orbit          : Boolean;
+   Deposits       : Boolean;	  
+   unique key World_Knowledge with Faction, World;
+end World_Knowledge;
+
+record Owned_World is
+   key Faction;
+   key World;
+   unique key Owned_World with Faction, World;
+end Owned_World;
+
+record Edict_Group : Localised;
+
+record Edict : Localised, Has_Attributes is
+   key Edict_Group;
+   Group_Index       : Positive;
+   Extra_Consumption : String (12);
+   Extra_Claims      : Integer;
+   Revenue           : Long_Float;
+   Economy_Check     : Natural;
+end Edict;
+
+end Factions;

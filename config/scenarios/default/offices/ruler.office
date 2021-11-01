@@ -1,0 +1,5 @@
+rank = 1
+skills = { leadership persuade }
+abilities = { int cha soc }
+vacancy = { unrest = 4 }
+attributes = { loyalty economy stability }

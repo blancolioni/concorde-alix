@@ -1,0 +1,16 @@
+default-terrain = grass
+condition = [ atmosphere = standard && has_life && hydrosphere >= 0.1 && hydrosphere <= 0.9 && temperature >= 270 && temperature <= 310 ]
+habitability = 1
+terrain = {
+   desert = 10%
+   forest = 20%
+   grass = 20%
+   hill = 20%
+   jungle = 20%
+   marsh = 20%
+   swamp = 20%
+   mountain = 20%
+   plain = 20%
+   tundra = 20%
+   volcanic = 20%
+}

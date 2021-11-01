@@ -1,0 +1,17 @@
+hazard = 0.01
+priority = 2
+resource = { funghi = 0.200
+             fruit = 0.200
+             grains = 0.500
+             herb = 0.300
+             livestock = 0.400
+             vegetables = 0.300
+             water = 0.250
+           }
+
+color = "#cc0"
+
+module-costs = {
+  farm = 0.8
+  plantation = 0.6
+}

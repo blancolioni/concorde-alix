@@ -1,0 +1,5 @@
+zones = {
+   mine = {
+     base-price = 5.0
+     }
+}

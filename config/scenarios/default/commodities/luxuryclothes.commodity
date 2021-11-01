@@ -1,0 +1,8 @@
+class = consumer-good
+name = "Luxury Clothes"
+mass = 20
+quality = 3
+clothing = true
+component = { livestock = 10
+              precious = 10
+            }

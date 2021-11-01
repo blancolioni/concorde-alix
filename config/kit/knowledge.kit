@@ -1,0 +1,16 @@
+package Knowledge is
+
+record Knowable;
+
+record Has_Knowledge;
+
+record Knowledge is
+   key Has_Knowledge;
+   key Knowable;
+   Existence : Boolean;
+   Current   : Boolean;
+   key Knowledge with Has_Knowledge, Knowable;
+end Knowledge;
+
+end Knowledge;
+

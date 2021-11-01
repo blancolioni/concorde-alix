@@ -1,0 +1,5 @@
+class = service
+quality = 1
+mass = 0
+entertainment = true
+npc-price = 120

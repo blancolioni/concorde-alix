@@ -1,0 +1,15 @@
+with Commodities;
+
+object Residential : Producer is
+
+   Zone => Urban;
+   
+   Inputs => (Power => 10);
+   
+   Efficiency => (Administration => 1,
+	              Operator       => 1,
+	              Mechanic       => 1);
+				 
+   Outputs    => (Residential => 100);
+   	  
+end Residential;

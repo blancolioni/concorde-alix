@@ -1,0 +1,8 @@
+class = industrial-good
+name = "Visual Display"
+mass = 5
+electronic = true
+component = { glass = 2
+              silicon = 1
+              pvc = 2
+            }

@@ -1,0 +1,7 @@
+class = industrial-good
+name = Bronze
+mass = 5
+alloy = true
+component = { copper = 10
+              coal = 10
+            }

@@ -1,0 +1,17 @@
+hazard = 0.02
+priority = 3
+resource = { aluminium = 0.100
+             carbonite = 0.250
+             coal = 0.150
+             copper = 0.150
+             iron = 0.250
+             precious = 0.0500
+             silicon = 0.100
+             water = 0.250
+           }
+color = "#009A17"
+
+module-costs = {
+  farm = 1.1
+  plantation = 1
+}

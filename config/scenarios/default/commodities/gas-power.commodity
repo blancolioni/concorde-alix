@@ -1,0 +1,6 @@
+class = industrial-good
+name = "Gas Power"
+mass = 10
+power = true
+component = { hydrocarbon = 4
+            }

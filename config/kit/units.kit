@@ -1,0 +1,15 @@
+with Construction;
+with Supply;
+with Technology;
+
+package Units is
+
+type Unit_Category is (Land, Naval, Air, Orbital);
+
+record Unit : Localised, Technological, Constructed, Supplied is
+   Category : Unit_Category;
+   Organisation : Natural;
+   Maximum_Speed : Float;
+end Unit;
+
+end Units;

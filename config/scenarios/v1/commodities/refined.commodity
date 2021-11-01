@@ -1,0 +1,26 @@
+# steel = {
+#    parts = {
+# 	   iron = 2
+# 	   coal = 1
+# 	}
+ #   demand = 0
+# }
+
+# petroleum = {
+ #   parts = { hydrocarbon = 2 }
+  #  demand = 0
+# }
+   
+refined-crystals = {
+    base-price = 3
+    supply-coefficient = 10
+    production-sector = refining
+    parts = { crystals = 2 }
+}
+
+plastic = {
+    base-price = 3
+    supply-coefficient = 10
+    production-sector = refining
+    parts = { hydrocarbon = 2 }
+}

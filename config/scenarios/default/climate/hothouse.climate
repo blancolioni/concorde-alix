@@ -1,0 +1,9 @@
+default-terrain = desert
+condition = [ temperature > 320 ]
+habitability = 0
+terrain = {
+   desert = 25%
+   hill = 10%
+   mountain = 15%
+   plain = 20%
+}

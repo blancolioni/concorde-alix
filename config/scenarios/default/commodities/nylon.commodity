@@ -1,0 +1,6 @@
+class = industrial-good
+name = Nylon
+mass = 1
+plastic = true
+component = { oil = 2
+            }

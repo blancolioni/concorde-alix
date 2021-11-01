@@ -1,0 +1,9 @@
+schema Commodities is
+
+   for Extension use "commodity";
+      
+   Id         : String;
+   Base_Price : Price;
+   Properties : List (String, Real);
+   
+end Commodities;

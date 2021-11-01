@@ -1,0 +1,9 @@
+package Angles is
+
+type Concorde.Trigonometry.Angle is new Long_Float
+   with To_Database => To_Degrees,
+        From_Database => From_Degrees,
+        To_String => Image,
+        From_String => Value;
+
+end Angles;

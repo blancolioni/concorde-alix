@@ -1,0 +1,21 @@
+with Colors;
+with Generated;
+with Names;
+with Knowledge;
+with Orders;
+with Star_Systems;
+
+package Stars is
+
+   type Spectral_Class is (O, B, A, F, G, K, M);
+   
+   record Star : Star_System_Object, Has_Color is
+       Class       : Spectral_Class;
+       Subclass    : Natural;
+       Luminosity  : Long_Float;
+       Temperature : Long_Float;
+       Age         : Long_Float;
+       Ecosphere   : Long_Float;
+   end Star;
+
+end Stars;

@@ -1,0 +1,10 @@
+class = resource
+name = Vegetables
+mass = 1
+organic = true
+npc-price = 10
+constraints = {
+    life = multicellular
+    temperature = { 273 290 }
+    moisture = { 0.2 0.7 }
+}

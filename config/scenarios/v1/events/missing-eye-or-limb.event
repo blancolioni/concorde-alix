@@ -1,0 +1,6 @@
+heading = injury
+text = missing-eye-or-limb
+choices = {
+    lose-dex = { dex = -2 }
+    lose-str = { str = -2 }
+}

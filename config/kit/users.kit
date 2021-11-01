@@ -1,0 +1,31 @@
+with Names;
+
+package Concorde.Users is
+
+record User is
+   unique key Login : String (32);
+   Password         : String (32);
+   Administrator    : Boolean;
+end User;
+
+record Has_Permission is
+   key User;
+   Find   : Boolean;
+   Read   : Boolean;
+   Write  : Boolean;
+   Delete : Boolean;
+end Has_Permission;
+
+record Script : Has_Name is
+   key User;
+   unique key User_Name with User, Name;
+end Script;
+
+record Script_Line is
+   Script;
+   Index   : Positive;
+   Line    : String (100);
+   unique key Script_Line with Script, Index;
+end Script_Line;
+
+end Concorde.Users;

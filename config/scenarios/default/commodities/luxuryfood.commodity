@@ -1,0 +1,14 @@
+class = consumer-good
+name = "Luxury Food"
+mass = 10
+quality = 3
+food = true
+component = { fruit = 4
+              funghi = 4
+              grains = 2
+              herb = 3
+              livestock = 2
+              salt = 1
+              seafood = 2
+              vegetables = 3
+            }

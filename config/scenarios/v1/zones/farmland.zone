@@ -1,0 +1,5 @@
+zones = {
+   farm = {
+     base-price = 10.0
+     }
+}

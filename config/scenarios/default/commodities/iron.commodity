@@ -1,0 +1,6 @@
+class = resource
+name = Iron
+mass = 1
+metal = true
+npc-price = 10
+deposits = abundant

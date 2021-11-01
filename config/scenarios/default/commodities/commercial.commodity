@@ -1,0 +1,8 @@
+class = building-module
+name = Commercial
+mass = 40
+commercial = true
+component = { structural = 1
+              electronic-component = 2
+              computer = 1
+            }

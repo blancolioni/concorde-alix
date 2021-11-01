@@ -1,0 +1,34 @@
+taxation = yes
+
+choices = {
+    minimal = {
+        check = { economy = 8 }
+        economy-factor = 150%
+        loyalty = 2
+        revenue = 10%
+    }
+    light = {
+        check = { economy = 5 }
+        economy-factor = 120%
+        loyalty = 1
+        revenue = 20%
+    }
+    normal = {
+        check = { economy = 4 }
+        economy-factor = 100%
+        loyalty = 0
+        revenue = 33%
+    }
+    heavy = {
+        check = { economy = 3 }
+        economy-factor = 85%
+        loyalty = -4
+        revenue = 50%
+    }
+    crushing = {
+        check = { economy = 2 }
+        economy-factor = 75%
+        loyalty = -8
+        revenue = 67%
+    }
+}

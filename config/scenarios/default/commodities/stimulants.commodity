@@ -1,0 +1,9 @@
+class = consumer-good
+name = Stimulants
+mass = 10
+quality = 2
+intoxicant = true
+component = { funghi = 4
+              carbonite = 4
+              vegetables = 4
+            }

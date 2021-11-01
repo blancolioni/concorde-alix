@@ -1,0 +1,7 @@
+class = industrial-good
+name = Glass
+mass = 1
+ceramic = true
+component = { silicon = 2
+              coal = 1
+            }

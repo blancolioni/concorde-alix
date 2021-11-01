@@ -1,0 +1,32 @@
+start-cash = 50
+
+capital = {
+   modules = {
+      residency-1
+#      residency-2
+      market-1
+#      storehouse-1
+#      monument-1
+      meeting-place-1
+#      medical-facility-1
+#      sanitation-facility-1
+   }
+   individuals = 50
+}
+
+districts = {
+   count = 10
+}
+
+edicts = {
+   expansion = standard
+   holiday = regular
+   taxation = normal
+}
+
+init-script = {
+   "load-galaxy-view"
+   "load-star-system-view --name=$CAPITAL_SYSTEM"
+   "load-world-view --world-name=$CAPITAL_WORLD"
+   "show-orbit $CAPITAL_WORLD"
+}

@@ -1,0 +1,135 @@
+water = {
+
+    base-price = 1
+    
+    deposits = {
+        unlimited = { 
+            hydrosphere = 10%
+        }
+        unlimited = { 
+            composition = ice
+        }
+        unlimited = { 
+            composition = rock_ice
+        }
+        rare = { zone = yellow }
+        uncommon = { zone = green }
+        common = { zone = blue }
+        abundant = { zone = black }
+    }
+}
+
+helium = {
+    base-price = 0.5
+    deposits = {
+        rare
+        unlimited = { composition = gaseous }
+        unlimited = { composition = hydrogen }
+    }
+}
+
+iron = {
+    base-price = 1
+    deposits = abundant
+}
+
+aluminium = {
+    base-price = 1.5
+    deposits = {
+        rare = { mass = small }
+        uncommon = { mass = medium }
+        common = { mass = large }
+    }
+}
+
+silicon = {
+    base-price = 0.8
+    deposits = abundant
+}
+
+magnesium = {
+    base-price = 1.8
+    deposits = common
+}
+
+nickel = {
+    base-price = 2.2
+    deposits = {
+        abundant = { mass = small }
+        common = { mass = medium }
+        uncommon = { mass = large }
+    }
+}
+
+uranium = {
+    base-price = 2.5
+    deposits = uncommon
+}
+
+coal = {
+    base-price = 1
+    deposits = {
+        common = {
+            life-bearing = 4
+            minimum-age = 4G
+        }
+    }
+}
+
+hydrocarbon = {
+    base-price = 1.5
+    deposits = {
+        common = {
+            life-bearing = 4
+            minimum-age = 4G
+        }
+    }
+}
+
+crystals = {
+    base-price = 2
+    deposits = {
+        sphere = {
+            frequency = 5%
+            radius = { 1 1 1 }
+            strength = { 1000 20 }
+            attenuation = { 1.5 4.5 }
+        }
+    }
+}
+
+transuranium = {
+    base-price = 10
+    deposits = {
+        sphere = {
+            frequency = 2%
+            radius = { 1 1 1 }
+            strength = { 10 1 }
+            attenuation = { 1.1 1.5 }
+        }
+    }
+}
+
+neutronium = {
+    base-price = 20
+    deposits = {
+        sphere = {
+            frequency = 1%
+            radius = { 1 1 1 }
+            strength = { 100 10 }
+            attenuation = { 1.5 3.5 }
+        }
+    }
+}
+
+trilithium = {
+    base-price = 50
+    deposits = {
+        sphere = {
+            frequency = 1%
+            radius = { 1 1 1 }
+            strength = { 20 2 }
+            attenuation = { 1.5 3.5 }
+        }
+    }
+}

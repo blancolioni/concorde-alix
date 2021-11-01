@@ -1,0 +1,7 @@
+class = industrial-good
+name = Cement
+mass = 1
+ceramic = true
+component = { carbonite = 2
+              coal = 1
+            }

@@ -1,0 +1,57 @@
+1 = {
+    cost = 10
+    modules = {
+        medical-facility = { stability = 2 }
+        sanitation-facility = { stability = 2 }
+        workshop = { economy = 2 }
+    }
+}
+
+2 = {
+    cost = 20
+    modules = {
+        academy = { economy = 2 loyalty = 2 }
+        medical-facility = { stability = 4 loyalty = 2 }
+        research-facility = { economy = 2 stability = 2 }
+        sanitation-facility = { stability = 4 }
+        workshop = { economy = 4 }
+    }
+}
+
+3 = {
+    cost = 40
+    slots = 2
+    modules = {
+        academy = { economy = 3 loyalty = 3 capability = 1 }
+        factory = { economy = 6 supply = 1 }
+        medical-facility = { stability = 4 loyalty = 2 capability = 1 }
+        research-facility = { economy = 4 stability = 2 culture = 1 }
+        sanitation-facility = { stability = 6 capability = 1 }
+        workshop = { economy = 4 loyalty = 2 culture = 1 }
+    }
+}
+
+4 = {
+    cost = 60
+    slots = 2
+    modules = {
+        academy = { economy = 4 loyalty = 4 capability = 1 cultire = 1 }
+        factory = { economy = 6 supply = 2 supply = 2 }
+        medical-facility = { stability = 4 economy = 2 loyalty = 2 capability = 2 }
+        research-facility = { economy = 4 stability = 4 culture = 1 supply = 1 }
+        sanitation-facility = { stability = 6 economy = 2 capability = 1 supply = 1 }
+    }
+}
+
+5 = {
+    cost = 80
+    slots = 4
+    modules = {
+        academy = { economy = 6 loyalty = 4 capability = 2 cultire = 2 }
+        factory = { economy = 6 supply = 4 supply = 4 }
+        medical-facility = { stability = 6 economy = 2 loyalty = 2 capability = 4 }
+        research-facility = { economy = 4 stability = 4 loyalty = 2 capability = 1 culture = 2 supply = 1 }
+        sanitation-facility = { stability = 8 economy = 2 capability = 2 supply = 2 }
+    }
+}
+

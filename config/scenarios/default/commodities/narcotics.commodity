@@ -1,0 +1,9 @@
+class = consumer-good
+name = Narcotics
+mass = 10
+quality = 3
+intoxicant = true
+component = { rare-minerals = 4
+              carbonite = 4
+              water = 4
+            }

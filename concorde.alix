@@ -1,0 +1,41 @@
+project_name = Concorde
+source_dir = src
+source_dir = src/agents
+source_dir = src/colonies
+source_dir = src/commodities
+source_dir = src/configure
+source_dir = src/driver
+source_dir = src/factions
+source_dir = src/individuals
+source_dir = src/kit
+source_dir = src/library
+source_dir = src/server
+source_dir = src/ships
+source_dir = src/stars
+source_dir = src/surfaces
+source_dir = src/systems
+source_dir = src/ui
+source_dir = src/ui/entities
+source_dir = src/ui/models
+source_dir = src/ui/nazar
+source_dir = src/ui/rho
+source_dir = src/ui/text
+source_dir = src/ui/views
+source_dir = src/updates
+source_dir = src/voronoi
+source_dir = src/worlds
+depend = { project = Tropos version = any }
+depend = { project = Wlib version = any }
+depend = { project = marlowe version = any }
+depend = { project = kit version = any }
+depend = { project = nazar version = any }
+depend = { project = nazargtk version = any }
+depend = { project = ../reiko/reiko external = yes }
+depend = { project = ../tarana/tarana external = yes }
+depend = { project = ../rho/rho external = yes }
+language = Ada
+language = C
+main_unit = concorde-driver
+exec_name = concorde
+config_dir = config
+path_unit = { unit = Concorde.Paths path = src/driver/concorde-paths.ads }

@@ -1,0 +1,5 @@
+text = friend-gets-hurt
+choices = {
+    oh-no = {
+    }
+}

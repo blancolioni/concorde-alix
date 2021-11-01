@@ -1,0 +1,8 @@
+politics = {
+  military = { position = 0.9 strength = 0.9 }
+}
+
+proportion = 10%
+
+influences = {
+}

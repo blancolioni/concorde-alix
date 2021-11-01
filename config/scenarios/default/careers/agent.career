@@ -1,0 +1,132 @@
+qualification = { ability = int score = 6 }
+advanced-education = { ability = edu score = 6 }
+
+benefits = {
+    1 = { cash = 1000 }
+    2 = { cash = 2000 int = 1 }
+    3 = { cash = 5000 }
+    4 = { cash = 7500 }
+    5 = { cash = 10000 }
+    6 = { cash = 25000 soc = 1 }
+    7 = { cash = 50000 }
+}
+
+advancement-tables = {
+    personal-development = {
+        1 = { gun-combat }
+        2 = { dex }
+        3 = { end }
+        4 = { melee }
+        5 = { int }
+        6 = { athletics }
+    }
+    service-skills = {
+        1 = { streetwise }
+        2 = { drive }
+        3 = { investigate }
+        4 = { flyer }
+        5 = { recon }
+        6 = { gun-combat }
+    }
+    advanced-education = {
+        1 = { advocate }
+        2 = { language }
+        3 = { explosives }
+        4 = { medic }
+        5 = { spacesuit }
+        6 = { electronics }
+    }
+}
+
+mishaps = {
+    1 = evt-severely-injured
+    2 = evt-criminal-offers-deal
+    3 = evt-investigation-gone-wrong
+    4 = evt-learn-too-much
+    5 = evt-friend-gets-hurt
+    6 = evt-injured
+}
+
+events = {
+    2 = mishap
+    3 = evt-dangerous-investigation
+    4 = evt-mission-complete
+    5 = evt-establish-contact-network
+    6 = evt-advanced-training
+    7 = life-event
+    8 = evt-undercover
+    9 = evt-above-and-beyond
+    10 = evt-specialist-vehicle-training
+    11 = evt-befriended-by-senior
+    12 = evt-uncover-conspiracy
+}
+
+assignment = {
+    law-enforcement = {
+        survival = { end = 6 }
+        advance  = { int = 6 }
+
+        advancement-table = {
+            1 = { investigate }
+            2 = { recon }
+            3 = { streetwise }
+            4 = { stealth }
+            5 = { melee }
+            6 = { advocate }
+        }
+        
+        ranks = {
+            rookie
+            constable = { streetwise = 1 }
+            sergeant
+            detective
+            lieutenant = { investigate = 1 }
+            chief = { admin = 1 }
+            commissioner = { soc = 1 }
+        }
+    }    
+    
+    intelligence = {
+        survival = { int = 7 }
+        advance  = { int = 5 }
+        advancement-table = {
+            1 = { investigate }
+            2 = { recon }
+            3 = { electronics }
+            4 = { stealth }
+            5 = { persuade }
+            6 = { deception }
+        }
+        ranks = {
+            { }
+            agent = { deception = 1 }
+            field-agent = { investigate = 1 }
+            { }
+            special-agent = { gun-combat = 1 }
+            assistant-director
+            director
+        }
+    }
+    
+    corporate = {
+        survival = { int = 5 }
+        advance  = { int = 7 }
+        advancement-table = {
+            1 = { investigate }
+            2 = { electronics }
+            3 = { stealth }
+            4 = { carouse }
+            5 = { deception }
+            6 = { streetwise }
+        }
+        ranks = {
+            { }
+            agent = { deception = 1 }
+            field-agent = { investigate = 1 }
+            { }
+            special-agent = { gun-combat = 1 }
+            assistant-director
+            director
+        }
+    }
+}

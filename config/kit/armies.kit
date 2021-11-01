@@ -1,0 +1,40 @@
+with Agents;
+with Commodities;
+with Construction;
+with Factions;
+with Localisation;
+with Managed;
+with Names;
+with Technology;
+with Worlds;
+with World_Sectors;
+
+package Armies is
+
+record Movement : Localised;
+
+record Unit : Localised, Technological, Constructed, Supplied is
+   key Movement;
+   Base_Speed  : Long_Float;
+   Armour      : Long_Float;
+   Attack      : Long_Float;
+   Discipline  : Long_Float;
+   Recon       : Long_Float;
+   Camoflage   : Long_Float;
+end Unit;
+
+record Army : Agent, Has_Name, Supplied, Managed is
+   key Faction;
+   key World;
+   key World_Sector;
+end Army;
+
+record Regiment : Supplied is
+   key Army;
+   Unit;
+   Strength     : Natural;
+   Morale       : Long_Float;
+   Organisation : Long_Float;
+end Regiment;
+
+end Armies;

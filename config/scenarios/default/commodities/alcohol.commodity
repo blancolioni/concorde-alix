@@ -1,0 +1,9 @@
+class = consumer-good
+name = Alcohol
+mass = 20
+quality = 1
+intoxicant = true
+component = { grains = 5
+              water = 20
+              funghi = 2
+            }

@@ -1,0 +1,5 @@
+class = resource
+name = Carbonite
+mass = 1
+mineral = true
+npc-price = 3

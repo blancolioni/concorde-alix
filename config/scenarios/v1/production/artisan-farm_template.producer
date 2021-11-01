@@ -1,0 +1,8 @@
+abstract producer Artisan.Farm_Template is
+
+   Zone => Farmland
+   Inputs => Farming
+   Efficiency => Administration
+   Outputs => <>
+			  
+end Artisan.Farm_Template;

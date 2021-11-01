@@ -1,0 +1,13 @@
+hazard = 0.02
+priority = 4
+resource = { copper = 0.100
+             fruit = 0.200
+             funghi = 0.250
+             herb = 0.250
+             livestock = 0.200
+           }
+
+module-costs = {
+  farm = 2
+  plantation = 5
+}

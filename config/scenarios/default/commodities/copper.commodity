@@ -1,0 +1,5 @@
+class = resource
+name = Copper
+mass = 1
+metal = true
+npc-price = 5

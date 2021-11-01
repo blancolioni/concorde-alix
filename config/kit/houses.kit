@@ -1,0 +1,13 @@
+with Colors;
+with Money;
+with Owners;
+with Worlds;
+
+package Houses is
+
+record House : Has_Name, Has_Color, Owner is
+   unique key Capital : World;
+   Military_Budget    : Money_Type;
+end House;
+
+end Houses;

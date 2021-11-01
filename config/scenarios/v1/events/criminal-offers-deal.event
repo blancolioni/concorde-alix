@@ -1,0 +1,9 @@
+text = criminal-offers-deal
+choices = {
+    take-deal = { event = evt-null }
+    refuse-deal = {
+        event = evt-severely-injured
+        event = evt-advance-any-skill
+        event = evt-gain-enemy
+    }
+}

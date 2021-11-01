@@ -1,0 +1,38 @@
+with Agents;
+with Attributes;
+with Commodities;
+with Factions;
+with Modules;
+with Money;
+with Worlds;
+with World_Sectors;
+
+package Colonies is
+
+record Colony : Agent, Has_Stock, Has_Attributes, Managed is
+   key World;
+   key Faction;
+   Capital       : World_Sector;
+   Plurality     : Long_Float;
+end Colony;
+
+record Colony_Sector is
+   key Colony;
+   Max_Slots     : Natural;
+   Slot_Count    : Natural;
+   unique key World_Sector;
+end Colony_Sector;
+
+record Colony_Sector_Module is
+   key Colony_Sector;
+   Module;
+end Colony_Sector_Module;
+
+record Colony_Edict is
+   key Colony;
+   Edict_Group;
+   Edict;
+   unique key Colony_Edict with Colony, Edict_Group;
+end Colony_Edict;
+
+end Colonies;

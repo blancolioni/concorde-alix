@@ -1,0 +1,8 @@
+heading = improperly-revived
+text = improperly-description
+ejected = no
+choices = {
+    lose-str = { str = -1 }
+    lose-dex = { dex = -1 }
+    lose-end = { end = -1 }
+}

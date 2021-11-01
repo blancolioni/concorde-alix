@@ -1,0 +1,18 @@
+politics = {
+  control = { position = 0.1 strength = 0.8 }
+  corporate = { position = 0.8 strength = 0.8 }
+  democracy = { position = 0.5 strength = 0.5 }
+  equality = { position = 0.5 strength = 0.5 }
+  freedom = { position = 0.7 strength = 0.6 }
+  individual = { position = 0.7 strength = 0.6 }
+  order = { position = 0.7 strength = 0.4 }
+  spending = { position = 0.1 strength = 0.8 }
+  state = { position = 0.2 strength = 0.6 }
+}
+
+proportion = 0.1
+
+influences = {
+   trade-unionist = -25%
+   self-employed = 10%
+}

@@ -1,0 +1,5 @@
+rank = 7
+skills = { persuade }
+abilities = { cha soc }
+vacancy = { loyalty = -2 }
+attributes = { loyalty }

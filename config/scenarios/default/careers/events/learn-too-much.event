@@ -1,0 +1,7 @@
+text = learn-too-much
+choices = {
+    oh-no = {
+        event = evt-gain-enemy
+        deception = 1
+    }
+}

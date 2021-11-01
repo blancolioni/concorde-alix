@@ -1,0 +1,16 @@
+package Properties is
+
+record Property is
+   unique key Tag : String (16) is Display;
+end Property;
+
+record Has_Properties;
+
+record Property_Entry is
+   key Has_Properties;
+   Property;
+   Value      : Long_Float;
+   unique key Property_Entry with Has_Properties, Property;
+end Property_Entry;
+
+end Properties;

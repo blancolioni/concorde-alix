@@ -1,0 +1,5 @@
+rank = 11
+skills = { investigate streetwise deception }
+abilities = { int }
+vacancy = { unrest = 1 economy = -4 }
+attributes = { economy }

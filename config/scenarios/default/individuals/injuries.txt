@@ -1,0 +1,6 @@
+1 = { evt-nearly-killed }
+2 = { evt-severely-injured }
+3 = { evt-missing-eye-or-limb }
+4 = { evt-scarred }
+5 = { evt-injured }
+6 = { evt-lightly-injured }

@@ -1,0 +1,5 @@
+rank = 2
+skills = { diplomacy }
+abilities = { int cha }
+vacancy = { stability = -2 }
+attributes = { stability culture }

@@ -1,0 +1,9 @@
+package Numerics is
+
+   type Real is new Long_Float
+     with To_Database => Long_Float,
+          From_Database => Real,
+          To_String => Real_Image,
+          From_String => Real_Value;
+          
+end Numerics;

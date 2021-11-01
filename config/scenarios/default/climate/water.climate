@@ -1,0 +1,13 @@
+default-terrain = water
+condition = [ hydrosphere > 0.9 ]
+habitability = 1
+terrain = {
+   forest = 5%
+   grass = 5%
+   hill = 10%
+   jungle = 5%
+   marsh = 10%
+   swamp = 10%
+   mountain = 5%
+   volcanic = 5%
+}

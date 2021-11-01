@@ -1,0 +1,6 @@
+class = resource
+name = "Precious Metals"
+mass = 1
+metal = true
+npc-price = 100
+yield = 1%

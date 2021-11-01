@@ -1,0 +1,8 @@
+class = consumer-good
+name = Rations
+mass = 10
+quality = 1
+food = true
+component = { grains = 9
+              salt = 1
+            }

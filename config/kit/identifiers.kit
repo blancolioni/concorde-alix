@@ -1,0 +1,11 @@
+package Identifiers is
+
+record Has_Identifier is
+   unique key Identifier : Fixed_String (12);
+end Has_Identifier;
+
+record Next_Identifier is
+   Next : Fixed_String (12);
+end Next_Identifier;
+
+end Identifiers;

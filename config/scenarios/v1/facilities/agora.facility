@@ -1,0 +1,6 @@
+class = agora
+zone = urban
+
+in = {
+  power = 10
+  }

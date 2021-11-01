@@ -1,0 +1,6 @@
+class = industrial-good
+name = PVC
+mass = 1
+plastic = true
+component = { oil = 2
+            }

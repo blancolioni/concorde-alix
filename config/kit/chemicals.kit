@@ -1,0 +1,15 @@
+package Chemicals is
+
+record Chemical : Has_Name is
+   unique key Formula   : String (16);
+   key Molecular_Weight : Long_Float;
+   Melting_Point        : Long_Float;
+   Boiling_Point        : Long_Float;
+   Density              : Long_Float;
+   Abundance_E          : Long_Float;
+   Abundance_S          : Long_Float;
+   Reactivity           : Long_Float;
+   Max_IPP              : Long_Float;
+end Chemical;
+
+end Chemicals;

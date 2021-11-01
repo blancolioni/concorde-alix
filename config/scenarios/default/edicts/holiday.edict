@@ -1,0 +1,33 @@
+change = {
+    lower = {
+       unrest = 1
+    }
+}
+
+choices = {
+    none = {
+        consumption = 0
+        economy = 0
+        loyalty = -4
+    }
+    rare = {
+        consumption = 1
+        economy = -1
+        loyalty = -2
+    }
+    regular = {
+        consumption = 1d3
+        economy = 0
+        loyalty = 0
+    }
+    frequent = {
+        consumption = 1d6
+        economy = 1
+        loyalty = 2
+    }
+    constant = {
+        consumption = 1d12
+        economy = 2
+        loyalty = 4
+    }
+}

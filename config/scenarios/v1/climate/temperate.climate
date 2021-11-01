@@ -1,0 +1,7 @@
+terrain = {
+   plain = 50%
+   hills = 45%
+   mountains = 5%
+}
+
+habitability = 100

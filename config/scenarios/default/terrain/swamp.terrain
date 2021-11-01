@@ -1,0 +1,14 @@
+hazard = 0.05
+priority = 6
+resource = { herb = 0.500
+             hydrocarbon = 0.250
+             noblegas = 0.100
+             oil = 0.250
+             silicon = 0.100
+             water = 1.00
+           }
+
+module-costs = {
+  farm = 1.8
+  plantation = 3
+}

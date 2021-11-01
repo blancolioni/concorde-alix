@@ -1,0 +1,25 @@
+with Commodities;
+with Quantities;
+with Money;
+
+package Construction is
+
+record Constructed;
+
+record Construction_Input is
+   key Constructed;
+   key Commodity;
+   Quantity : Quantity_Type;
+   unique key Construction_Input with Constructed, Commodity;
+end Construction_Input;
+
+record Supplied;
+
+record Supply_Input is
+   key Supplied;
+   key Commodity;
+   Quantity : Quantity_Type;
+   unique key Supply_Input with Supplied, Commodity;
+end Supply_Input;
+
+end Construction;

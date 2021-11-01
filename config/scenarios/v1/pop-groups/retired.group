@@ -1,0 +1,12 @@
+politics = {
+  order = { position = 0.7 strength = 0.8 }
+  society = { position = 0.8 strength = 0.8 }
+  spending = { position = 0.6 strength = 0.6 }
+}
+
+proportion = 17%
+
+influences = {
+  state-employees = -1
+  self-employed = -1
+}

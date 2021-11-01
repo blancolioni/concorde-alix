@@ -1,0 +1,13 @@
+in = {
+  farming = 1
+}
+efficiency = {
+  administration = 1
+}
+
+zone = farm
+size = 1
+
+out = {
+ vegetables = 7
+}

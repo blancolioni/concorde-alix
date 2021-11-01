@@ -1,0 +1,134 @@
+qualification = { ability = int score = 4 }
+advanced-education = { ability = edu score = 8 }
+
+benefits = {
+    1 = { cash = 1000 }
+    2 = { cash = 5000 int = 1 }
+    3 = { cash = 10000  edu = 1 }
+    4 = { cash = 20000 }
+    5 = { cash = 20000 }
+    6 = { cash = 40000 }
+    7 = { cash = 40000 }
+}
+
+advancement-tables = {
+    personal-development = {
+        1 = { str }
+        2 = { dex }
+        3 = { end }
+        4 = { int }
+        5 = { language }
+        6 = { streetwise }
+    }
+    service-skills = {
+        1 = { drive }
+        2 = { spacesuit }
+        3 = { broker }
+        4 = { steward }
+        5 = { electronics }
+        6 = { persuade }
+    }
+    advanced-education = {
+        1 = { engineer }
+        2 = { astrogation }
+        3 = { electronics }
+        4 = { pilot }
+        5 = { admin }
+        6 = { advocate }
+    }
+}
+
+mishaps = {
+    1 = evt-severely-injured
+    2 = evt-criminal-offers-deal
+    3 = evt-investigation-gone-wrong
+    4 = evt-learn-too-much
+    5 = evt-friend-gets-hurt
+    6 = evt-injured
+}
+
+events = {
+    2 = mishap
+    3 = evt-dangerous-investigation
+    4 = evt-mission-complete
+    5 = evt-establish-contact-network
+    6 = evt-advanced-training
+    7 = life-event
+    8 = evt-undercover
+    9 = evt-above-and-beyond
+    10 = specialist-vehicle-training
+    11 = evt-befriended-by-senior
+    12 = evt-uncover-conspiracy
+}
+
+assignment = {
+    merchant-marine = {
+        survival = { edu = 5 }
+        advance  = { int = 7 }
+
+        advancement-table = {
+            1 = { pilot }
+            2 = { spacesuit }
+            3 = { athletics }
+            4 = { mechanic }
+            5 = { engineer }
+            6 = { electronics }
+        }
+        
+        ranks = {
+            crew
+            senior-crew = { mechanic = 1 }
+            4th-officer
+            3rd-officer
+            2nd-officer = { pilot = 1 }
+            1st-officer = { soc }
+            captain
+        }
+    }    
+    
+    free-trader = {
+        survival = { dex = 6 }
+        advance  = { int = 6 }
+        
+        advancement-table = {
+            1 = { pilot }
+            2 = { spacesuit }
+            3 = { deception }
+            4 = { mechanic }
+            5 = { streetwise }
+            6 = { gunner }
+        }
+        ranks = {
+            { }
+            { persuade = 1 }
+            { }
+            experienced-trader = { jack-of-all-trades = 1 }
+            { }
+            { }
+            { }
+        }
+    }
+    
+    broker = {
+        survival = { edu = 5 }
+        advance  = { int = 7 }
+        
+        advancement-table = {
+            1 = { admin }
+            2 = { advocate }
+            3 = { broker }
+            4 = { streetwise }
+            5 = { deception }
+            6 = { persuade }
+        }
+        ranks = {
+            { }
+            { broker = 1 }
+            { }
+            experienced-broker = { streetwise = 1 }
+            { }
+            { }
+            { }
+        }
+    }
+}

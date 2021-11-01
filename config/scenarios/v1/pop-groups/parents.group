@@ -1,0 +1,16 @@
+politics = {
+  democracy = { position = 0.6 strength = 0.3 }
+  equality = { position = 0.8 strength = 0.25 }
+  military = { position = 0.3 strength = 0.2 }
+  order = { position = 0.8 strength = 0.25 }
+  society = { position = 0.8 strength = 0.25 }
+  spending = { position = 0.6 strength = 0.2 }
+  state = { position = 0.6 strength = 0.2 }
+}
+
+proportion = 0.24
+
+influences = {
+    retired = -1
+}
+

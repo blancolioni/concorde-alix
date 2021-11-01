@@ -1,0 +1,39 @@
+with Agents;
+with Colonies;
+with Money;
+with Pops;
+
+package Employment is
+
+record Hire_Request is
+   key Colony;
+   key Colony_Region;
+   key Employer;
+   key Pop_Group;
+   Quantity : Positive;
+   key Pop_Group_Hire with Colony_Region, Pop_Group;
+   unique key Employer_Pop_Group_Hire with Colony_Region, Employer, Pop_Group;
+end Hire_Request;
+
+record Worker_Demand_Region is
+   key Colony_Region;
+   key Pop_Group;
+   Quantity : Natural;
+   unique key Worker_Demand_Region with Colony_Region, Pop_Group;
+end Worker_Demand_Region;
+
+record Worker_Demand_Colony is
+   key Colony;
+   key Pop_Group;
+   Quantity : Natural;
+   unique key Worker_Demand_Colony with Colony, Pop_Group;
+end Worker_Demand_Colony;
+
+record Hire_Response is
+   key Hire_Request;
+   Pop;
+   Quantity : Natural;
+   Salary   : Price_Type;
+end Hire_Response;
+
+end Employment;

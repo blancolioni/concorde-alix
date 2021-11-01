@@ -1,0 +1,20 @@
+wealth-group = yes
+priority = 10
+
+politics = {
+  corporate = { position = 0.9 strength = 0.9 }
+  individual = { position = 0.9 strength = 0.9 }
+  military = { position = 0.8 strength = 0.8 }
+  order = { position = 0.8 strength = 0.8 }
+  society = { position = 0.1 strength = 0.4 }
+  spending = { position = 0.0 strength = 0.6 }
+}
+
+influences = {
+  state-employees = -1 trade-unionist = -1
+}
+
+demand = {
+    food = [ megarich-population * 1.5 ]
+    basic-electronics = [ megarich-population * 2 ]
+}

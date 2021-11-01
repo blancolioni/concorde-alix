@@ -1,0 +1,7 @@
+class = consumer-good
+name = "Bottled Water"
+mass = 20
+quality = 1
+drink = true
+component = { water = 20
+            }

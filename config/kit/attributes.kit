@@ -1,0 +1,15 @@
+package Attributes is
+
+record Attribute : Localised;
+
+record Has_Attributes;
+
+record Attribute_Value is
+    key Has_Attributes;
+    Attribute;
+    Add       : Integer;
+    Multiply  : Long_Float;
+    unique key Attribute_Value with Has_Attributes, Attribute;
+end Attribute_Value;
+
+end Attributes;

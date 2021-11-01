@@ -1,0 +1,4 @@
+hours = { polynomial 0 -1 12 0.8 24 -1 } 
+happy = { logarithmic 5 25 }
+health = { logarithmic 2 50 }
+education = { polynomial 0 -1 2 0.8 10 0 }

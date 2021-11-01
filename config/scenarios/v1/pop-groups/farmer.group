@@ -1,0 +1,11 @@
+politics = {
+  democracy = { position = 0.7 strength = 0.8 }
+  society = { position = 0.6 strength = 0.7 }
+#  religion = { position = 0.2 strength = 0.7 }
+}
+
+proportion = 0.4
+
+influences = {
+  retired = -1
+}

@@ -1,0 +1,11 @@
+with Localisation;
+
+package Cultures is
+
+record Culture_Group : Localised;
+
+record Culture : Localised is
+   key Culture_Group;
+end Culture;
+
+end Cultures;

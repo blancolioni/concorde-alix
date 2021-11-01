@@ -1,0 +1,9 @@
+class = industrial-good
+name = Computer
+mass = 20
+electronic = true
+component = { cpu = 1
+              vdu = 1
+              datastorage = 1
+              electronic-component = 1
+            }

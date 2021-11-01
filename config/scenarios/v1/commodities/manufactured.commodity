@@ -1,0 +1,63 @@
+food = {
+
+    base-price = 1
+    price-pressure-delay = 14
+    market-share-delay = 10
+    market-share-smoothing = 20
+    pressure-smoothing = 5
+    production-sector = farming
+    
+    metrics = {
+
+        production = {
+            content = quantity
+            value = [ farming * (1 + environment) ]
+        }
+        
+        availability = {
+            content = rating
+            
+            value = [ 2 * food-supply / max 1 food-demand - 1 ]
+
+            effect = { 
+                poor = [ x - 0.8 ]
+                middle-class = [ x / 2 - 0.4 ]
+                rich = [ x / 3 - 0.2 ]
+                health = [ x - 1]
+            }
+        }        
+    }
+}
+
+basic-electronics = {
+
+    base-price = 10
+    price-pressure-delay = 14
+    market-share-pressure-delay = 10
+    market-share-pressure-factor = 0.04
+    market-share-self-smoothing = 10
+    pressure-smoothing = 10
+    pressure-price-smoothing = 14
+    pressure-price-delay = 7
+    supply-coefficient = 10
+    production-sector = manufacturing
+
+    parts = {
+        refined-crystals = 2
+        silicon = 2
+        plastic = 2
+    }
+
+    metrics = {       
+        availability = {
+            content = rating
+            value = [ 2 * basic-electronics-supply / max 1 basic-electronics-demand - 1 ]
+            effect = { 
+                poor = [ min x 0 ]
+                middle-class = [ min (x / 2) 0 ]
+                rich = [ min (x / 3) 0 ]
+            }
+            
+        }        
+    }
+}

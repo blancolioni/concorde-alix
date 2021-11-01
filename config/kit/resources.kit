@@ -1,0 +1,70 @@
+with Commodities;
+with Worlds;
+
+package Resources is 
+
+type Resource_Category is (Organic, Mineral, Metal, Fissile, Fuel, Gas, Liquid);
+
+record Fuzzy_Set is
+   Max_Zero : Long_Float;
+   Min_One  : Long_Float;
+   Max_One  : Long_Float;
+   Min_Zero : Long_Float;
+end Fuzzy_Set;
+   
+record Resource : Commodity is
+   key Category : Resource_Category;
+   Yield        : Long_Float;
+end Resource;
+
+record Resource_Sphere is
+   key Resource;
+   Centre_X    : Long_Float;
+   Centre_Y    : Long_Float;
+   Centre_Z    : Long_Float;
+   Strength    : Long_Float;
+   Radius      : Long_Float;
+   Attenuation : Long_Float;
+end Resource_Sphere;
+
+record Resource_Constraint is
+   key Resource;
+   Mass_Constraint        : Boolean;
+   Zone_Constraint        : Boolean;
+   Life_Constraint        : Boolean;
+   Age_Constraint         : Boolean;
+   Hydrosphere_Constraint : Boolean;
+   Composition_Constraint : Boolean;
+   Terrain_Constraint     : Boolean;
+   Temperature_Constraint : Boolean;
+   Moisture_Constraint    : Boolean;
+   key Sphere_Constraint  : Boolean;
+   Mass                   : Fuzzy_Set;
+   Zone                   : Stellar_Orbit_Zone;
+   Composition            : World_Composition;
+   Min_Lifeforms          : Life_Complexity_Type;
+   Min_Age                : Long_Float;
+   Min_Hydrosphere        : Long_Float;
+   Min_Temperature        : Long_Float;
+   Max_Temperature        : Long_Float;
+   Min_Moisture           : Long_Float;
+   Max_Moisture           : Long_Float;
+   Terrain;
+   Sphere_Frequency       : Long_Float;
+   Sphere_RX              : Long_Float;
+   Sphere_RY              : Long_Float;
+   Sphere_RZ              : Long_Float;
+   Attenuation_Min        : Long_Float;
+   Attenuation_Max        : Long_Float;
+   Unlimited              : Boolean;
+   Mean                   : Long_Float;
+   Standard_Deviation     : Long_Float;
+end Resource_Constraint;
+
+record Terrain_Resource is
+  Terrain;
+  Resource;
+  Chance : Long_Float;
+end Terrain_Resource;
+   
+end Resources;

@@ -1,0 +1,8 @@
+class = resource
+name = "Hydrocarbon Gas"
+mass = 1
+gas = true
+npc-price = 10
+constraints = {
+    life = multicellular
+}

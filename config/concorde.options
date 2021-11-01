@@ -1,0 +1,54 @@
+package Concorde.Options is
+
+   Scenario                : String;
+   Language                : String;
+   
+   Randomise               : Boolean;
+   Random_Seed             : Natural;
+   Generate_Root_Password  : Boolean;
+   Command_Line            : Boolean;
+   Batch_Mode              : Boolean;
+   Update_Count            : Natural;
+   
+   Create                  : Boolean;
+   System_Count            : Natural;
+   
+   User_Interface          : String;
+   Display_Theme           : String;
+   
+   Add_Faction             : Boolean;
+   Account_Name            : String;
+   Faction_Name            : String;
+   Faction_Adjective       : String;
+   Faction_Plural_Name     : String;
+   Faction_Color           : String;
+   Faction_Setup_Path      : String;
+   Faction_Names_File      : String;
+   Faction_Colors_File     : String;
+   Galaxy_Shape            : String;
+   Galaxy_Radius           : Natural;
+   Galaxy_Radius_X         : Natural;
+   Galaxy_Radius_Y         : Natural;
+   Galaxy_Radius_Z         : Natural;
+   System_X_Deviation      : Natural;
+   System_Y_Deviation      : Natural;
+   System_Z_Deviation      : Natural;
+   Average_Connections     : Positive;
+   
+   Work_Threads            : Positive := 1;
+
+   Enable_Faction_Logging  : Boolean;
+   Enable_Market_Logging   : Boolean;
+   Write_Accounts          : Boolean;
+
+   Realistic_Star_Masses   : Boolean;
+   
+   Log_Folder              : String;
+   Log_Ship_Movement       : Boolean;
+   Log_Trade_Offers        : Boolean;
+   Log_Offer_Ids           : Boolean;
+   
+   Detailed_Logging        : Boolean;
+   Show_Clock_Time         : Boolean;
+   
+end Concorde.Options;

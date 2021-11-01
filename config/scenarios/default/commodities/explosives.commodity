@@ -1,0 +1,8 @@
+class = industrial-good
+name = Explosives
+mass = 1
+plastic = true
+component = { oil = 2
+              noblegas = 1
+              rare-minerals = 1
+            }

@@ -1,0 +1,13 @@
+package Calendar is
+
+   type Concorde.Calendar.Time is new Long_Float
+   with To_Database => To_Real,
+        From_Database => To_Time,
+        To_String => Image,
+        From_String => From_String;
+
+   record Calendar is
+      Clock : Time;
+   end Calendar;
+   
+end Calendar;

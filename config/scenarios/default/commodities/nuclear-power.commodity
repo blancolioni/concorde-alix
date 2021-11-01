@@ -1,0 +1,6 @@
+class = industrial-good
+name = "Nuclear Power"
+mass = 10
+power = true
+component = { fissile = 1
+            }

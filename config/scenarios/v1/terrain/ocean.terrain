@@ -1,0 +1,4 @@
+is-water = yes
+color = "#0077be"
+min-height = -100
+max-height = 0

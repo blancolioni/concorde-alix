@@ -1,0 +1,9 @@
+package Quantities is
+
+type Concorde.Quantities.Quantity_Type is new Long_Float
+   with To_Database => To_Real,
+        From_Database => To_Quantity,
+        To_String => Image,
+        From_String => Value;
+
+end Quantities;

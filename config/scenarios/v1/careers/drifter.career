@@ -1,0 +1,125 @@
+benefits = {
+    1 = { }
+    2 = { }
+    3 = { cash = 1000 }
+    4 = { cash = 2000 }
+    5 = { cash = 3000 edu }
+    6 = { cash = 4000 }
+    7 = { cash = 5000 }
+}
+
+advancement-tables = {
+    personal-development = {
+        1 = { str }
+        2 = { end }
+        3 = { dex }
+        4 = { language }
+        5 = { profession }
+        6 = { jack-of-all-trades }
+    }
+    service-skills = {
+        1 = { athletics }
+        2 = { melee }
+        3 = { recon }
+        4 = { streetwise }
+        5 = { stealth }
+        6 = { survival }
+    }
+}
+
+mishaps = {
+    1 = evt-severely-injured
+    2 = evt-criminal-offers-deal
+    3 = evt-investigation-gone-wrong
+    4 = evt-learn-too-much
+    5 = evt-friend-gets-hurt
+    6 = evt-injured
+}
+
+events = {
+    2 = mishap
+    3 = evt-dangerous-investigation
+    4 = evt-mission-complete
+    5 = evt-establish-contact-network
+    6 = evt-advanced-training
+    7 = life-event
+    8 = evt-undercover
+    9 = evt-above-and-beyond
+    10 = specialist-vehicle-training
+    11 = evt-befriended-by-senior
+    12 = evt-uncover-conspiracy
+}
+
+assignment = {
+    barbarian = {
+        survival = { end = 7 }
+        advance  = { str = 7 }
+        
+        advancement-table = {
+            1 = { animals }
+            2 = { carouse }
+            3 = { melee }
+            4 = { stealth }
+            5 = { seafarer }
+            6 = { survival }
+        }
+        
+        ranks = {
+            { }
+            { survival = 1 }
+            warrior = { melee = 1 }
+            { }
+            chieftain = { leadership = 1 }
+            { }
+            warlord
+        }
+    }
+    
+    wanderer = {
+        survival = { end = 7 }
+        advance  = { int = 7 }
+        
+        advancement-table = {
+            1 = { drive }
+            2 = { deception }
+            3 = { recon }
+            4 = { stealth }
+            5 = { streetwise }
+            6 = { survival }
+        }
+        
+        ranks = {
+            { }
+            { streetwise = 1 }
+            { }
+            { deception = 1 }
+            { }
+            { }
+            { }
+        }
+    }
+    scavenger = {
+        survival = { dex = 7 }
+        advance  = { end = 7 }
+        
+        advancement-table = {
+            1 = { pilot }
+            2 = { mechanic }
+            3 = { astrogation }
+            4 = { spacesuit }
+            5 = { profession }
+            6 = { gun-combat }
+        }
+        
+        ranks = {
+            { }
+            { spacesuit = 1 }
+            { }
+            { profession = 1 }
+            { }
+            { }
+            { }
+        }
+    }
+}
+

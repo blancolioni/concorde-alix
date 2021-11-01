@@ -1,0 +1,8 @@
+class = consumer-good
+name = Ambrosia
+mass = 20
+quality = 3
+drink = true
+component = { water = 15
+              fruit = 15
+            }

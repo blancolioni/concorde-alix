@@ -1,0 +1,5 @@
+rank = 3
+skills = { advocate investigate }
+abilities = { int edu }
+vacancy = { unrest = 2 }
+attributes = { law loyalty }

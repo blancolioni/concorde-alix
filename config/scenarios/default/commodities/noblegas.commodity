@@ -1,0 +1,5 @@
+class = resource
+name = "Noble Gas"
+mass = 1
+gas = true
+npc-price = 10

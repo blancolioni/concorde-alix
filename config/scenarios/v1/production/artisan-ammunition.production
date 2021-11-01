@@ -1,0 +1,16 @@
+in = {
+  chemistry = 1
+  iron = 1
+  sulphur = 1
+}
+
+efficiency = {
+ administration = 1
+ }
+ 
+zone = industrial
+size = 0.01
+
+out = {
+  ammunition = 1
+}

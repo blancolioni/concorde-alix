@@ -1,0 +1,132 @@
+qualification = { ability = edu score = 5 }
+advanced-education = { ability = edu score = 10 }
+
+benefits = {
+    1 = { cash = 2000 }
+    2 = { cash = 5000 }
+    3 = { cash = 10000  int = 1 }
+    4 = { cash = 10000 }
+    5 = { cash = 10000  edu = 1}
+    6 = { cash = 50000 }
+    7 = { cash = 100000 }
+}
+
+advancement-tables = {
+    personal-development = {
+        1 = { edu }
+        2 = { int }
+        3 = { carouse }
+        4 = { gambler }
+        5 = { drive }
+        6 = { jack-of-all-trades }
+    }
+    service-skills = {
+        1 = { drive }
+        2 = { flyer }
+        3 = { streetwise }
+        4 = { melee }
+        5 = { steward }
+        6 = { profession }
+    }
+    advanced-education = {
+        1 = { art }
+        2 = { advocate }
+        3 = { diplomat }
+        4 = { language }
+        5 = { electronics }
+        6 = { medic }
+    }
+}
+
+mishaps = {
+    1 = evt-severely-injured
+    2 = evt-criminal-offers-deal
+    3 = evt-investigation-gone-wrong
+    4 = evt-learn-too-much
+    5 = evt-friend-gets-hurt
+    6 = evt-injured
+}
+
+events = {
+    2 = mishap
+    3 = evt-dangerous-investigation
+    4 = evt-mission-complete
+    5 = evt-establish-contact-network
+    6 = evt-advanced-training
+    7 = life-event
+    8 = evt-undercover
+    9 = evt-above-and-beyond
+    10 = specialist-vehicle-training
+    11 = evt-befriended-by-senior
+    12 = evt-uncover-conspiracy
+}
+
+assignment = {
+    corporate = {
+        survival = { soc = 6 }
+        advance  = { int = 6 }
+
+        advancement-table = {
+            1 = { advocate }
+            2 = { admin }
+            3 = { broker }
+            4 = { electronics }
+            5 = { diplomat }
+            6 = { leadership }
+        }
+        
+        ranks = {
+            { }
+            { }
+            manager = { admin = 1 }
+            { }
+            senior-manager = { advocate = 1 }
+            { }
+            director = { soc = 1 }
+        }
+    }    
+    
+    worker = {
+        survival = { end = 4 }
+        advance  = { edu = 8 }
+        advancement-table = {
+            1 = { drive }
+            2 = { mechanic }
+            3 = { electronics }
+            4 = { engineer }
+            5 = { profession }
+            6 = { science }
+        }
+        ranks = {
+            { }
+            { }
+            technician = { profession = 1 }
+            { }
+            craftsman = { mechanic = 1 }
+            { }
+            master-technician = { engineer = 1 }
+        }
+    }
+    
+    colonist = {
+        survival = { int = 7 }
+        advance  = { end = 5 }
+        advancement-table = {
+            1 = { animals }
+            2 = { athletics }
+            3 = { jack-of-all-trades }
+            4 = { drive }
+            5 = { survival }
+            6 = { recon }
+        }
+        ranks = {
+            { }
+            { }
+            settler = { survival = 1 }
+            { }
+            explorer = { navigation = 1 }
+            { }
+            { gun-combat = 1 }
+        }
+    }
+}

@@ -1,0 +1,7 @@
+class = industrial-good
+name = Steel
+mass = 5
+alloy = true
+component = { iron = 10
+              coal = 10
+            }

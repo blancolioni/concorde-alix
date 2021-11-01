@@ -1,0 +1,15 @@
+package Orders is
+
+record Has_Orders;
+
+record Order_Target;
+
+record Order is
+   key Has_Orders;
+   Tag      : String (16);
+   Target   : Order_Target;
+   Text_Arg : String (16);
+   Int_Arg  : Integer;
+end Order;
+
+end Orders;

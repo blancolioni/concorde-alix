@@ -1,0 +1,5 @@
+rank = 5
+skills = { leadership pilot }
+abilities = { int soc }
+vacancy = { economy = -4 }
+attributes = { economy }

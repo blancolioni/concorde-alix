@@ -1,0 +1,5 @@
+class = service
+quality = 1
+mass = 0
+medical = true
+npc-price = 100

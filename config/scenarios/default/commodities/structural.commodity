@@ -1,0 +1,9 @@
+class = building-module
+name = Structural
+mass = 10
+structural = true
+component = { cement = 3
+              steel = 1
+              glass = 1
+              pvc = 1
+            }

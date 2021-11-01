@@ -1,0 +1,14 @@
+hazard = 0.01
+priority = 1
+resource = { funghi = 0.200
+             fruit = 0.250
+             livestock = 0.300
+             water = 0.250
+           }
+color = "#84DE02"
+
+module-costs = {
+  farm = 0.7
+  plantation = 0.9
+  residency = 0.8
+}

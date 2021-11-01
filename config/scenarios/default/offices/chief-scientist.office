@@ -1,0 +1,5 @@
+rank = 9
+skills = { science }
+abilities = { int edu }
+vacancy = { economy = -2 }
+attributes = { economy }

@@ -1,0 +1,7 @@
+heading = injury
+text = severely-injured
+choices = {
+    lose-str = { str = -d6 }
+    lose-dex = { dex = -d6 }
+    lose-end = { end = -d6 }
+}

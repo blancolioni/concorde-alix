@@ -1,0 +1,11 @@
+class = resource
+name = Herbs
+mass = 1
+organic = true
+npc-price = 20
+constraints = {
+    life = multicellular
+    temperature = { 290 310 }
+    moisture = { 0.5 1.0 }
+}
+yield = 20%

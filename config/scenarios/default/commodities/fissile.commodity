@@ -1,0 +1,6 @@
+class = resource
+name = Fissile
+mass = 1
+fissile = true
+npc-price = 500
+yield = 1%

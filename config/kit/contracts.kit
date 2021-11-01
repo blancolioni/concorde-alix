@@ -1,0 +1,38 @@
+with Agents;
+with Calendar;
+with Money;
+with Quantities;
+
+package Contracts is
+
+record Contract is
+   Term    : Long_Float;
+end Contract;
+
+record Party is
+   key Contract;
+end Party;
+
+record Obligation is
+   key Contract;
+   From      : Party;
+   To        : Party;
+   Cash      : Money_Type;
+   Commodity;
+   Quantity  : Quantity_Type;
+end Obligation;
+   
+record Agreement is
+   Contract;
+   Start     : Time;
+   Finish    : Time;
+end Agreement;
+
+record Agreed_Party is
+   key Agreement;
+   Party;
+   key Agent;
+   unique key Agreed_Party with Agreement, Party;
+end Agreed_Party;
+
+end Contracts;

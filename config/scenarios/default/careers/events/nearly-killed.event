@@ -1,0 +1,8 @@
+heading = injury
+text = nearly-killed
+choices = {
+    { physical-ability = -d6
+      physical-ability = -2
+      physical-ability = -2
+    }
+}

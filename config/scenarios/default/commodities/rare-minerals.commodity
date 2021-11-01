@@ -1,0 +1,5 @@
+class = resource
+name = "Rare minerals"
+mass = 1
+mineral = true
+npc-price = 100

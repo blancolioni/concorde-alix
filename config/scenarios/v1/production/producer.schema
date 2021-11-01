@@ -1,0 +1,13 @@
+with Zones;
+
+schema Producer is
+
+   for Extension use "producer";
+   
+   Zone;
+   
+   Inputs     : List (Commodity, Quantity);
+   Efficiency : List (Commodity, Quantity);
+   Outputs    : List (List (Commodity, Quantity));
+   
+end Producer;

@@ -1,0 +1,9 @@
+random auto
+choices = {
+    1 = { redirect = evt-nearly-killed }
+    2 = { redirect = evt-severely-injured }
+    3 = { redirect = evt-missing-eye-or-limb }
+    4 = { redirect = evt-scarred }
+    5 = { redirect = evt-injured }
+    6 = { redirect = evt-lightly-injured }
+}

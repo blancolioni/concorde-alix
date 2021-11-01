@@ -1,0 +1,11 @@
+default-terrain = hill
+habitability = 0
+terrain = {
+   desert = 5%
+   hill = 20%
+   mountain = 20%
+   volcanic = 20%
+   ice = 10%
+}
+
+   

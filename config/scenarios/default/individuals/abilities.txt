@@ -1,0 +1,7 @@
+str = { physical }
+dex = { physical }
+end = { physical }
+int = { mental }
+edu = { mental }
+cha = { social }
+soc = { social }

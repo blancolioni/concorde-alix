@@ -1,0 +1,25 @@
+package Events is
+
+record Event is
+   unique key Tag : String (64) is Display;
+   Heading        : String (32);
+   Text           : String (32);
+   Random_Choice  : Boolean;
+   Auto_Execute   : Boolean;
+end Event;
+
+record Event_Choice is
+   key Event;
+   Tag : String (32);
+end Event_Choice;
+
+record Event_Effect is
+   key Event_Choice;
+end Event_Effect;
+
+record Child_Event : Event_Effect is
+   Tag      : String (64);
+   Redirect : Boolean;
+end Child_Event;
+
+end Events;

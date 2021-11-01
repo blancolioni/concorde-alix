@@ -1,0 +1,105 @@
+with Colors;
+with Generated;
+with Modules;
+with Names;
+with Knowledge;
+with Localisation;
+with Locations;
+with Quantities;
+with Star_Systems;
+with Surfaces;
+
+package Worlds is
+
+    type World_Composition is
+     (Hydrogen, Gaseous, Ice, Rock, Rock_Ice, Rock_Iron);
+
+   type World_Climate is
+     (Airless, Desert, Hothouse, Iceball, Martian, Temperate, Venusian, Water, Jovian);
+
+   type Stellar_Orbit_Zone is
+     (Red, Yellow, Green, Blue, Black);
+
+   type Life_Complexity_Type is
+        (No_Life, Prebiotic, Single_Celled, Plants, Multicellular);
+
+    record Atmospheric_Gas : Localised is
+       unique key Formula   : String (16);
+       key Molecular_Weight : Long_Float;
+       Melting_Point        : Long_Float;
+       Boiling_Point        : Long_Float;
+       Density              : Long_Float;
+       Abundance_E          : Long_Float;
+       Abundance_S          : Long_Float;
+       Reactivity           : Long_Float;
+       Max_IPP              : Long_Float;
+    end Atmospheric_Gas;
+
+   record Terrain : Localised, Has_Color is
+      Hazard   : Long_Float;
+      Is_Water : Boolean;   
+   end Terrain;
+
+   record Terrain_Module_Cost is
+      key Terrain;
+      key Module_Group;
+      Cost      : Long_Float;
+      unique key Terrain_Module_Cost with Terrain, Module_Group;
+   end Terrain_Module_Cost;   
+
+   record Feature : Localised, Has_Color is
+      Is_Ice   : Boolean;
+   end Feature;
+
+   record Feature_Module_Cost is
+      key Feature;
+      key Module_Group;
+      Cost      : Long_Float;
+      unique key Feature_Module_Cost with Feature, Module_Group;
+   end Feature_Module_Cost;   
+   
+   record Elevation : Has_Color is
+	  Height : Integer;
+   end Elevation;
+      
+   record Climate_Terrain is
+      key Climate : World_Climate;
+      Terrain;
+	  Sequence  : Natural;
+      Frequency : Long_Float;
+      key Climate_Terrain with Climate, Terrain;
+   end Climate_Terrain;
+   
+   record Transport_Method : Localised;
+   
+   record Movement_Cost is
+      key Transport_Method;
+	  key Terrain;
+	  Cost : Long_Float;
+   end Movement_Cost;
+   
+   record World : Star_System_Object, Has_Name, Knowable, Surface, Is_Generated, Has_Random_Seed, Has_Orbits is
+      Composition         : World_Composition;
+      Climate             : World_Climate;
+      Orbit_Zone          : Stellar_Orbit_Zone;
+      Gas_Giant           : Boolean;
+      Age                 : Long_Float;
+      key Habitability    : Long_Float;
+      Surface_Pressure    : Long_Float;
+	   Average_Temperature : Long_Float;
+      Hydrosphere         : Long_Float;
+	   Life                : Life_Complexity_Type;
+	   Smoothness          : Natural;
+	   Elevation_Range     : Natural;
+	   Sea_Level           : Natural;
+   end World; 
+
+   record Atmosphere is
+      key World;
+      Atmospheric_Gas;
+      Percentage : Long_Float;
+      key World_Atmosphere with World, Percentage;
+      key World_Gas with World, Atmospheric_Gas;
+   end Atmosphere;
+
+end Worlds;

@@ -1,0 +1,80 @@
+with Localisation;
+with Calendar;
+with Colors;
+with Identifiers;
+with Money;
+with Properties;
+with Quantities;
+with Technology;
+
+package Commodities is
+
+type Quality_Type is (Regular, Good, High);
+
+type Consumer_Class is (Food, Drink, Intoxicant, Clothing);
+
+type Service_Category is (Education, Entertainment, Fitness, Medical);
+
+type Industrial_Class is (Alloy, Ceramic, Electronic, Plastic, Power);
+
+type Building_Module_Category is (Structural, Industrial, Commercial, Habitation, Military);
+
+record Commodity : Localised is
+   Mass       : Long_Float;
+   Base_Price : Price_Type;
+   Complexity : Long_Float;
+   Transient  : Boolean;
+   Employment : Boolean;
+end Commodity;
+
+record Has_Stock : Has_Identifier;
+
+record Stock_Item is
+   key Has_Stock;
+   Commodity;
+   Quantity : Quantity_Type;
+   Value    : Money_Type;
+   unique key Stock_Item with Has_Stock, Commodity;
+end Stock_Item;
+
+record Historical_Stock is
+   Time_Stamp : Time;
+   Has_Stock;
+   Commodity;
+   Quantity : Quantity_Type;
+   Value    : Money_Type;
+   unique key Historical_Stock with Has_Stock, Commodity, Time_Stamp;
+end Historical_Stock;
+
+record Input_Commodity is
+   key Commodity;
+   key Input : Commodity;
+   Quantity : Quantity_Type;
+   unique key Input_Commodity with Commodity, Input;
+end Input_Commodity;
+
+record Consumer_Commodity : Commodity is
+   key Quality : Quality_Type;
+   key Class   : Consumer_Class;
+   Happiness   : Long_Float;
+   Consumption : Long_Float;
+   key Quality_Class with Quality, Class;
+end Consumer_Commodity;
+
+record Service_Commodity : Commodity is
+   key Quality : Quality_Type;
+   key Class   : Service_Category;
+   Happiness   : Long_Float;
+   Consumption : Long_Float;
+   key Quality_Class with Quality, Class;
+end Service_Commodity;
+
+record Industrial_Commodity : Commodity is
+   key Class : Industrial_Class;
+end Industrial_Commodity;
+
+record Building_Module : Commodity is
+   key Category : Building_Module_Category;
+end Building_Module;
+
+end Commodities;

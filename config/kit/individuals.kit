@@ -1,0 +1,117 @@
+with Abilities;
+with Calendar;
+with Events;
+with Factions;
+with Offices;
+with Ships;
+with Skills;
+with World_Sectors;
+
+package Characters is
+
+record Individual : Agent is
+    key Alive      : Boolean;
+    key Faction;
+    key World_Sector;
+    key Ship;
+    Title          : String (32);
+    First_Name     : String (32);
+    Last_Name      : String (32);
+    Gender         : Long_Float;
+    Office;
+    key Power      : Natural;
+    key Birth_Date : Time;
+    key Death_Date : Time;
+    key Faction_Office with Faction, Office;
+end Individual;
+
+record Ability_Score is
+    key Individual;
+    Ability;
+    Score : Natural;
+    unique key Ability_Score with Individual, Ability;
+end Ability_Score;
+
+record Skill_Level is
+    key Individual;
+    Skill;
+    Level : Natural;
+    unique key Skill_Level with Individual, Skill;
+end Skill_Level;
+
+type Skill_Training_Type is 
+  (Personal_Development, Service_Skills, Advanced_Skills, 
+   Commission_Skills, Assignment_Training);
+
+record Career : Localised is
+    Qualification    : Ability;
+    Check            : Natural;
+    Advanced_Ability : Ability;
+    Advanced_Check   : Natural;
+    Has_Commission   : Boolean;
+    Basic_Training   : Skill_Training_Type;
+end Career;
+
+record Advancement is
+   Ability;
+   Cash    : Money_Type;
+   Skill;
+   Skill_Level : Integer;
+end Advancement;
+
+record Assignment : Localised is
+   key Career;
+   Survival_Ability : Ability;
+   Survival_Check   : Natural;
+   Advance_Ability  : Ability;
+   Advance_Check    : Natural;
+end Assignment;
+
+record Assignment_Rank : Advancement, Localised is
+    key Assignment;
+    key Rank_Index : Natural;
+    unique key Assignment_Rank with Assignment, Rank_Index;
+end Assignment_Rank;
+
+record Advancement_Table : Advancement is
+    Table : Skill_Training_Type;
+    key Career;
+    Assignment;
+    DR : Positive;
+    key Advancement_Table with Career, Table, Assignment;
+    unique key Advancement_Entry with Career, Table, Assignment, DR;
+end Advancement_Table;
+
+record Career_Benefit : Advancement is
+   Career;
+   Index   : Positive;
+   unique key Career_Benefit with Career, Index;
+end Career_Benefit;
+
+record Career_Mishap is
+   key Career;
+   Event;
+end Career_Mishap;
+
+record Individual_Career is
+    key Individual;
+    Career;
+    Assignment;
+    Rank        : Natural;
+    Term_Start  : Time;
+    Term_Finish : Time;
+end Individual_Career;
+
+record Change_Ability : Event_Effect is
+   Category : Ability_Category;
+   Ability;
+   Low      : Integer;
+   High     : Integer;
+end Change_Ability;
+
+record Gain_Skill : Event_Effect is
+   Skill;
+   Level   : Integer;
+end Gain_Skill;
+
+end Characters;

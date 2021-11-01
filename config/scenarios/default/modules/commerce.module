@@ -1,0 +1,46 @@
+1 = {
+    cost = 10
+    modules = {
+        market = { economy = 1 stability = 1 }
+        black-market = { economy = 4 unrest = 1 }
+    }
+}
+
+2 = {
+    cost = 20
+    modules = {
+        market = { economy = 3 stability = 1 }
+        black-market = { economy = 8 stability = -2 unrest = 1 }
+    }
+}
+
+3 = {
+    cost = 40
+    slots = 2
+    modules = {
+        market = { economy = 4 stability = 2 supply = 1 }
+        black-market = { economy = 12 stability = -4 unrest = 1 capability = 1 law = -1 supply = 1 }
+        bank = { economy = 3 stability = 3 law = 1 }
+    }
+}
+
+4 = {
+    cost = 60
+    slots = 2
+    modules = {
+        market = { economy = 6 stability =2 supply = 2 }
+        black-market = { economy = 14 stability = -2 unrest = 2 capability = 2 law = -2 supply = 2 }
+        bank = { economy = 4 stability = 4 law = 1 supply = 1 }
+    }
+}
+
+5 = {
+    cost = 80
+    slots = 4
+    modules = {
+        market = { economy = 6 stability = 4 supply = 4 }
+        black-market = { economy = 16 stability = -2 unrest = 2 capability = 3 law = -2 supply = 3 }
+        bank = { economy = 4 stability = 4 loyalty = 2 law = 2 supply = 1 capability = 1 }
+    }
+}
+

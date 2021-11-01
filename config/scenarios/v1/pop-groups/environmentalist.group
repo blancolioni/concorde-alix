@@ -1,0 +1,10 @@
+politics = {
+  control = { position = 0.6 strength = 0.5 }
+  corporate = { position = 0.1 strength = 0.6 }
+  individual = { position = 0.1 strength = 0.3 }
+}
+
+proportion = 0.09
+
+influences = {
+}

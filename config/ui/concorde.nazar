@@ -1,0 +1,23 @@
+application Concorde is
+
+   view Top_Level : Vertical_Box is
+   
+      view Main_Toolbar : Toolbar is
+	     
+	  end Main_Toolbar;
+	  
+	  view HBox : Horizontal_Box is
+	  
+	     view Information_Panel : Tree;
+		 
+		 view Dashboard : Grid is
+		    view Galaxy : Draw;
+   	     end Dashboard;
+	  
+	     view Outliner : 
+	     view Status : Status_Bar;
+	  
+	  end HBox;
+   end Top_Level;
+
+end Concorde;

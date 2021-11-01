@@ -1,0 +1,24 @@
+with Attributes;
+with Localisation;
+with Money;
+with Quantities;
+
+package Modules is
+
+type Module_Category is (Agriculture, Commerce, Cultural, Development, Extraction, Governance, Military, Monument, Residential, Transit);
+
+record Module_Group : Localised is
+   key Category : Module_Category;
+   Habitable_Factor : Long_Float;
+   Deposit_Factor   : Long_Float;
+end Module_Group;
+
+record Module : Localised, Has_Attributes is
+   key Module_Group;
+   Level        : Positive;
+   Cost         : Money_Type;
+   Slots        : Positive;
+   unique key Group_Level with Module_Group, Level;
+end Module;
+
+end Modules;

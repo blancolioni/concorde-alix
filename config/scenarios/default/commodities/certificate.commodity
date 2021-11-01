@@ -1,0 +1,6 @@
+class = service
+quality = 1
+mass = 0
+education = true
+npc-price = 100
+transient = true

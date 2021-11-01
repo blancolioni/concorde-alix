@@ -1,0 +1,14 @@
+with Commodities;
+
+package Supply is
+
+record Supplied;
+
+record Supply_Requirement is
+   key Supplied;
+   key Commodity;
+   Quantity : Float;
+   unique key Supply_Requirement with Supplied, Commodity;
+end Supply_Requirement;
+
+end Supply;

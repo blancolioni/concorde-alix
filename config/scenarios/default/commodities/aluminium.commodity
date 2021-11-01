@@ -1,0 +1,11 @@
+class = resource
+name = Aluminium
+mass = 1
+metal = true
+npc-price = 5
+yield = 15%
+deposits = {
+    rare = { mass = small }
+    uncommon = { mass = medium }
+    common = { mass = large }
+}

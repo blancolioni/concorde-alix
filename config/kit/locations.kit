@@ -1,0 +1,21 @@
+with Massive_Objects;
+
+package Locations is
+
+type Location_Class is (Nowhere, In_Orbit, System_Point, Carried);
+
+record Has_Orbits : Massive_Object;
+
+record Can_Carry;
+
+record Located is
+   Class : Location_Class;
+   Has_Orbits;
+   Can_Carry;
+   Orbit        : Long_Float;
+   X            : Long_Float;
+   Y            : Long_Float;
+   Z            : Long_Float;
+end Located;
+
+end Locations;

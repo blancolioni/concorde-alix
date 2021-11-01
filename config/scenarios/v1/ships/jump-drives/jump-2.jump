@@ -1,0 +1,5 @@
+jump = 2
+hull = 5%
+minimum_size = 10
+cost = 1500
+power_per_ton = 2

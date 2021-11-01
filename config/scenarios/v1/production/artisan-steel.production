@@ -1,0 +1,16 @@
+in = {
+  metallurgy = 1
+  iron = 10
+  coal = 10
+}
+
+efficiency = {
+ administration = 1
+ }
+ 
+zone = industrial
+size = 0.01
+
+out = {
+  steel = 10
+}

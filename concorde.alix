@@ -30,9 +30,9 @@ depend = { project = marlowe version = any }
 depend = { project = kit version = any }
 depend = { project = nazar version = any }
 depend = { project = nazargtk version = any }
-depend = { project = ../reiko/reiko external = yes }
-depend = { project = ../tarana/tarana external = yes }
-depend = { project = ../rho/rho external = yes }
+depend = { project = reiko version = any }
+depend = { project = tarana version = any }
+depend = { project = rho version = any }
 language = Ada
 language = C
 main_unit = concorde-driver

@@ -1,3 +1,4 @@
+with Concorde.Agents;
 with Concorde.Calendar;
 with Concorde.Colonies.Updates;
 
@@ -27,6 +28,11 @@ package body Concorde.Colonies.Managers is
       Updates.Stability_Check (Manager.Colony);
       Updates.Pay_Maintenance (Manager.Colony);
       Updates.Collect_Taxes (Manager.Colony);
+      Log (Manager.Colony,
+           "cash: "
+           & Concorde.Money.Show
+             (Concorde.Agents.Cash (Manager.Colony.Faction)));
+
       Manager.Update_With_Delay (Concorde.Calendar.Days (30));
    end Execute;
 

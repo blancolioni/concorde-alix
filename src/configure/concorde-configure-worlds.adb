@@ -310,14 +310,14 @@ package body Concorde.Configure.Worlds is
             Surface   : Concorde.Surfaces.Root_Surface_Type;
          begin
             Concorde.Logging.Log
-              ("generator", "surfaces", World.Name,
+              (World.Name,
                "Creating surface with "
                & Tile_Count'Image & " tiles");
             Surface.Create_Voronoi_Partition (Tile_Count);
             Save_Surface (Surface, World);
 
             Concorde.Logging.Log
-              ("generator", "surfaces", World.Name,
+              (World.Name,
                "done");
 
          end;

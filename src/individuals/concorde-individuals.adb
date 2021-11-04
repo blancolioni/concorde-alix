@@ -206,12 +206,9 @@ package body Concorde.Individuals is
                 Individual.Title;
    begin
       Concorde.Logging.Log
-        (Actor    =>
-           (if Title = "" then "" else Title & " ")
-             & Individual.First_Name & " " & Individual.Last_Name,
-         Location => Individual.World_Sector.World.Name,
-         Category => "career",
-         Message  => Message);
+        ((if Title = "" then "" else Title & " ")
+         & Individual.First_Name & " " & Individual.Last_Name,
+         Message);
    end Log;
 
    ------------------

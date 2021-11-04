@@ -1,3 +1,5 @@
+with Ada.Characters.Latin_1;
+
 with Concorde.Calendar;
 with Concorde.Identifiers;
 with Concorde.Logging;
@@ -96,10 +98,8 @@ package body Concorde.Agents is
    is
    begin
       Concorde.Logging.Log
-        (Actor    => Describe (Agent),
-         Location => "",
-         Category => Context,
-         Message  => Message);
+        (Describe (Agent),
+         Context & Ada.Characters.Latin_1.HT & Message);
    end Log_Agent;
 
    -----------------

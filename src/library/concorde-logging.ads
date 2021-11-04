@@ -1,21 +1,33 @@
+with Ada.Exceptions;
+
 package Concorde.Logging is
 
-   procedure Log
-     (Actor    : String;
-      Location : String;
-      Category : String;
-      Message  : String);
+   type Log_Level is range 1 .. 4;
 
-   procedure Log
-     (Category : String;
-      Message  : String);
-
-   procedure Start_Logging
-     (Log_Name : String := "");
+   procedure Start_Logging (Path : String;
+                            Level : Log_Level := 3);
+   procedure Start_Logging (Level : Log_Level := 3);
 
    procedure Stop_Logging;
 
-   procedure Start_Update;
-   procedure Finish_Update;
+   procedure Log (Message : String);
+   procedure Log (Level   : Log_Level;
+                  Message : String);
+
+   procedure Log (Category : String;
+                  Message  : String);
+
+   procedure Log (Level    : Log_Level;
+                  Category : String;
+                  Message  : String);
+
+   procedure Log_Exception
+     (Message : String;
+      E       : Ada.Exceptions.Exception_Occurrence);
+
+   procedure Log_Exception
+     (Level   : Log_Level;
+      Message : String;
+      E       : Ada.Exceptions.Exception_Occurrence);
 
 end Concorde.Logging;

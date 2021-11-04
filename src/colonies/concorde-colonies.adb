@@ -330,7 +330,7 @@ package body Concorde.Colonies is
    is
    begin
       Concorde.Logging.Log
-        (Colony.Faction.Name
+        (Colony.Faction.Adjective
          & " colony on " & Colony.World.Name,
          Message);
    end Log;

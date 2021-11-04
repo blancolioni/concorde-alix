@@ -143,9 +143,7 @@ begin
 
    Ada.Text_IO.Put_Line ("exit");
 
-   if Concorde.Options.Detailed_Logging then
-      Concorde.Logging.Stop_Logging;
-   end if;
+   Concorde.Logging.Stop_Logging;
 
 exception
 

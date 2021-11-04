@@ -363,11 +363,8 @@ package body Concorde.Individuals.Create is
             Career_Count := Career_Count + 1;
 
             Concorde.Logging.Log
-              (Actor    => "",
-               Location => Individual.World_Sector.World.Name,
-               Category => "career",
-               Message  =>
-                 Individual.First_Name & " " & Individual.Last_Name
+              (Individual.World_Sector.World.Name,
+               Individual.First_Name & " " & Individual.Last_Name
                & " " & Concorde.Calendar.Image (Current_Start)
                & ": starts new career "
                & Current_Assignment.Career.Tag
@@ -376,11 +373,8 @@ package body Concorde.Individuals.Create is
 
          else
             Concorde.Logging.Log
-              (Actor    => "",
-               Location => Individual.World_Sector.World.Name,
-               Category => "career",
-               Message  =>
-                 Individual.First_Name & " " & Individual.Last_Name
+              (Individual.World_Sector.World.Name,
+               Individual.First_Name & " " & Individual.Last_Name
                & " " & Concorde.Calendar.Image (Current_Start)
                & ": continues career "
                & Current_Assignment.Tag

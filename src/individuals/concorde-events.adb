@@ -1,3 +1,4 @@
+with Ada.Characters.Latin_1;
 with Ada.Containers.Vectors;
 
 with WL.Random;
@@ -218,9 +219,7 @@ package body Concorde.Events is
    begin
       Concorde.Logging.Log
         (Target.First_Name,
-         "",
-         Event.Tag,
-         Message);
+         Event.Tag & Ada.Characters.Latin_1.HT & Message);
    end Log;
 
    ---------
@@ -236,8 +235,6 @@ package body Concorde.Events is
    begin
       Concorde.Logging.Log
         (Target.First_Name,
-         "",
-         "effect",
          Message);
    end Log;
 

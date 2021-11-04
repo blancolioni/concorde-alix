@@ -1,5 +1,3 @@
-with Ada.Text_IO;
-
 with WL.Random;
 with WL.String_Sets;
 
@@ -202,9 +200,11 @@ package body Concorde.Colonies is
             Attribute_Name => Attribute_Name);
       end loop;
 
-      Concorde.Logging.Log
-        (Colony.World.Name,
-         Concorde.Calculations.Show (Calculation));
+      if False then
+         Concorde.Logging.Log
+           (Colony.World.Name,
+            Concorde.Calculations.Show (Calculation));
+      end if;
 
       return Integer'Max (Concorde.Calculations.Total (Calculation), 0);
 
@@ -245,7 +245,7 @@ package body Concorde.Colonies is
               Total      => Total,
               Difficulty => Ruling_Difficulty (Colony))
          do
-            Ada.Text_IO.Put_Line ("check with no ruler fails");
+            Log (Colony, "check with no ruler fails");
          end return;
       end if;
 
@@ -255,26 +255,26 @@ package body Concorde.Colonies is
            Total      => Total,
            Difficulty => Ruling_Difficulty (Colony))
       do
-         Ada.Text_IO.Put_Line
-           ("check: " & Check_Tag & " by "
-            & Concorde.Individuals.Full_Name_And_Title (Checker)
-            & ": " & Attribute_Tag & Attribute (Colony)'Image
-            & " + ruling" & Ruling_Bonus'Image
-            & (if Bonus_Tag = "" then ""
-              else " + " & Bonus_Tag & Bonus'Image)
-            & (if Penalty_Tag = "" then ""
-              else " - " & Penalty_Tag & Penalty'Image)
-            & " + roll" & Roll'Image
-            & " =" & Total'Image
-            & " against difficulty" & Result.Difficulty'Image
-            & ": "
-            & (if Major_Success (Result)
-              then "major success"
-              elsif Major_Failure (Result)
-              then "major failure"
-              elsif Success (Result)
-              then "success"
-              else "failure"));
+         Log (Colony,
+              "check: " & Check_Tag & " by "
+              & Concorde.Individuals.Full_Name_And_Title (Checker)
+              & ": " & Attribute_Tag & Attribute (Colony)'Image
+              & " + ruling" & Ruling_Bonus'Image
+              & (if Bonus_Tag = "" then ""
+                else " + " & Bonus_Tag & Bonus'Image)
+              & (if Penalty_Tag = "" then ""
+                else " - " & Penalty_Tag & Penalty'Image)
+              & " + roll" & Roll'Image
+              & " =" & Total'Image
+              & " against difficulty" & Result.Difficulty'Image
+              & ": "
+              & (if Major_Success (Result)
+                then "major success"
+                elsif Major_Failure (Result)
+                then "major failure"
+                elsif Success (Result)
+                then "success"
+                else "failure"));
       end return;
    end Check;
 
@@ -319,6 +319,21 @@ package body Concorde.Colonies is
 
       return Max_Investment_For_Level'Last;
    end Level;
+
+   ---------
+   -- Log --
+   ---------
+
+   procedure Log
+     (Colony  : Colony_Class;
+      Message : String)
+   is
+   begin
+      Concorde.Logging.Log
+        (Colony.Faction.Name
+         & " colony on " & Colony.World.Name,
+         Message);
+   end Log;
 
    -----------------------
    -- Ruling_Difficulty --

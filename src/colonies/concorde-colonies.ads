@@ -98,4 +98,8 @@ private
    function Major_Failure (Check : Check_Result) return Boolean
    is (Check.Total <= Check.Difficulty - 5);
 
+   procedure Log
+     (Colony  : Colony_Class;
+      Message : String);
+
 end Concorde.Colonies;

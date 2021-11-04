@@ -1,5 +1,3 @@
-with Ada.Text_IO;
-
 with WL.Random;
 
 with Concorde.Agents;
@@ -33,9 +31,7 @@ package body Concorde.Colonies.Updates is
                             Office  => Accord.Office.Get_By_Tag ("treasurer"));
    begin
       if not Ruler.Has_Element then
-         Ada.Text_IO.Put_Line
-           (Colony.Faction.Name & " on " & Colony.World.Name
-            & ": no treasurer, no taxes");
+         Log (Colony, "no treasurer, no taxes");
          return;
       end if;
 
@@ -66,8 +62,9 @@ package body Concorde.Colonies.Updates is
             New_Unrest := New_Unrest + 2;
          end if;
 
-         Ada.Text_IO.Put_Line
-           ("taxation edict " & Colony_Edict.Edict.Tag
+         Log
+           (Colony,
+            "taxation edict " & Colony_Edict.Edict.Tag
             & "; revenue " & Image (Colony_Edict.Edict.Revenue * 100.0)
             & "%; total taxes " & Show (Taxes));
          Concorde.Agents.Add_Cash (Colony.Faction, Taxes, "taxes");
@@ -84,9 +81,9 @@ package body Concorde.Colonies.Updates is
       Amount : constant Money_Type :=
                  Total_Maintenance (Colony);
    begin
-      Ada.Text_IO.Put_Line
-        (Colony.Faction.Name & ": " & Colony.World.Name & ": maintenance "
-         & Show (Amount));
+      Log (Colony,
+           "maintenance "
+           & Show (Amount));
 
       if Amount > Concorde.Agents.Cash (Colony.Faction) then
          Concorde.Attributes.Increase (Colony, "unrest", 2);
@@ -122,26 +119,30 @@ package body Concorde.Colonies.Updates is
               (Agent => Colony.Faction,
                Cash  => Concorde.Money.To_Money (1.0),
                Tag   => "stability-check");
-            Ada.Text_IO.Put_Line
-              ("success: cash now "
+            Log
+              (Colony,
+               "success: cash now "
                & Concorde.Money.Show (Concorde.Agents.Cash (Colony.Faction)));
          else
             Concorde.Attributes.Decrease (Colony, "unrest", 1);
-            Ada.Text_IO.Put_Line
-              ("success: unrest now" & Unrest (Colony)'Image);
+            Log
+              (Colony,
+               "success: unrest now" & Unrest (Colony)'Image);
          end if;
       elsif not Major_Failure (Result) then
          Concorde.Attributes.Increase (Colony, "unrest", 1);
-         Ada.Text_IO.Put_Line
-           ("failure: unrest now" & Unrest (Colony)'Image);
+         Log
+           (Colony,
+            "failure: unrest now" & Unrest (Colony)'Image);
       else
          declare
             Increase : constant Positive :=
                          WL.Random.Random_Number (1, 4) + 1;
          begin
             Concorde.Attributes.Increase (Colony, "unrest", Increase);
-            Ada.Text_IO.Put_Line
-              ("major failure: unrest now" & Unrest (Colony)'Image);
+            Log
+              (Colony,
+               "major failure: unrest now" & Unrest (Colony)'Image);
          end;
       end if;
    end Stability_Check;

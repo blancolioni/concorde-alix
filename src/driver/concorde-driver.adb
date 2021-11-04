@@ -3,6 +3,8 @@ with Ada.Exceptions;
 
 with Ada.Text_IO;
 
+with WL.Processes;
+
 with Reiko.Control;
 
 with Concorde.Options;
@@ -15,11 +17,10 @@ with Concorde.Calendar;
 with Concorde.Logging;
 with Concorde.Logs;
 
+with Concorde.Managers;
+
 with Concorde.Server;
 --  with Concorde.Updates;
-
-with Concorde.Colonies.Updates;
-with Concorde.Factions.Reports;
 
 with Accord.Db.Database;
 
@@ -48,11 +49,6 @@ begin
    Accord.Db.Database.Open;
    Database_Open := True;
 
-   Reiko.Control.Start
-     (Current_Time =>
-        Reiko.Reiko_Time (Concorde.Calendar.To_Real (Concorde.Calendar.Clock)),
-      Task_Count   => Concorde.Options.Work_Threads);
-
    Ada.Text_IO.Put_Line ("starting server ...");
 
    Concorde.Server.Start;
@@ -62,46 +58,56 @@ begin
    Ada.Text_IO.Put_Line
      ("Start date: " & Concorde.Calendar.Image (Concorde.Calendar.Clock));
 
+   Reiko.Control.Start
+     (Current_Time =>
+        Reiko.Reiko_Time
+          (Concorde.Calendar.To_Days (Concorde.Calendar.Clock)),
+      Task_Count   => Natural'Max (Concorde.Options.Work_Threads, 1));
+
    Updates_Running := True;
+
+   Concorde.Managers.Start_Managers;
 
    if Concorde.Options.Batch_Mode then
       declare
-         Update_Days : constant Natural :=
-                         Concorde.Options.Update_Count;
-         Start_Time  : constant Ada.Calendar.Time :=
-                         Ada.Calendar.Clock;
+         Process      : WL.Processes.Process_Type;
+         Day_Count    : constant Positive :=
+                          Natural'Max (Concorde.Options.Update_Count, 1);
+         Reiko_Minute : constant := 1.0 / 24.0 / 60.0;
+         Start        : constant Ada.Calendar.Time := Ada.Calendar.Clock;
       begin
-         if Update_Days > 0 then
 
-            for Day_Index in 1 .. Update_Days loop
-               Concorde.Colonies.For_All_Colonies
-                 (Concorde.Colonies.Updates.Stability_Check'Access);
+         Ada.Text_IO.Put_Line ("tasks:" & Concorde.Options.Work_Threads'Image);
+         Ada.Text_IO.Put_Line ("days: " & Concorde.Options.Update_Count'Image);
 
-               Concorde.Colonies.For_All_Colonies
-                 (Concorde.Colonies.Updates.Pay_Maintenance'Access);
+         Process.Start_Bar
+           (Name            => "Updating",
+            Finish          => Day_Count,
+            With_Percentage => False,
+            Bar_Length      => 40,
+            Tick_Size       => 1);
 
-               Concorde.Colonies.For_All_Colonies
-                 (Concorde.Colonies.Updates.Collect_Taxes'Access);
+         for I in 1 .. Day_Count loop
+            for J in 1 .. 24 loop
+               for K in 1 .. 60 loop
+                  Concorde.Calendar.Advance (60.0);
+                  Reiko.Control.Advance (Reiko_Minute);
+               end loop;
             end loop;
+            Process.Tick;
+         end loop;
+         Process.Finish;
 
-            Concorde.Factions.For_All_Factions
-              (Concorde.Factions.Reports.Put_Faction_Summary'Access);
-
-            declare
-               use Ada.Calendar;
-               Elapsed_Time : constant Duration :=
-                                Clock - Start_Time;
-            begin
-               Ada.Text_IO.Put_Line
-                 ("Updated" & Update_Days'Image
-                  & " day"
-                  & (if Update_Days = 1 then "" else "s")
-                  & " in "
-                  & Concorde.Real_Images.Approximate_Image
-                    (Real (Elapsed_Time))
-                  & "s");
-            end;
-         end if;
+         declare
+            use Ada.Calendar;
+            Elapsed : constant Duration := Clock - Start;
+         begin
+            Ada.Text_IO.Put_Line
+              ("Advanced" & Day_Count'Image & " days in "
+               & Concorde.Real_Images.Approximate_Image
+                 (Real (Elapsed))
+               & "s");
+         end;
 
       end;
 

@@ -9,6 +9,7 @@ source_dir = src/factions
 source_dir = src/individuals
 source_dir = src/kit
 source_dir = src/library
+source_dir = src/managers
 source_dir = src/server
 source_dir = src/ships
 source_dir = src/stars

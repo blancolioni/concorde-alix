@@ -60,8 +60,9 @@ package body Concorde.Colonies.Create is
                     Last_Earn     => Concorde.Money.Zero,
                     Last_Spend    => Concorde.Money.Zero,
                     Active        => True,
-                    Scheduled     => False,
-                    Next_Event    => Concorde.Calendar.Clock,
+                    Scheduled     => True,
+                    Next_Event    =>
+                      Concorde.Calendar.Clock,
                     Manager       => "default-colony",
                     Identifier    => Concorde.Identifiers.Next_Identifier,
                     World         => World,

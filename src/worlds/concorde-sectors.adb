@@ -12,6 +12,8 @@ with Accord.Db;
 
 package body Concorde.Sectors is
 
+   Log_Sectors : constant Boolean := False;
+
    Root_2_Pi : constant Real :=
                  Concorde.Elementary_Functions.Sqrt
                    (1.0 * Ada.Numerics.Pi)
@@ -78,7 +80,7 @@ package body Concorde.Sectors is
            else (1.5 - Deposit_Score) / Group.Deposit_Factor)
         * Concorde.Terrain.Module_Group_Cost (Sector.Terrain, Group)
       do
-         if Factor /= 1.0 then
+         if Log_Sectors and then Factor /= 1.0 then
             Concorde.Logging.Log
               ("module-group-cost",
                "sector" & Accord.Db.To_String (Sector.Reference_World_Sector)

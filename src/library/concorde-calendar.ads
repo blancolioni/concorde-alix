@@ -108,6 +108,8 @@ package Concorde.Calendar is
 
    procedure Advance (Seconds : Concorde_Duration);
 
+   function To_Days (Clock : Time) return Real;
+
    procedure Load_Clock;
 
    function "+" (Left : Time;     Right : Concorde_Duration) return Time;
@@ -175,5 +177,8 @@ private
    is (Clock + Days (Days_Delay));
 
    function Zero_Time return Time is (0);
+
+   function To_Days (Clock : Time) return Real
+   is (Real (Clock) / Real (Day_Length));
 
 end Concorde.Calendar;

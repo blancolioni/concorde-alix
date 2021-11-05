@@ -16,6 +16,7 @@ with Concorde.Calendar;
 
 with Concorde.Logging;
 with Concorde.Logs;
+with Concorde.Factions.Reports;
 
 with Concorde.Managers;
 
@@ -23,6 +24,8 @@ with Concorde.Server;
 --  with Concorde.Updates;
 
 with Accord.Db.Database;
+
+with Accord.Faction;
 
 --  with Nazar.Main;
 
@@ -110,6 +113,10 @@ begin
          end;
 
       end;
+
+      for Faction of Accord.Faction.Scan_By_Top_Record loop
+         Concorde.Factions.Reports.Put_Faction_Summary (Faction);
+      end loop;
 
    else
 

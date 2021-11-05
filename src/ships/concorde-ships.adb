@@ -6,6 +6,7 @@ with Concorde.Random;
 with Concorde.Ship_Designs;
 
 with Accord.Db;
+with Accord.Manager;
 
 package body Concorde.Ships is
 
@@ -32,27 +33,30 @@ package body Concorde.Ships is
                  Concorde.Calendar.Clock
                    + Concorde_Duration
         (Concorde.Random.Unit_Random * Period);
+      Ship : constant Accord.Ship.Ship_Handle :=
+               Accord.Ship.Create
+                 (Name            => Name,
+                  Primary_Massive => World,
+                  Semimajor_Axis  => Orbit,
+                  Epoch           => Epoch,
+                  Eccentricity    => 0.0,
+                  Period          => Period,
+                  Identifier      => Concorde.Identifiers.Next_Identifier,
+                  Mass            => Concorde.Ship_Designs.Dry_Mass (Design),
+                  Faction         => Owner,
+                  Home            => Home,
+                  World           => World,
+                  Status          => Accord.Db.Idle,
+                  Training        => 0.0,
+                  Fuel            => Design.Fuel_Tank,
+                  Destination     => Accord.World.Empty_Handle);
    begin
-      Accord.Ship.Create
-        (Name            => Name,
-         Active          => True,
-         Scheduled       => True,
-         Next_Event      => Concorde.Calendar.Clock,
-         Manager         => Manager,
-         Primary_Massive => World,
-         Semimajor_Axis  => Orbit,
-         Epoch           => Epoch,
-         Eccentricity    => 0.0,
-         Period          => Period,
-         Identifier      => Concorde.Identifiers.Next_Identifier,
-         Mass            => Concorde.Ship_Designs.Dry_Mass (Design),
-         Faction         => Owner,
-         Home            => Home,
-         World           => World,
-         Status          => Accord.Db.Idle,
-         Training        => 0.0,
-         Fuel            => Design.Fuel_Tank,
-         Destination     => Accord.World.Empty_Handle);
+      Accord.Manager.Create
+        (Managed    => Ship,
+         Active     => True,
+         Scheduled  => True,
+         Next_Event => Concorde.Calendar.Clock,
+         Manager    => Manager);
    end Create_Ship;
 
 end Concorde.Ships;

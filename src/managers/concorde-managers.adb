@@ -6,6 +6,8 @@ with Reiko.Updates;
 
 with Concorde.Managers.Loader;
 
+with Accord.Manager;
+
 package body Concorde.Managers is
 
    type Manager_Access is access all Root_Concorde_Manager'Class;
@@ -72,9 +74,9 @@ package body Concorde.Managers is
    procedure Start_Managers is
    begin
       Loader.Load_Managers;
-      for Managed of Accord.Managed.Scan_By_Top_Record loop
+      for Manager_Record of Accord.Manager.Scan_By_Top_Record loop
          declare
-            Name : constant String := Managed.Manager;
+            Name : constant String := Manager_Record.Manager;
             Launch : constant Manager_Launch_Function :=
                        (if Manager_Map.Contains (Name)
                         then Manager_Map (Name)
@@ -90,9 +92,9 @@ package body Concorde.Managers is
                declare
                   Manager : constant Manager_Access :=
                               new Root_Concorde_Manager'Class'
-                                (Launch (Managed));
+                                (Launch (Manager_Record.Managed));
                begin
-                  if Managed.Scheduled then
+                  if Manager_Record.Scheduled then
                      declare
                         Update : constant Manager_Update :=
                                    Manager_Update'
@@ -104,10 +106,11 @@ package body Concorde.Managers is
                            Update_At =>
                              Reiko.Reiko_Time
                                (Concorde.Calendar.To_Days
-                                    (Managed.Next_Event)));
+                                    (Manager_Record.Next_Event)));
                      end;
                   end if;
-                  Active_Manager_Map.Insert (Managed.Identifier, Manager);
+                  Active_Manager_Map.Insert
+                    (Manager_Record.Managed.Identifier, Manager);
                end;
             end if;
          end;

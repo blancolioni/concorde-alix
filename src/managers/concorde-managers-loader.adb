@@ -9,7 +9,7 @@ package body Concorde.Managers.Loader is
    procedure Load_Managers is
    begin
       Add_Manager
-        ("default-colony",
+        ("colony-monthly",
          Concorde.Colonies.Managers.Create_Default_Colony_Manager'Access);
    end Load_Managers;
 

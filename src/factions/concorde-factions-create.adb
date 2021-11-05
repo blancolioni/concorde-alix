@@ -5,7 +5,6 @@ with Ada.Text_IO;
 with WL.Numerics.Roman;
 with WL.String_Sets;
 
-with Concorde.Calendar;
 with Concorde.Configure;
 with Concorde.Identifiers;
 with Concorde.Logging;
@@ -96,10 +95,6 @@ package body Concorde.Factions.Create is
                           (if Adjective = "" then Name else Adjective),
                         Plural_Name   =>
                           (if Plural_Name = "" then Name else Plural_Name),
-                        Active        => True,
-                        Scheduled     => False,
-                        Next_Event    => Concorde.Calendar.Clock,
-                        Manager       => "default-faction",
                         Account       => Account,
                         Last_Earn     => Concorde.Money.Zero,
                         Last_Spend    => Concorde.Money.Zero,
@@ -113,23 +108,19 @@ package body Concorde.Factions.Create is
                         Fame           => 1,
                         Infamy         => 0);
 
-         Company    : constant Accord.Company.Company_Handle :=
-           Accord.Company.Create
-                          (Identifier   =>
-                                      Concorde.Identifiers.Next_Identifier,
-                           Account      =>
-                             Concorde.Agents.New_Account (Concorde.Money.Zero),
-                           Last_Earn     => Concorde.Money.Zero,
-                           Last_Spend    => Concorde.Money.Zero,
-                           Name          => Name,
-                           Active        => True,
-                           Scheduled     => False,
-                           Next_Event    => Concorde.Calendar.Clock,
-                           Manager       => "faction-company",
-                           Faction       => Faction,
-                           Headquarters  => Capital,
-                           Shares        => Faction_Company_Shares,
-                           Dividend      => 0.2);
+         Company    : constant Accord.Company.Company_Handle
+           := Accord.Company.Create
+             (Identifier   =>
+                  Concorde.Identifiers.Next_Identifier,
+              Account      =>
+                Concorde.Agents.New_Account (Concorde.Money.Zero),
+              Last_Earn     => Concorde.Money.Zero,
+              Last_Spend    => Concorde.Money.Zero,
+              Name          => Name,
+              Faction       => Faction,
+              Headquarters  => Capital,
+              Shares        => Faction_Company_Shares,
+              Dividend      => 0.2);
          Remaining_Shares : constant Natural := Faction_Company_Shares;
          Script           : constant Accord.Script.Script_Handle :=
                               Accord.Script.Create ("rc", User);

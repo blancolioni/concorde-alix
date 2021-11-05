@@ -13,6 +13,7 @@ with Accord.Colony_Edict;
 with Accord.Colony_Sector;
 with Accord.Edict;
 with Accord.Edict_Group;
+with Accord.Manager;
 with Accord.Module_Group;
 with Accord.Owned_World;
 
@@ -59,11 +60,6 @@ package body Concorde.Colonies.Create is
                       (Concorde.Money.Zero, Faction.Account),
                     Last_Earn     => Concorde.Money.Zero,
                     Last_Spend    => Concorde.Money.Zero,
-                    Active        => True,
-                    Scheduled     => True,
-                    Next_Event    =>
-                      Concorde.Calendar.Clock,
-                    Manager       => "default-colony",
                     Identifier    => Concorde.Identifiers.Next_Identifier,
                     World         => World,
                     Faction       => Faction,
@@ -75,6 +71,17 @@ package body Concorde.Colonies.Create is
          Max_Slots    => Slots_Per_Sector,
          Slot_Count   => 0,
          World_Sector => Capital);
+
+      declare
+         use Concorde.Calendar;
+      begin
+         Accord.Manager.Create
+           (Managed    => Colony,
+            Active     => True,
+            Scheduled  => True,
+            Next_Event => Concorde.Calendar.Clock + Days (30),
+            Manager    => "colony-monthly");
+      end;
 
       for Module_Config of Init.Child ("capital").Child ("modules") loop
          Add_Module (Colony, Capital, Module_Config.Config_Name);

@@ -1,0 +1,12 @@
+hull = streamlined
+tonnage = 200
+armor = { crystaliron = 2 }
+engine = impulse-1
+jump = jump-1
+generator = { type = fusion-15 tonnage = 5 }
+bridge = { type = bridge-10 }
+computer = { type = capacity-5 }
+sensor = { type = civilian }
+standard-berth = 10
+low-berth = 40
+fuel_tank = 21

@@ -4,6 +4,7 @@ with WL.String_Maps;
 
 with Reiko.Updates;
 
+with Concorde.Logging;
 with Concorde.Managers.Loader;
 
 with Accord.Manager;
@@ -53,6 +54,8 @@ package body Concorde.Managers is
 
    overriding procedure Execute (Update : Manager_Update) is
    begin
+      Concorde.Logging.Log
+        (Message => "Executing: " & Update.Manager.Name);
       Update.Manager.Has_Update := False;
 
       Update.Manager.Execute;
@@ -66,6 +69,20 @@ package body Concorde.Managers is
                      (Update.Manager.Next_Update_At)));
       end if;
    end Execute;
+
+   ---------
+   -- Log --
+   ---------
+
+   procedure Log
+     (Manager : Root_Concorde_Manager'Class;
+      Message : String)
+   is
+   begin
+      Concorde.Logging.Log
+        (Category => Manager.Name,
+         Message  => Message);
+   end Log;
 
    --------------------
    -- Start_Managers --
@@ -110,7 +127,10 @@ package body Concorde.Managers is
                      end;
                   end if;
                   Active_Manager_Map.Insert
-                    (Manager_Record.Managed.Identifier, Manager);
+                    (Manager_Record.Managed.Identifier
+                     & "--"
+                     & Manager_Record.Manager,
+                     Manager);
                end;
             end if;
          end;

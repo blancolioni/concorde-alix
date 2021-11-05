@@ -15,6 +15,10 @@ package Concorde.Managers is
      (Manager : in out Root_Concorde_Manager)
    is abstract;
 
+   procedure Log
+     (Manager : Root_Concorde_Manager'Class;
+      Message : String);
+
    procedure Update_With_Delay
      (Manager      : in out Root_Concorde_Manager'Class;
       Update_Delay : Concorde_Duration);

@@ -81,6 +81,12 @@ package body Concorde.Colonies.Create is
             Scheduled  => True,
             Next_Event => Concorde.Calendar.Clock + Days (30),
             Manager    => "colony-monthly");
+         Accord.Manager.Create
+           (Managed    => Colony,
+            Active     => True,
+            Scheduled  => True,
+            Next_Event => Concorde.Calendar.Clock + Days (1),
+            Manager    => "colony-daily");
       end;
 
       for Module_Config of Init.Child ("capital").Child ("modules") loop

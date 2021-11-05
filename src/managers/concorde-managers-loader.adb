@@ -10,7 +10,10 @@ package body Concorde.Managers.Loader is
    begin
       Add_Manager
         ("colony-monthly",
-         Concorde.Colonies.Managers.Create_Default_Colony_Manager'Access);
+         Concorde.Colonies.Managers.Create_Monthly_Update'Access);
+      Add_Manager
+        ("colony-daily",
+         Concorde.Colonies.Managers.Create_Daily_Update'Access);
    end Load_Managers;
 
 end Concorde.Managers.Loader;

@@ -1,10 +1,5 @@
 with WL.String_Maps;
 
-with Accord.Consumer_Commodity;
-with Accord.Service_Commodity;
-
-with Accord.Db;
-
 package body Concorde.Commodities is
 
    type Cached_Commodity_Record is
@@ -49,25 +44,6 @@ package body Concorde.Commodities is
          Tag & ": unknown commodity";
       end if;
    end Get;
-
-   ---------------
-   -- Happiness --
-   ---------------
-
-   function Happiness (Commodity : Commodity_Class) return Unit_Real is
-   begin
-      case Commodity.Top_Record is
-         when Accord.Db.R_Consumer_Commodity =>
-            return Accord.Consumer_Commodity.Get_From_Commodity (Commodity)
-              .Happiness;
-         when Accord.Db.R_Service_Commodity =>
-            return Accord.Service_Commodity.Get_From_Commodity (Commodity)
-              .Happiness;
-         when others =>
-            raise Constraint_Error with
-            Commodity.Tag & ": no happiness";
-      end case;
-   end Happiness;
 
    ----------
    -- Load --

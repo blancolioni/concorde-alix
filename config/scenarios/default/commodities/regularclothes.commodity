@@ -1,9 +1,0 @@
-class = consumer-good
-name = "Regular Clothes"
-mass = 20
-quality = 2
-clothing = true
-component = { livestock = 10
-              bronze = 2
-              nylon = 2
-            }

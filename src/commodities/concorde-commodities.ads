@@ -14,8 +14,6 @@ package Concorde.Commodities is
    function Get (Tag : String) return Commodity_Class
      with Pre => Exists (Tag);
 
-   function Happiness (Commodity : Commodity_Class) return Unit_Real;
-
    function Yield_Estimate
      (Resource : Resource_Class;
       Sector   : Accord.World_Sector.World_Sector_Class)

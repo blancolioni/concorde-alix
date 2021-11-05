@@ -1,6 +1,0 @@
-class = resource
-name = Salt
-mass = 1
-mineral = true
-npc-price = 1
-deposits = abundant

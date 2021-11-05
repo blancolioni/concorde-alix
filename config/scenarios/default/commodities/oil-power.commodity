@@ -1,6 +1,0 @@
-class = industrial-good
-name = "Oil Power"
-mass = 10
-power = true
-component = { oil = 4
-            }

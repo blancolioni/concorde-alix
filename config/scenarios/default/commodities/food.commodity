@@ -1,0 +1,6 @@
+class = food
+name = Rations
+mass = 10
+quality = 1
+food = true
+npc-price = 1

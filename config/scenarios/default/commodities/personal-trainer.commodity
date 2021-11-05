@@ -1,6 +1,0 @@
-class = service
-quality = 3
-mass = 0
-fitness = true
-npc-price = 3000
-transient = true

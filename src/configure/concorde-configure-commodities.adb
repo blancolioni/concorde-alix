@@ -9,17 +9,17 @@ with Tropos.Reader;
 with Concorde.Commodities;
 with Concorde.Elementary_Functions;
 with Concorde.Logging;
+with Concorde.Real_Images;
 
 with Accord.Building_Module;
 with Accord.Commodity;
 with Accord.Construction_Input;
-with Accord.Consumer_Commodity;
+with Accord.Food_Commodity;
 with Accord.Fuzzy_Set;
 with Accord.Industrial_Commodity;
 with Accord.Input_Commodity;
 with Accord.Resource;
 with Accord.Resource_Constraint;
-with Accord.Service_Commodity;
 with Accord.Stock_Item;
 with Accord.Supply_Input;
 with Accord.Terrain;
@@ -30,26 +30,6 @@ package body Concorde.Configure.Commodities is
 
    use Accord.Commodity;
    use Accord.Db;
-
-   type Happiness_Rating is range 0 .. 16;
-
-   function Happiness_Level
-     (Class : Consumer_Class)
-      return Happiness_Rating
-   is (case Class is
-          when Food => 3,
-          when Drink => 2,
-          when Intoxicant => 1,
-          when Clothing   => 2);
-
-   function Happiness_Level
-     (Category : Service_Category)
-      return Happiness_Rating
-   is (case Category is
-          when Education => 1,
-          when Fitness => 1,
-          when Medical => 2,
-          when Entertainment => 4);
 
    type Commodity_Creator is access
      function (Config : Tropos.Configuration)
@@ -66,11 +46,7 @@ package body Concorde.Configure.Commodities is
      (Config : Tropos.Configuration)
       return Commodity_Handle;
 
-   function Create_Consumer_Good
-     (Config : Tropos.Configuration)
-      return Commodity_Handle;
-
-   function Create_Service_Commodity
+   function Create_Food
      (Config : Tropos.Configuration)
       return Commodity_Handle;
 
@@ -797,59 +773,26 @@ package body Concorde.Configure.Commodities is
    --
    --  end Create_Components;
 
-   --------------------------
-   -- Create_Consumer_Good --
-   --------------------------
+   -----------------
+   -- Create_Food --
+   -----------------
 
-   function Create_Consumer_Good
+   function Create_Food
      (Config : Tropos.Configuration)
       return Commodity_Handle
    is
-      function Get_Consumer_Class return Consumer_Class;
-
-      ------------------------
-      -- Get_Consumer_Class --
-      ------------------------
-
-      function Get_Consumer_Class return Consumer_Class is
-         use Ada.Characters.Handling;
-      begin
-         for Class in Consumer_Class loop
-            if Config.Get (To_Lower (Class'Image)) then
-               return Class;
-            end if;
-         end loop;
-         raise Constraint_Error with
-           "consumer good '" & Config.Config_Name & "': "
-           & "no consumer class found";
-      end Get_Consumer_Class;
-
-      Class : constant Consumer_Class := Get_Consumer_Class;
-
-      use Accord.Consumer_Commodity;
-
-      Commodity : constant Consumer_Commodity_Handle :=
-                    Create
-                      (Mass       => Get_Mass (Config),
-                       Base_Price => Get_Price (Config),
-                       Transient  => False,
-                       Tag        => Config.Config_Name,
-                       Quality    =>
-                         Quality_Type'Val (Config.Get ("quality") - 1),
-                       Class      => Class,
-                       Happiness  => Real (Happiness_Level (Class))
-                       / Real (Happiness_Rating'Last),
-                       Consumption =>
-                         (case Class is
-                             when Food       => 1.0,
-                             when Drink      => 1.0,
-                             when Intoxicant => 0.1,
-                             when Clothing   => 0.05));
+      Food : constant Accord.Food_Commodity.Food_Commodity_Handle :=
+               Accord.Food_Commodity.Create
+                 (Mass       => Get_Mass (Config),
+                  Base_Price => Get_Price (Config),
+                  Transient  => False,
+                  Complexity => 1.0,
+                  Tag        => Config.Config_Name);
    begin
-      return Commodity.To_Commodity_Handle;
-   end Create_Consumer_Good;
+      return Food.To_Commodity_Handle;
+   end Create_Food;
 
-   ---------------------------------
+      ---------------------------------
    -- Create_Frequency_Constraint --
    ---------------------------------
 
@@ -1005,60 +948,6 @@ package body Concorde.Configure.Commodities is
    end Create_Resource;
 
    ------------------------------
-   -- Create_Service_Commodity --
-   ------------------------------
-
-   function Create_Service_Commodity
-     (Config : Tropos.Configuration)
-      return Commodity_Handle
-   is
-      use Accord.Service_Commodity;
-
-      function Get_Service_Class return Service_Category;
-
-      ------------------------
-      -- Get_Service_Class --
-      ------------------------
-
-      function Get_Service_Class return Service_Category is
-         use Ada.Characters.Handling;
-      begin
-         for Class in Service_Category loop
-            if Config.Get (To_Lower (Class'Image)) then
-               return Class;
-            end if;
-         end loop;
-         raise Constraint_Error with
-           "service '" & Config.Config_Name & "': "
-           & "no service category found";
-      end Get_Service_Class;
-
-      Class : constant Service_Category := Get_Service_Class;
-
-      Commodity : constant Service_Commodity_Handle :=
-                    Create
-                      (Mass       => Get_Mass (Config),
-                       Base_Price => Get_Price (Config),
-                       Transient  => True,
-                       Tag        => Config.Config_Name,
-                       Complexity =>
-                         Config.Get ("quality") ** 2,
-                       Quality    =>
-                         Quality_Type'Val (Config.Get ("quality") - 1),
-                       Class      => Class,
-                       Happiness  => Real (Happiness_Level (Class))
-                       / Real (Happiness_Rating'Last),
-                       Consumption =>
-                         (case Class is
-                             when Education     => 0.25,
-                             when Entertainment => 0.5,
-                             when Fitness       => 0.125,
-                             when Medical       => 0.125));
-   begin
-      return Commodity.To_Commodity_Handle;
-   end Create_Service_Commodity;
-
-   ------------------------------
    -- Create_Sphere_Constraint --
    ------------------------------
 
@@ -1145,10 +1034,9 @@ package body Concorde.Configure.Commodities is
 
    begin
       Add ("building-module", Create_Building_Module'Access);
-      Add ("consumer-good", Create_Consumer_Good'Access);
+      Add ("food", Create_Food'Access);
       Add ("industrial-good", Create_Industrial_Good'Access);
       Add ("resource", Create_Resource'Access);
-      Add ("service", Create_Service_Commodity'Access);
    end Initialize_Creator_Map;
 
 begin

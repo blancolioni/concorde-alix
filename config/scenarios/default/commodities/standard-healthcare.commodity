@@ -1,5 +1,0 @@
-class = service
-quality = 2
-mass = 0
-medical = true
-npc-price = 200

@@ -1,6 +1,8 @@
+with Ada.Characters.Handling;
 with Ada.Containers.Doubly_Linked_Lists;
 with Ada.Text_IO;
 
+with WL.Numerics.Roman;
 with WL.String_Sets;
 
 with Concorde.Calendar;
@@ -16,8 +18,10 @@ with Concorde.Worlds;
 
 with Concorde.Colonies.Create;
 with Concorde.Factions.Reports;
+with Concorde.Ships;
 
 with Accord.Account;
+with Accord.Colony;
 with Accord.Company;
 with Accord.Deposit;
 with Accord.Individual;
@@ -26,6 +30,7 @@ with Accord.Owned_World;
 with Accord.Script;
 with Accord.Script_Line;
 with Accord.Shareholder;
+with Accord.Ship_Design;
 with Accord.Star_System;
 with Accord.Star_System_Distance;
 with Accord.World;
@@ -48,6 +53,12 @@ package body Concorde.Factions.Create is
      (Faction : Faction_Class;
       Office  : Accord.Office.Office_Class)
       return Accord.Individual.Individual_Class;
+
+   function To_Ship_Name
+     (Design_Name : String;
+      Index       : Positive;
+      Count       : Positive)
+      return String;
 
    --------------------
    -- Create_Faction --
@@ -174,6 +185,34 @@ package body Concorde.Factions.Create is
                   Holder.Update_Individual
                     .Set_Office (Office)
                     .Done;
+               end if;
+            end;
+         end loop;
+
+         for Ship_Config of Setup.Child ("ships") loop
+            declare
+               Design_Name : constant String := Ship_Config.Config_Name;
+               Count       : constant Natural := Ship_Config.Value;
+               Design      : constant Accord.Ship_Design.Ship_Design_Class :=
+                               Accord.Ship_Design.First_By_Name (Design_Name);
+               Home        : constant Accord.Colony.Colony_Class :=
+                               Accord.Colony.First_By_World
+                                 (Capital);
+            begin
+               if not Design.Has_Element then
+                  Ada.Text_IO.Put_Line
+                    (Ada.Text_IO.Standard_Error,
+                     "no such ship design: " & Design_Name);
+               else
+                  for I in 1 .. Count loop
+                     Concorde.Ships.Create_Ship
+                       (Owner   => Faction,
+                        Home    => Home,
+                        World   => Capital,
+                        Design  => Design,
+                        Manager => "",
+                        Name    => To_Ship_Name (Design_Name, I, Count));
+                  end loop;
                end if;
             end;
          end loop;
@@ -364,5 +403,34 @@ package body Concorde.Factions.Create is
          & " with ruling bonus" & Best_Score'Image);
       return Best_Holder;
    end Find_Office_Holder;
+
+   ------------------
+   -- To_Ship_Name --
+   ------------------
+
+   function To_Ship_Name
+     (Design_Name : String;
+      Index       : Positive;
+      Count       : Positive)
+      return String
+   is
+      Ship_Name : String := Design_Name;
+      Capital   : Boolean := True;
+   begin
+      for Ch of Ship_Name loop
+         if Capital then
+            Ch := Ada.Characters.Handling.To_Upper (Ch);
+            Capital := False;
+         elsif Ch = '-' or else Ch = '_' then
+            Ch := ' ';
+            Capital := True;
+         end if;
+      end loop;
+
+      return Ship_Name
+        & (if Count > 1
+           then " " & WL.Numerics.Roman.Roman_Image (Index)
+           else "");
+   end To_Ship_Name;
 
 end Concorde.Factions.Create;

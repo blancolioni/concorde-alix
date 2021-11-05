@@ -139,6 +139,7 @@ type Ship_Status is
 record Ship : Has_Name, Managed, Shared, Orbiting_Object is
    key Faction;
    key Home    : Colony;
+   key World;
    Status      : Ship_Status;
    Training    : Long_Float;
    Fuel        : Long_Float;

@@ -24,6 +24,8 @@ edicts = {
    taxation = normal
 }
 
+ships = { free-trader = 1 scout = 2 }
+
 init-script = {
    "load-galaxy-view"
    "load-star-system-view --name=$CAPITAL_SYSTEM"

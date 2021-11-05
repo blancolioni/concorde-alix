@@ -158,10 +158,10 @@ package body Concorde.Configure.Scenarios is
       Accord.Attribute.Create ("supply");
       Accord.Attribute.Create ("unrest");
 
+      Concorde.Configure.Commodities.Configure_Commodities (Scenario_Name);
       Concorde.Configure.Modules.Configure_Modules (Scenario_Name);
 
       Concorde.Configure.Terrain.Configure_Terrain (Scenario_Name);
-      Concorde.Configure.Commodities.Configure_Commodities (Scenario_Name);
       Concorde.Configure.Commodities.Configure_Components (Scenario_Name);
       Concorde.Configure.Commodities.Configure_Complexity;
       Concorde.Configure.Commodities.Configure_Initial_Prices;

@@ -1,4 +1,5 @@
 with Attributes;
+with Commodities;
 with Localisation;
 with Money;
 with Quantities;
@@ -20,5 +21,11 @@ record Module : Localised, Has_Attributes is
    Slots        : Positive;
    unique key Group_Level with Module_Group, Level;
 end Module;
+
+record Module_Production is
+   key Module;
+   key Commodity;
+   Quantity : Quantity_Type;
+end Module_Production;
 
 end Modules;

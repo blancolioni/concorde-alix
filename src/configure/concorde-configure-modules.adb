@@ -4,8 +4,11 @@ with Concorde.Configure.Attributes;
 
 with Accord.Db;
 
+with Accord.Commodity;
 with Accord.Module;
 with Accord.Module_Group;
+with Accord.Module_Production;
+with Accord.Resource;
 
 package body Concorde.Configure.Modules is
 
@@ -69,6 +72,33 @@ package body Concorde.Configure.Modules is
                   Concorde.Configure.Attributes.Configure_Has_Attributes
                     (Has_Attributes    => Module,
                      Attributes_Config => Module_Config);
+                  for Commodity of Accord.Commodity.Scan_By_Tag loop
+                     if Module_Config.Contains (Commodity.Tag) then
+                        Accord.Module_Production.Create
+                          (Module    => Module,
+                           Commodity => Commodity,
+                           Quantity  =>
+                             Concorde.Quantities.To_Quantity
+                               (Real (Float'
+                                  (Module_Config.Get (Commodity.Tag)))));
+                     end if;
+                  end loop;
+
+                  if Module_Config.Contains ("deposit") then
+                     declare
+                        Quantity : constant Quantities.Quantity_Type :=
+                                     Concorde.Quantities.To_Quantity
+                                       (Real (Float'
+                                          (Module_Config.Get ("deposit"))));
+                     begin
+                        for Resource of Accord.Resource.Scan_By_Tag loop
+                           Accord.Module_Production.Create
+                             (Module    => Module,
+                              Commodity => Resource,
+                              Quantity  => Quantity);
+                        end loop;
+                     end;
+                  end if;
                end;
             end loop;
          end;

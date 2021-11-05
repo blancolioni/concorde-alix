@@ -6,7 +6,7 @@ groups = {
 1 = {
     cost = 10
     modules = {
-        farm = { economy = 1 stability = 1 }
+        farm = { food = 1 }
         storehouse = { stability = 1 Loyalty = 1 }
     }
 }
@@ -14,7 +14,7 @@ groups = {
 2 = {
     cost = 20
     modules = {
-        farm = { economy = 2 stability = 2 }
+        farm = { food = 3 }
         storehouse = { stability = 2 Loyalty = 2 }
     }
 }
@@ -23,7 +23,7 @@ groups = {
     cost = 40
     slots = 2
     modules = {
-        farm = { economy = 2 stability = 4 capability = 1 }
+        farm = { food = 8 }
         storehouse = { economy = 2 stability = 2 Loyalty = 2 capability = 1 }
         plantation = { economy = 6 supply = 1 }
     }
@@ -33,7 +33,7 @@ groups = {
     cost = 60
     slots = 2
     modules = {
-        farm = { economy = 4 stability = 4 capability = 2 }
+        farm = { food = 15 }
         storehouse = { economy = 2 stability = 4 Loyalty = 2 capability = 1 law = 1 }
         plantation = { economy = 6 loyalty = 2 culture = 1 supply = 1 }
     }
@@ -43,7 +43,7 @@ groups = {
     cost = 80
     slots = 4
     modules = {
-        farm = { economy = 4 stability = 6 capability = 2 supply = 2 }
+        farm = { food = 20 }
         plantation = { economy = 8 loyalty = 2 culture = 2 supply = 2 }
     }
 }

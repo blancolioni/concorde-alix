@@ -9,7 +9,6 @@ with Tropos.Reader;
 with Concorde.Commodities;
 with Concorde.Elementary_Functions;
 with Concorde.Logging;
-with Concorde.Real_Images;
 
 with Accord.Building_Module;
 with Accord.Commodity;

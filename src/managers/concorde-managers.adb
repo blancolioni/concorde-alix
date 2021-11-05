@@ -81,9 +81,11 @@ package body Concorde.Managers is
                         else null);
          begin
             if Launch = null then
-               Ada.Text_IO.Put_Line
-                 (Ada.Text_IO.Standard_Error,
-                  "no such manager: " & Name);
+               if Name /= "" then
+                  Ada.Text_IO.Put_Line
+                    (Ada.Text_IO.Standard_Error,
+                     "no such manager: " & Name);
+               end if;
             else
                declare
                   Manager : constant Manager_Access :=

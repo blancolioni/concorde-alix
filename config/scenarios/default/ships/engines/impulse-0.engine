@@ -1,4 +1,5 @@
 impulse = 0
 hull = 0.5%
 cost = 7K
-power_per_ton = 0.5
+power_per_size = 0.5
+mass_per_size = 3

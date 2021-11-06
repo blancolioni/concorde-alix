@@ -2,4 +2,5 @@ jump = 1
 hull = 2.5%
 minimum_size = 10
 cost = 1500
-power_per_ton = 4
+power_per_size = 4
+mass_per_size = 10

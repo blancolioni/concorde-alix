@@ -86,7 +86,8 @@ package body Concorde.Configure.Ships is
       Accord.Hull_Armor.Create
         (Tag           => Config.Config_Name,
          Enabled_By    => Accord.Technology.Empty_Handle,
-         Tonnage       => Get ("tonnage"),
+         Size_Fraction => Get ("consumed-size"),
+         Mass_Fraction => Get ("mass-per-point"),
          Cost_Fraction => Get ("cost"),
          Max_Armor     => Config.Get ("max_armor"));
    end Configure_Armor;
@@ -101,19 +102,21 @@ package body Concorde.Configure.Ships is
       function Get (Name : String) return Real
       is (Get_Value (Config, Name));
 
-      Tonnage : constant Non_Negative_Real := Get ("tonnage");
-      Ship_Tons : constant Tropos.Configuration :=
-                    Config.Child ("ship_tonnage");
+      Size      : constant Non_Negative_Real := Get ("size");
+      Ship_Size : constant Tropos.Configuration :=
+                    Config.Child ("ship_size");
    begin
       Accord.Bridge.Create
-        (Minimum_Tonnage => Tonnage,
-         Power_Per_Ton   => 0.0,
-         Price_Per_Ton   => Concorde.Money.To_Price (Get ("price") / Tonnage),
+        (Minimum_Size    => Size,
+         Size            => Size,
+         Mass_Per_Size   => Get ("mass"),
+         Price_Per_Size  =>
+           Concorde.Money.To_Price (Get ("price") / Size),
+         Power_Per_Size  => Get ("power") / Size,
          Tag             => Config.Config_Name,
          Enabled_By      => Accord.Technology.Empty_Handle,
-         Tonnage         => Tonnage,
-         Ship_Tons_Low   => Real (Long_Float'(Ship_Tons.Get (1))),
-         Ship_Tons_High  => Real (Long_Float'(Ship_Tons.Get (2))));
+         Ship_Size_Low   => Real (Long_Float'(Ship_Size.Get (1))),
+         Ship_Size_High  => Real (Long_Float'(Ship_Size.Get (2))));
    end Configure_Bridge;
 
    ------------------------
@@ -127,9 +130,10 @@ package body Concorde.Configure.Ships is
       is (Get_Value (Config, Name));
    begin
       Accord.Computer.Create
-        (Minimum_Tonnage => 1.0,
-         Power_Per_Ton   => 0.0,
-         Price_Per_Ton   => Concorde.Money.To_Price (Get ("price")),
+        (Power_Per_Size  => 0.2,
+         Minimum_Size    => 1.0,
+         Price_Per_Size  => Concorde.Money.To_Price (Get ("price")),
+         Mass_Per_Size   => 1.0,
          Tag             => Config.Config_Name,
          Enabled_By      => Accord.Technology.Empty_Handle,
          Capacity        => Config.Get ("capacity"));
@@ -154,24 +158,24 @@ package body Concorde.Configure.Ships is
                 Accord.Hull_Armor.Get_By_Tag
                   (Config.Get ("armor", ""));
 
-      Tonnage : constant Non_Negative_Real := Get ("tonnage");
+      Size : constant Non_Negative_Real := Get ("size");
       Hull_Points : constant Non_Negative_Real :=
-                      Tonnage / 2.5
-                        + (if Tonnage > 25_000.0
-                           then (Tonnage - 25_000.0) / 4.0 else 0.0)
-                        + (if Tonnage > 100_000.0
-                           then (Tonnage - 100_000.0) / 2.0 else 0.0);
-
-      Fuel_Tank : constant Non_Negative_Real :=
-                    Get_Value (Config, "fuel_tank");
+                      Size / 2.5
+                        + (if Size > 25_000.0
+                           then (Size - 25_000.0) / 4.0 else 0.0)
+                        + (if Size > 100_000.0
+                           then (Size - 100_000.0) / 2.0 else 0.0);
+      Dry_Mass    : constant Non_Negative_Real := Hull_Points;
+      Fuel_Tank   : constant Non_Negative_Real :=
+                      Get_Value (Config, "fuel_tank");
 
       Firm_Points : constant Natural :=
-                      (if Tonnage < 35.0 then 1
-                       elsif Tonnage < 70.0 then 2
-                       elsif Tonnage < 100.0 then 3
+                      (if Size < 35.0 then 1
+                       elsif Size < 70.0 then 2
+                       elsif Size < 100.0 then 3
                        else 0);
       Hard_Points : constant Natural :=
-                      Natural (Real'Truncation (Tonnage / 100.0));
+                      Natural (Real'Truncation (Size / 100.0));
 
       Design : constant Accord.Ship_Design.Ship_Design_Class :=
                  Accord.Ship_Design.Create
@@ -183,7 +187,8 @@ package body Concorde.Configure.Ships is
                       Accord.Stealth.Empty_Handle,
                     Reinforcement      =>
                       Accord.Reinforcement.Empty_Handle,
-                    Tonnage            => Tonnage,
+                    Size               => Size,
+                    Dry_Mass           => Dry_Mass,
                     Hull_Points        => Hull_Points,
                     Fuel_Tank          => Fuel_Tank,
                     Cargo_Space        => 0.0,
@@ -231,7 +236,8 @@ package body Concorde.Configure.Ships is
          Accord.Ship_Design_Module.Create
            (Ship_Design => Design,
             Component   => Handle,
-            Tonnage     => Handle.Tonnage,
+            Size        => Handle.Size,
+            Mass        => Handle.Mass_Per_Size * Handle.Size,
             Concealed   => False);
       end Configure_Bridge_Design;
 
@@ -249,7 +255,8 @@ package body Concorde.Configure.Ships is
          Accord.Ship_Design_Module.Create
            (Ship_Design => Design,
             Component   => Handle,
-            Tonnage     => 1.0,
+            Size        => 1.0,
+            Mass        => Handle.Mass_Per_Size * Handle.Size,
             Concealed   => False);
       end Configure_Computer_Design;
 
@@ -260,14 +267,16 @@ package body Concorde.Configure.Ships is
       procedure Configure_Engine_Design
         (Engine : Accord.Engine.Engine_Class)
       is
+         Component_Size : constant Non_Negative_Real :=
+                            Non_Negative_Real'Max
+                              (Size * Engine.Hull_Fraction,
+                               Engine.Minimum_Size);
       begin
          Accord.Ship_Design_Module.Create
            (Ship_Design => Design,
             Component   => Engine,
-            Tonnage     =>
-              Non_Negative_Real'Max
-                (Tonnage * Engine.Hull_Fraction,
-                 Engine.Minimum_Tonnage),
+            Size        => Component_Size,
+            Mass        => Engine.Mass_Per_Size * Component_Size,
             Concealed   => False);
       end Configure_Engine_Design;
 
@@ -281,6 +290,8 @@ package body Concorde.Configure.Ships is
          Handle : constant Accord.Generator.Generator_Handle :=
                     Accord.Generator.Get_By_Tag
                       (Gen_Config.Get ("type"));
+         Size   : constant Non_Negative_Real :=
+                    Get_Value (Gen_Config, "size");
       begin
          pragma Assert (Handle.Has_Element,
                         "no such generator: "
@@ -288,7 +299,8 @@ package body Concorde.Configure.Ships is
          Accord.Ship_Design_Module.Create
            (Ship_Design => Design,
             Component   => Handle,
-            Tonnage     => Get_Value (Gen_Config, "tonnage"),
+            Size        => Size,
+            Mass        => Handle.Mass_Per_Size * Size,
             Concealed   => False);
       end Configure_Generator_Design;
 
@@ -299,15 +311,16 @@ package body Concorde.Configure.Ships is
       procedure Configure_Jump_Design
         (Jump_Drive : Accord.Jump_Drive.Jump_Drive_Class)
       is
+         Component_Size : constant Non_Negative_Real :=
+                            Non_Negative_Real'Max
+                              (Size * Jump_Drive.Hull_Fraction,
+                               Jump_Drive.Minimum_Size);
       begin
          Accord.Ship_Design_Module.Create
            (Ship_Design => Design,
             Component   => Jump_Drive,
-            Tonnage     =>
-              Non_Negative_Real'Max
-                (Tonnage * Jump_Drive.Hull_Fraction,
-                 Jump_Drive.Minimum_Tonnage),
-            Concealed   => False);
+            Size        => Component_Size,
+            Mass        => Jump_Drive.Mass_Per_Size * Component_Size);
       end Configure_Jump_Design;
 
       -------------------------------
@@ -329,7 +342,8 @@ package body Concorde.Configure.Ships is
             Accord.Ship_Design_Module.Create
               (Ship_Design => Design,
                Component   => Handle,
-               Tonnage     => Handle.Tonnage,
+               Size        => Handle.Size,
+               Mass        => Handle.Size * Handle.Mass_Per_Size,
                Concealed   => False);
          end loop;
       end Configure_Quarters_Design;
@@ -348,7 +362,8 @@ package body Concorde.Configure.Ships is
          Accord.Ship_Design_Module.Create
            (Ship_Design => Design,
             Component   => Handle,
-            Tonnage     => Handle.Tonnage,
+            Size        => Handle.Size,
+            Mass        => Handle.Size * Handle.Mass_Per_Size,
             Concealed   => False);
       end Configure_Sensor_Design;
 
@@ -367,7 +382,8 @@ package body Concorde.Configure.Ships is
          Accord.Ship_Design_Module.Create
            (Ship_Design => Design,
             Component   => Handle,
-            Tonnage     => Handle.Tonnage,
+            Size        => Handle.Size,
+            Mass        => Handle.Size * Handle.Mass_Per_Size,
             Concealed   => Config.Get ("concealed"));
       end Configure_Weapon_Mount_Design;
 
@@ -395,9 +411,9 @@ package body Concorde.Configure.Ships is
       end loop;
 
       declare
-         Space        : Non_Negative_Real := Tonnage - Fuel_Tank;
+         Space        : Non_Negative_Real := Size - Fuel_Tank;
          Basic_Power  : constant Non_Negative_Real :=
-                          Tonnage * Basic_Power_Per_Ton;
+                          Size * Basic_Power_Per_Ton;
          Engine_Power : Non_Negative_Real := 0.0;
          Jump_Power   : Non_Negative_Real := 0.0;
       begin
@@ -405,7 +421,7 @@ package body Concorde.Configure.Ships is
            Accord.Ship_Design_Module.Select_By_Ship_Design
              (Design)
          loop
-            Space := Space - Module.Tonnage;
+            Space := Space - Module.Size;
 
             declare
                use Accord.Db;
@@ -417,7 +433,7 @@ package body Concorde.Configure.Ships is
                                   (Module.Component);
                   begin
                      Engine_Power := Engine_Power
-                       + Engine.Power_Per_Ton * Module.Tonnage;
+                       + Engine.Power_Per_Size * Module.Size;
                   end;
                elsif Module.Component.Top_Record = R_Jump_Drive then
                   declare
@@ -427,7 +443,7 @@ package body Concorde.Configure.Ships is
                            (Module.Component);
                   begin
                      Jump_Power := Jump_Power
-                       + Jump.Power_Per_Ton * Module.Tonnage;
+                       + Jump.Power_Per_Size * Module.Size;
                   end;
                end if;
             end;
@@ -455,13 +471,14 @@ package body Concorde.Configure.Ships is
 
    begin
       Accord.Engine.Create
-        (Minimum_Tonnage => Get_Value (Config, "minimum_size"),
-         Power_Per_Ton   => Get ("power_per_ton"),
-         Price_Per_Ton   => Concorde.Money.To_Price (Get ("cost")),
-         Tag             => Config.Config_Name,
-         Enabled_By      => Accord.Technology.Empty_Handle,
-         Hull_Fraction   => Get ("hull"),
-         Impulse         => Get ("impulse"));
+        (Minimum_Size     => Get_Value (Config, "minimum_size"),
+         Power_Per_Size   => Get ("power_per_size"),
+         Price_Per_Size   => Concorde.Money.To_Price (Get ("cost")),
+         Mass_Per_Size    => Get ("mass_per_size"),
+         Tag              => Config.Config_Name,
+         Enabled_By       => Accord.Technology.Empty_Handle,
+         Hull_Fraction    => Get ("hull"),
+         Impulse          => Get ("impulse"));
    end Configure_Engine;
 
    -------------------------
@@ -476,9 +493,10 @@ package body Concorde.Configure.Ships is
 
    begin
       Accord.Generator.Create
-        (Minimum_Tonnage => Get_Value (Config, "minimum_size"),
-         Fuel_Per_Ton    => Get ("fuel_per_ton_per_day"),
-         Price_Per_Ton   => Concorde.Money.To_Price (Get ("price_per_ton")),
+        (Minimum_Size    => Get_Value (Config, "minimum_size"),
+         Fuel_Per_Size   => Get ("fuel_per_size_per_day"),
+         Price_Per_Size  => Concorde.Money.To_Price (Get ("price_per_size")),
+         Mass_Per_Size   => Get ("mass_per_size"),
          Tag             => Config.Config_Name,
          Enabled_By      => Accord.Technology.Empty_Handle,
          Power_Per_Ton   => Get ("power_per_ton"));
@@ -501,7 +519,7 @@ package body Concorde.Configure.Ships is
          Streamlining  => Get ("streamlining"),
          Hull_Points   => Get ("hull_points"),
          Cost          => Get ("cost"),
-         Armor_Tonnage => Get ("armor_tonnage"));
+         Armor_Size => Get ("armor_size"));
    end Configure_Hull;
 
    --------------------------
@@ -517,9 +535,10 @@ package body Concorde.Configure.Ships is
 
    begin
       Accord.Jump_Drive.Create
-        (Minimum_Tonnage => Get_Value (Config, "minimum_size"),
-         Power_Per_Ton   => Get ("power_per_ton"),
-         Price_Per_Ton   => Concorde.Money.To_Price (Get ("cost")),
+        (Minimum_Size    => Get_Value (Config, "minimum_size"),
+         Power_Per_Size  => Get ("power_per_size"),
+         Price_Per_Size  => Concorde.Money.To_Price (Get ("cost")),
+         Mass_Per_Size   => Get ("mass_per_size"),
          Tag             => Config.Config_Name,
          Enabled_By      => Accord.Technology.Empty_Handle,
          Hull_Fraction   => Get ("hull"),
@@ -536,15 +555,17 @@ package body Concorde.Configure.Ships is
       function Get (Name : String) return Real
       is (Get_Value (Config, Name));
 
-      Tonnage : constant Non_Negative_Real := Get ("tonnage");
+      Size : constant Non_Negative_Real := Get ("size");
    begin
       Accord.Quarters.Create
-        (Power_Per_Ton      => Get ("power_per_ton"),
-         Minimum_Tonnage    => Tonnage,
-         Price_Per_Ton      => Concorde.Money.To_Price (Get ("price_per_ton")),
+        (Power_Per_Size     => Get ("power_per_size"),
+         Minimum_Size       => Size,
+         Price_Per_Size     =>
+           Concorde.Money.To_Price (Get ("price_per_size")),
+         Mass_Per_Size      => Get ("mass_per_size"),
          Tag                => Config.Config_Name,
          Enabled_By         => Accord.Technology.Empty_Handle,
-         Tonnage            => Tonnage,
+         Size            => Size,
          Comfort_Level      => Config.Get ("comfort"),
          Standard_Occupants => Config.Get ("occupancy"),
          Max_Occupants      => Config.Get ("max_occupancy"));
@@ -560,16 +581,17 @@ package body Concorde.Configure.Ships is
       function Get (Name : String) return Real
       is (Get_Value (Config, Name));
 
-      Tonnage : constant Non_Negative_Real := Get ("tonnage");
+      Size : constant Non_Negative_Real := Get ("size");
    begin
       Accord.Sensor.Create
-        (Minimum_Tonnage => Get_Value (Config, "minimum_size"),
-         Power_Per_Ton   => Get ("power") / Real'Max (Tonnage, 1.0),
-         Price_Per_Ton   => Concorde.Money.To_Price (Get ("price")
-           / Real'Max (Tonnage, 1.0)),
+        (Minimum_Size    => Get_Value (Config, "minimum_size"),
+         Power_Per_Size  => Get ("power") / Real'Max (Size, 1.0),
+         Mass_Per_Size   => Get ("mass") / Real'Max (Size, 1.0),
+         Price_Per_Size  => Concorde.Money.To_Price (Get ("price")
+           / Real'Max (Size, 1.0)),
          Tag             => Config.Config_Name,
          Enabled_By      => Accord.Technology.Empty_Handle,
-         Tonnage         => Tonnage,
+         Size            => Size,
          Modifier        => Config.Get ("modifier"));
    end Configure_Sensor;
 
@@ -639,16 +661,17 @@ package body Concorde.Configure.Ships is
 
    begin
       Accord.Weapon_Mount.Create
-        (Tag             => Config.Config_Name,
-         Enabled_By      => Accord.Technology.Empty_Handle,
-         Power_Per_Ton   => Get ("power"),
-         Minimum_Tonnage => Get ("tonnage"),
-         Price_Per_Ton   => Get ("price"),
-         Category        => Get ("category"),
-         Fixed           => Config.Get ("fixed"),
-         Hardpoints      => Config.Get ("hardpoints"),
-         Weapon_Count    => Config.Get ("weapons"),
-         Tonnage         => Get ("tonnage"));
+        (Tag              => Config.Config_Name,
+         Enabled_By       => Accord.Technology.Empty_Handle,
+         Power_Per_Size   => Get ("power"),
+         Mass_Per_Size    => Get ("mass"),
+         Minimum_Size     => Get ("size"),
+         Price_Per_Size   => Get ("price"),
+         Category         => Get ("category"),
+         Fixed            => Config.Get ("fixed"),
+         Hardpoints       => Config.Get ("hardpoints"),
+         Weapon_Count     => Config.Get ("weapons"),
+         Size             => Get ("size"));
    end Configure_Weapon_Mount;
 
 end Concorde.Configure.Ships;

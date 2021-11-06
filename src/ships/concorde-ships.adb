@@ -43,6 +43,7 @@ package body Concorde.Ships is
                   Period          => Period,
                   Identifier      => Concorde.Identifiers.Next_Identifier,
                   Mass            => Concorde.Ship_Designs.Dry_Mass (Design),
+                  Ship_Design     => Design,
                   Faction         => Owner,
                   Home            => Home,
                   World           => World,

@@ -68,6 +68,7 @@ package body Concorde.Factions.Reports is
       begin
          Ship_Report.Add_Column ("NAME");
          Ship_Report.Add_Column ("WORLD");
+         Ship_Report.Add_Column ("MASS");
          Ship_Report.Add_Column ("ALTITUDE", WL.Reports.Tables.Right);
          Ship_Report.Add_Column ("LONGITUDE", WL.Reports.Tables.Right);
 
@@ -75,6 +76,8 @@ package body Concorde.Factions.Reports is
             Ship_Report.Append_Row;
             Ship_Report.Append_Cell (Ship.Name);
             Ship_Report.Append_Cell (Ship.World.Name);
+            Ship_Report.Append_Cell
+              (Image (Ship.Mass) & "t");
             Ship_Report.Append_Cell
               (Image ((Ship.Semimajor_Axis - Ship.World.Radius) / 1000.0)
                & "km");

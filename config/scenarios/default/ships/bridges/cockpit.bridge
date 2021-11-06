@@ -1,3 +1,5 @@
-tonnage = 1.5
-ship_tonnage = { 0 50 }
+size = 1.5
+mass = 1.5
+power = 2
+ship_size = { 0 50 }
 price = 10

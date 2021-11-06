@@ -1,3 +1,5 @@
-tonnage = 10
-ship_tonnage = { 100 200 }
+size = 10
+mass = 10
+power = 10
+ship_size = { 100 200 }
 price = 10K

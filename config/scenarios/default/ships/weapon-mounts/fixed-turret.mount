@@ -4,3 +4,5 @@ concealable = yes
 price = 100
 hardpoints = 1
 weapons = 3
+size = 1
+mass = 20

@@ -1,3 +1,4 @@
-tonnage = 2.5%
+consumed-size = 2.5%
+mass-per-point = 2
 cost = 2.5%
 max_armor = 9

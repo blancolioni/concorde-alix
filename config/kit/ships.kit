@@ -13,19 +13,21 @@ package Ships is
 record Hull_Configuration : Localised is
    Streamlining  : Long_Float;
    Hull_Points   : Long_Float;
-   Armor_Tonnage : Long_Float;
+   Mass          : Long_Float;
+   Armor_Size    : Long_Float;
    Cost          : Long_Float;
 end Hull_Configuration;
    
 record Hull_Armor : Localised, Technological is
-    Tonnage       : Long_Float;
+    Size_Fraction : Long_Float;
+    Mass_Fraction : Long_Float;
     Cost_Fraction : Long_Float;
     Max_Armor     : Positive;
 end Hull_Armor;
 
 record Stealth : Localised, Technological is
-    Cost_Per_Ton : Long_Float;
-    Modifier     : Integer;
+    Cost_Per_Size : Long_Float;
+    Modifier      : Integer;
 end Stealth;
 
 record Reinforcement : Localised is
@@ -34,16 +36,18 @@ record Reinforcement : Localised is
 end Reinforcement;
 
 record Component : Localised, Technological is
-    Minimum_Tonnage : Long_Float;
-    Price_Per_Ton   : Price_Type;
+    Minimum_Size   : Long_Float;
+    Size           : Long_Float;
+    Mass_Per_Size  : Long_Float;
+    Price_Per_Size : Price_Type;
 end Component;
 
 record Fueled_Component : Component is
-    Fuel_Per_Ton : Long_Float;
+    Fuel_Per_Size : Long_Float;
 end Fueled_Component;
 
 record Powered_Component : Component is
-   Power_Per_Ton : Long_Float;
+   Power_Per_Size : Long_Float;
 end Powered_Component;
 
 record Engine : Powered_Component is
@@ -61,18 +65,15 @@ record Computer : Powered_Component is
 end Computer;
 
 record Sensor : Powered_Component is
-    Tonnage  : Long_Float;
     Modifier : Integer;
 end Sensor;
 
 record Bridge : Powered_Component is
-    Tonnage        : Long_Float;
-    Ship_Tons_Low  : Long_Float;
-    Ship_Tons_High : Long_Float;
+    Ship_Size_Low  : Long_Float;
+    Ship_Size_High : Long_Float;
 end Bridge;
 
 record Quarters : Powered_Component is
-    Tonnage            : Long_Float;
     Comfort_Level      : Natural;
     Standard_Occupants : Positive;
     Max_Occupants      : Positive;
@@ -110,7 +111,8 @@ record Ship_Design : Has_Name is
    Hull_Armor;
    Stealth;
    Reinforcement;
-   Tonnage        : Long_Float;
+   Size           : Long_Float;
+   Dry_Mass       : Long_Float;
    Hull_Points    : Long_Float;
    Fuel_Tank      : Long_Float;
    Cargo_Space    : Long_Float;
@@ -124,7 +126,8 @@ end Ship_Design;
 record Ship_Design_Module is
    key Ship_Design;
    Component;
-   Tonnage    : Long_Float;
+   Size       : Long_Float;
+   Mass       : Long_Float;
    Concealed  : Boolean;
 end Ship_Design_Module;
 
@@ -140,6 +143,7 @@ record Ship : Has_Name, Managed, Shared, Orbiting_Object is
    key Faction;
    key Home    : Colony;
    key World;
+   Ship_Design;
    Status      : Ship_Status;
    Training    : Long_Float;
    Fuel        : Long_Float;
@@ -154,7 +158,8 @@ record Ship_Module is
    key Ship;
    Component;
    Condition  : Long_Float;
-   Tonnage    : Long_Float;
+   Size       : Long_Float;
+   Mass       : Long_Float;
 end Ship_Module;
 
 record Engine_Module : Ship_Module is

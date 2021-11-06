@@ -4,4 +4,5 @@ price = 200
 hardpoints = 1
 weapons = 1
 power = 1
-tonnage = 1
+size = 1
+mass = 12

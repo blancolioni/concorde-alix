@@ -1,3 +1,4 @@
-power_per_ton = 20
-price_per_ton = 2000
-fuel_per_ton_per_day = 0.005
+power_per_size = 20
+price_per_size = 2000
+mass_per_size = 20
+fuel_per_size_per_day = 0.005

@@ -1,4 +1,5 @@
 with Concorde.Money;
+with Concorde.Quantities;
 
 with Accord.Colony;
 with Accord.Individual;
@@ -33,6 +34,14 @@ package Concorde.Colonies is
    function Defense (Colony : Colony_Class) return Natural;
    function Law (Colony : Colony_Class) return Natural;
    function Supply (Colony : Colony_Class) return Natural;
+
+   function Population
+     (Colony : Colony_Class)
+      return Concorde.Quantities.Quantity_Type;
+
+   function Employment
+     (Colony : Colony_Class)
+      return Concorde.Quantities.Quantity_Type;
 
    function Size (Colony : Colony_Class) return Positive;
    function Ruling_Difficulty (Colony : Colony_Class) return Natural;

@@ -2,11 +2,14 @@ with Concorde.Agents;
 with Concorde.Calendar;
 with Concorde.Identifiers;
 with Concorde.Money;
+with Concorde.Quantities;
 with Concorde.Random;
 
 with Concorde.Individuals.Create;
 with Concorde.Sectors;
 with Concorde.Worlds;
+
+with Concorde.Configure.Commodities;
 
 with Accord.Colony;
 with Accord.Colony_Edict;
@@ -54,6 +57,8 @@ package body Concorde.Colonies.Create is
       Capital : Accord.World_Sector.World_Sector_Class;
       Init    : Tropos.Configuration)
    is
+      use Concorde.Quantities;
+
       Colony : constant Accord.Colony.Colony_Handle :=
                  Accord.Colony.Create
                    (Account       => Concorde.Agents.New_Account
@@ -65,12 +70,14 @@ package body Concorde.Colonies.Create is
                     Faction       => Faction,
                     Capital       => Capital,
                     Plurality     => 1.0);
+      Capital_Sector : constant Accord.Colony_Sector.Colony_Sector_Handle :=
+                         Accord.Colony_Sector.Create
+                           (Colony       => Colony,
+                            Max_Slots    => Slots_Per_Sector,
+                            Slot_Count   => 0,
+                            World_Sector => Capital);
+      Capital_Pop : Quantity_Type := Zero;
    begin
-      Accord.Colony_Sector.Create
-        (Colony       => Colony,
-         Max_Slots    => Slots_Per_Sector,
-         Slot_Count   => 0,
-         World_Sector => Capital);
 
       declare
          use Concorde.Calendar;
@@ -90,8 +97,23 @@ package body Concorde.Colonies.Create is
       end;
 
       for Module_Config of Init.Child ("capital").Child ("modules") loop
-         Add_Module (Colony, Capital, Module_Config.Config_Name);
+         declare
+            Module : constant Accord.Module.Module_Handle :=
+                       Accord.Module.Get_By_Tag (Module_Config.Config_Name);
+         begin
+            pragma Assert (Module.Has_Element);
+            Add_Module (Colony, Capital, Module);
+            Capital_Pop := Capital_Pop + Module.Population;
+         end;
       end loop;
+
+      Capital_Sector.Update_Colony_Sector
+        .Set_Population (Capital_Pop)
+        .Done;
+
+      Concorde.Configure.Commodities.Configure_Stock
+        (Has_Stock => Colony,
+         Config    => Init.Child ("stock"));
 
       for I in 1 .. Init.Child ("capital").Get ("individuals") loop
          declare
@@ -156,7 +178,8 @@ package body Concorde.Colonies.Create is
                  (Colony       => Colony,
                   Max_Slots    => Slots_Per_Sector,
                   Slot_Count   => 0,
-                  World_Sector => Sector);
+                  World_Sector => Sector,
+                  Population   => Lowest_Module.Population);
 
                Add_Module (Colony, Sector, Lowest_Module);
 

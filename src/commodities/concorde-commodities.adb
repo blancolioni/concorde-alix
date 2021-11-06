@@ -27,6 +27,15 @@ package body Concorde.Commodities is
       end if;
    end Exists;
 
+   ----------
+   -- Food --
+   ----------
+
+   function Food return Commodity_Class is
+   begin
+      return Get ("food");
+   end Food;
+
    ---------
    -- Get --
    ---------

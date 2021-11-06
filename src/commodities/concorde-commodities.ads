@@ -10,6 +10,8 @@ package Concorde.Commodities is
    subtype Resource_Class is Accord.Resource.Resource_Class;
    subtype Resource_Handle is Accord.Resource.Resource_Handle;
 
+   function Food return Commodity_Class;
+
    function Exists (Tag : String) return Boolean;
    function Get (Tag : String) return Commodity_Class
      with Pre => Exists (Tag);

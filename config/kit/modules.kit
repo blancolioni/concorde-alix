@@ -19,6 +19,8 @@ record Module : Localised, Has_Attributes is
    Level        : Positive;
    Cost         : Money_Type;
    Slots        : Positive;
+   Population   : Quantity_Type;
+   Employment   : Quantity_Type;
    unique key Group_Level with Module_Group, Level;
 end Module;
 

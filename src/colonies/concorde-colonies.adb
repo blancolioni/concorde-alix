@@ -278,6 +278,29 @@ package body Concorde.Colonies is
       end return;
    end Check;
 
+   ----------------
+   -- Employment --
+   ----------------
+
+   function Employment
+     (Colony : Colony_Class)
+      return Concorde.Quantities.Quantity_Type
+   is
+      use Concorde.Quantities;
+   begin
+      return Emp : Quantity_Type := Zero do
+         for Sector of
+           Accord.Colony_Sector.Select_By_Colony (Colony)
+         loop
+            for Sector_Module of
+              Accord.Colony_Sector_Module.Select_By_Colony_Sector (Sector)
+            loop
+               Emp := Emp + Sector_Module.Module.Employment;
+            end loop;
+         end loop;
+      end return;
+   end Employment;
+
    ----------------------
    -- For_All_Colonies --
    ----------------------
@@ -335,13 +358,32 @@ package body Concorde.Colonies is
          Message);
    end Log;
 
+   ----------------
+   -- Population --
+   ----------------
+
+   function Population
+     (Colony : Colony_Class)
+      return Concorde.Quantities.Quantity_Type
+   is
+      use Concorde.Quantities;
+   begin
+      return Pop : Quantity_Type := Zero do
+         for Sector of
+           Accord.Colony_Sector.Select_By_Colony (Colony)
+         loop
+            Pop := Pop + Sector.Population;
+         end loop;
+      end return;
+   end Population;
+
    -----------------------
    -- Ruling_Difficulty --
    -----------------------
 
    function Ruling_Difficulty (Colony : Colony_Class) return Natural is
    begin
-      return Size (Colony) + 20;
+      return 20 + Size (Colony);
    end Ruling_Difficulty;
 
    ----------

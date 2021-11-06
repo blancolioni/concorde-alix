@@ -15,7 +15,7 @@ capital = {
 }
 
 districts = {
-   count = 10
+   count = 15
 }
 
 edicts = {
@@ -25,6 +25,10 @@ edicts = {
 }
 
 ships = { free-trader = 1 scout = 2 }
+
+stock = {
+   food = 1K
+}
 
 init-script = {
    "load-galaxy-view"

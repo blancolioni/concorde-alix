@@ -2,6 +2,7 @@ with Ada.Text_IO;
 with WL.Reports.Tables;
 
 with Concorde.Money;
+with Concorde.Quantities;
 with Concorde.Real_Images;
 
 with Concorde.Agents;
@@ -44,6 +45,10 @@ package body Concorde.Factions.Reports is
                       & Concorde.Money.Show (Total_Infrastructure (Colony)));
             Put_Line ("Maintenance: "
                       & Concorde.Money.Show (Total_Maintenance (Colony)));
+            Put_Line ("Population:  "
+                      & Concorde.Quantities.Show (Population (Colony)));
+            Put_Line ("Employment:  "
+                      & Concorde.Quantities.Show (Employment (Colony)));
             Put_Line ("Level:      " & Level (Colony)'Image);
             Put_Line ("Complexity: " & Ruling_Difficulty (Colony)'Image);
             Put_Line ("Capability: " & Capability (Colony)'Image);

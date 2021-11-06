@@ -6,16 +6,16 @@ groups = {
 1 = {
     cost = 10
     modules = {
-        farm = { food = 1 }
-        storehouse = { stability = 1 Loyalty = 1 }
+        farm = { economy = 1 stability = 1 food = 1 population = 1 employment = 5 }
+        storehouse = { stability = 1 Loyalty = 1 employment = 2 }
     }
 }
 
 2 = {
     cost = 20
     modules = {
-        farm = { food = 3 }
-        storehouse = { stability = 2 Loyalty = 2 }
+        farm = { economy = 2 stability = 2 food = 3 population = 1 employment = 15 }
+        storehouse = { stability = 2 Loyalty = 2 employment = 5 }
     }
 }
 
@@ -23,9 +23,9 @@ groups = {
     cost = 40
     slots = 2
     modules = {
-        farm = { food = 8 }
-        storehouse = { economy = 2 stability = 2 Loyalty = 2 capability = 1 }
-        plantation = { economy = 6 supply = 1 }
+        farm = { economy = 2 stability = 4 food = 8 population = 2 employment = 40 }
+        storehouse = { economy = 2 stability = 2 Loyalty = 2 capability = 1 employment = 12 }
+        plantation = { economy = 6 supply = 1 population = 1 employment = 20 }
     }
 }
 
@@ -33,9 +33,9 @@ groups = {
     cost = 60
     slots = 2
     modules = {
-        farm = { food = 15 }
-        storehouse = { economy = 2 stability = 4 Loyalty = 2 capability = 1 law = 1 }
-        plantation = { economy = 6 loyalty = 2 culture = 1 supply = 1 }
+        farm = { economy = 4 stability = 4 capability = 2 food = 15 population = 4 employment = 75 }
+        storehouse = { economy = 2 stability = 4 Loyalty = 2 capability = 1 law = 1 employment = 20 }
+        plantation = { economy = 6 loyalty = 2 culture = 1 supply = 1 population = 2 employment = 30 }
     }
 }
 
@@ -43,8 +43,8 @@ groups = {
     cost = 80
     slots = 4
     modules = {
-        farm = { food = 20 }
-        plantation = { economy = 8 loyalty = 2 culture = 2 supply = 2 }
+        farm = { economy = 6 stability = 4 capability = 2 supply = 2 food = 20 population = 5 employment = 100 }
+        plantation = { economy = 8 loyalty = 2 culture = 2 supply = 2  population = 3 employment = 50 }
     }
 }
 

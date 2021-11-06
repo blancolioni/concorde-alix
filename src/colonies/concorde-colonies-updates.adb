@@ -46,8 +46,9 @@ package body Concorde.Colonies.Updates is
                        Check_Tag     => "collect-taxes",
                        Penalty       => Unrest (Colony),
                        Penalty_Tag   => "unrest");
-         New_Unrest : Natural :=
+         Old_Unrest : constant Natural :=
                         Concorde.Attributes.Get (Colony, "unrest");
+         New_Unrest : Natural := Old_Unrest;
          Collection : constant Integer := Total (Result);
          Taxes      : constant Money_Type :=
                         (if Collection > 0
@@ -68,6 +69,11 @@ package body Concorde.Colonies.Updates is
             & "; revenue " & Image (Colony_Edict.Edict.Revenue * 100.0)
             & "%; total taxes " & Show (Taxes));
          Concorde.Agents.Add_Cash (Colony.Faction, Taxes, "taxes");
+
+         if New_Unrest > Old_Unrest then
+            Concorde.Attributes.Increase
+              (Colony, "unrest", New_Unrest - Old_Unrest);
+         end if;
       end;
 
    end Collect_Taxes;

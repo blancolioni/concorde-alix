@@ -25,7 +25,7 @@ package body Concorde.Ships is
       use type Concorde.Calendar.Time;
       Orbit  : constant Non_Negative_Real :=
                  World.Radius
-                   + (300.0 + Concorde.Random.Normal_Random * 10.0)
+                   + (800.0 + Concorde.Random.Normal_Random * 10.0)
                  * 1000.0;
       Period : constant Non_Negative_Real :=
                  Concorde.Orbits.Period (World.Mass, Orbit);

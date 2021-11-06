@@ -1,18 +1,18 @@
 1 = {
     cost = 10
     modules = {
-        meeting-place = { stability = 2 }
-        monument = { loyalty = 2 }
+        meeting-place = { stability = 2 employment = 1 }
+        monument = { loyalty = 2 employment = 1 }
     }
 }
 
 2 = {
     cost = 20
     modules = {
-        meeting-place = { stability = 4 }
-        monument = { loyalty = 4 }
-        temple = { loyalty = 2 stability = 2 }
-        theater = { economy = 2 stability = 2 }
+        meeting-place = { stability = 4 employment = 1 }
+        monument = { loyalty = 4 employment = 1 }
+        temple = { loyalty = 2 stability = 2 employment = 1 }
+        theater = { economy = 2 stability = 2 employment = 1 }
     }
 }
 
@@ -20,10 +20,10 @@
     cost = 40
     slots = 2
     modules = {
-        meeting-place = { loyalty = 2 stability = 4 law = 1 }
-        monument = { loyalty = 6 culture = 1 }
-        temple = { loyalty = 4 stability = 2 culture = 1 }
-        theater = { economy = 2 loyalty = 2 stability = 2 culture = 1 }
+        meeting-place = { loyalty = 2 stability = 4 law = 1 employment = 2 }
+        monument = { loyalty = 6 culture = 1 employment = 2 }
+        temple = { loyalty = 4 stability = 2 culture = 1 employment = 2 }
+        theater = { economy = 2 loyalty = 2 stability = 2 culture = 1 employment = 2 }
     }
 }
 
@@ -31,11 +31,11 @@
     cost = 60
     slots = 2
     modules = {
-        arena = { economy = 2 loyalty = 2 stability = 4 capability = 1 law = 1 }
-        meeting-place = { loyalty = 4 stability = 4 law = 2 }
-        monument = { loyalty = 8 culture = 2 }
-        temple = { loyalty = 4 stability = 4 culture = 2 }
-        theater = { economy = 4 loyalty = 2 stability = 2 culture = 2 }
+        arena = { economy = 2 loyalty = 2 stability = 4 capability = 1 law = 1 employment = 4 }
+        meeting-place = { loyalty = 4 stability = 4 law = 2 employment = 4 }
+        monument = { loyalty = 8 culture = 2 employment = 4 }
+        temple = { loyalty = 4 stability = 4 culture = 2 employment = 4 }
+        theater = { economy = 4 loyalty = 2 stability = 2 culture = 2 employment = 4 }
     }
 }
 
@@ -43,11 +43,11 @@
     cost = 80
     slots = 4
     modules = {
-        arena = { economy = 4 loyalty = 2 stability = 4 capability = 2 law = 2 }
-        meeting-place = { loyalty = 6 stability = 4 law = 4 }
-        monument = { loyalty = 10 culture = 4 }
-        temple = { economy = 2 loyalty = 4 stability = 4 culture = 2 law = 2 }
-        theater = { economy = 4 loyalty = 2 stability = 4 culture = 4 }
+        arena = { economy = 4 loyalty = 2 stability = 4 capability = 2 law = 2 employment = 5 }
+        meeting-place = { loyalty = 6 stability = 4 law = 4 employment = 5 }
+        monument = { loyalty = 10 culture = 4 employment = 5 }
+        temple = { economy = 2 loyalty = 4 stability = 4 culture = 2 law = 2 employment = 5 }
+        theater = { economy = 4 loyalty = 2 stability = 4 culture = 4 employment = 5 }
     }
 }
 

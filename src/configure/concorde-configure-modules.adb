@@ -60,6 +60,12 @@ package body Concorde.Configure.Modules is
                                 else Accord.Module_Group.Create
                                   (Base_Tag, Category));
 
+                  function Get_Quantity
+                    (Tag : String)
+                     return Concorde.Quantities.Quantity_Type
+                  is (Concorde.Quantities.To_Quantity
+                      (Real (Float'(Module_Config.Get (Tag, 0.0)))));
+
                   Module : constant Accord.Module.Module_Handle :=
                              Accord.Module.Create
                                (Tag          => Tag,
@@ -67,7 +73,9 @@ package body Concorde.Configure.Modules is
                                 Level        => Level,
                                 Cost         =>
                                   Concorde.Money.To_Money (Real (Cost)),
-                                Slots        => Slots);
+                                Slots        => Slots,
+                                Population   => Get_Quantity ("population"),
+                                Employment   => Get_Quantity ("employment"));
                begin
                   Concorde.Configure.Attributes.Configure_Has_Attributes
                     (Has_Attributes    => Module,

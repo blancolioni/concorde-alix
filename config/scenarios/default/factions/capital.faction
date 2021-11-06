@@ -3,6 +3,10 @@ start-cash = 500
 capital = {
    modules = {
       residency-1
+      residency-1
+      residency-1
+      residency-1
+      residency-2
       residency-2
       market-1
       storehouse-1
@@ -15,7 +19,7 @@ capital = {
 }
 
 districts = {
-   count = 100
+   count = 75
 }
 
 edicts = {
@@ -25,6 +29,10 @@ edicts = {
 }
 
 ships = { free-trader = 10 }
+
+stock = {
+   food = 10K
+}
 
 init-script = {
    "load-galaxy-view"

@@ -4,6 +4,7 @@ with Commodities;
 with Factions;
 with Modules;
 with Money;
+with Quantities;
 with Worlds;
 with World_Sectors;
 
@@ -20,6 +21,7 @@ record Colony_Sector is
    key Colony;
    Max_Slots     : Natural;
    Slot_Count    : Natural;
+   Population    : Quantity_Type;
    unique key World_Sector;
 end Colony_Sector;
 

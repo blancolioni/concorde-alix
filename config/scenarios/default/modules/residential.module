@@ -1,17 +1,17 @@
 1 = {
     cost = 10
     modules = {
-        hostel = { economy = 1 loyalty = 1 }
-        residency = { stability = 1 unrest = -1 }
+        hostel = { economy = 1 loyalty = 1 population = 200 employment = 1 }
+        residency = { stability = 1 unrest = -1 population = 100 employment = 2 }
     }
 }
 
 2 = {
     cost = 20
     modules = {
-        hostel = { economy = 2 loyalty = 2 }
-        residency = { stability = 2 unrest = -2 }
-        complex = { stability = 4 }
+        hostel = { economy = 2 loyalty = 2 population = 500 employment = 3 }
+        residency = { stability = 2 unrest = -2 population = 200 employment = 2 }
+        complex = { stability = 4 population = 40 employment = 3 }
     }
 }
 
@@ -19,10 +19,10 @@
     cost = 40
     slots = 2
     modules = {
-        hostel = { economy = 3 loyalty = 3 culture = 1 }
-        residency = { economy = 2 stability = 2 unrest = -1 law = 1 }
-        complex = { stability = 4 unrest = -1 law = 1 }
-        palace = { economy = 2 loyalty = 2 stability = 2 culture = 1 }
+        hostel = { economy = 3 loyalty = 3 culture = 1 population = 1200 employment = 6 }
+        residency = { economy = 2 stability = 2 unrest = -1 law = 1 population = 500 employment = 3 }
+        complex = { stability = 4 unrest = -1 law = 1 population = 1000 employment = 5 }
+        palace = { economy = 2 loyalty = 2 stability = 2 culture = 1 population = 1 employment = 10 }
     }
 }
 
@@ -30,10 +30,10 @@
     cost = 60
     slots = 2
     modules = {
-        hostel = { economy = 4 loyalty = 4 culture = 2 }
-        residency = { economy = 2 loyalty = 2 stability = 2 unrest = -1 culture = 1 law = 1 }
-        complex = { economy = 2 stability = 4 unrest = -2 law = 2 }
-        palace = { economy = 2 loyalty = 4 stability = 2 culture = 1 law = 1 }
+        hostel = { economy = 4 loyalty = 4 culture = 2 population = 2000 employment = 10 }
+        residency = { economy = 2 loyalty = 2 stability = 2 unrest = -1 culture = 1 law = 1 population = 1000 employment = 5 }
+        complex = { economy = 2 stability = 4 unrest = -2 law = 2 population = 1500 employment = 10 }
+        palace = { economy = 2 loyalty = 4 stability = 2 culture = 1 law = 1 population = 20 employment = 20 }
     }
 }
 
@@ -41,9 +41,9 @@
     cost = 80
     slots = 4
     modules = {
-        hostel = { economy = 4 loyalty = 4 stability = 2 culture = 4 }
-        complex = { economy = 2 loyalty = 2 stability = 4 unrest = -2 law = 2 culture = 2 }
-        palace = { economy = 2 loyalty = 6 stability = 2 culture = 2 law = 2 }
+        hostel = { economy = 4 loyalty = 4 stability = 2 culture = 4 population = 5000 employment = 20 }
+        complex = { economy = 2 loyalty = 2 stability = 4 unrest = -2 law = 2 culture = 2 population = 4000 employment = 15 }
+        palace = { economy = 2 loyalty = 6 stability = 2 culture = 2 law = 2 population = 50 employment = 50 }
     }
 }
 

@@ -32,7 +32,9 @@ package body Concorde.Modules.Updates is
                                   Sector.Habitability);
                begin
                   Concorde.Logging.Log
-                    (Sector.World.Name
+                    (Level    => 4,
+                     Message  =>
+                       Sector.World.Name
                      & ": habitability "
                      & Concorde.Real_Images.Approximate_Image
                        (Sector.Habitability * 100.0)

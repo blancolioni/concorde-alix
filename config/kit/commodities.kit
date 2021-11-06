@@ -27,7 +27,6 @@ record Stock_Item is
    key Has_Stock;
    Commodity;
    Quantity : Quantity_Type;
-   Value    : Money_Type;
    unique key Stock_Item with Has_Stock, Commodity;
 end Stock_Item;
 
@@ -36,7 +35,6 @@ record Historical_Stock is
    Has_Stock;
    Commodity;
    Quantity : Quantity_Type;
-   Value    : Money_Type;
    unique key Historical_Stock with Has_Stock, Commodity, Time_Stamp;
 end Historical_Stock;
 

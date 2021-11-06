@@ -1,5 +1,3 @@
-with Concorde.Money;
-
 with Accord.Stock_Item;
 
 package body Concorde.Stock is
@@ -45,8 +43,7 @@ package body Concorde.Stock is
          return Stock_Item;
       else
          return Accord.Stock_Item.Create
-           (Has_Stock, Commodity, Concorde.Quantities.Zero,
-            Concorde.Money.Zero);
+           (Has_Stock, Commodity, Concorde.Quantities.Zero);
       end if;
    end Get_Stock_Item;
 

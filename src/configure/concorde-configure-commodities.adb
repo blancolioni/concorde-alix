@@ -412,9 +412,7 @@ package body Concorde.Configure.Commodities is
                Accord.Stock_Item.Create
                  (Has_Stock => Has_Stock,
                   Commodity => Commodity,
-                  Quantity  => Quantity,
-                  Value     =>
-                    Concorde.Money.Total (Commodity.Base_Price, Quantity));
+                  Quantity  => Quantity);
 
             end;
          else

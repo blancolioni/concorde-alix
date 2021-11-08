@@ -37,4 +37,26 @@ record Colony_Edict is
    unique key Colony_Edict with Colony, Edict_Group;
 end Colony_Edict;
 
+record Colony_Minimum is
+   key Colony;
+   Commodity;
+   Quantity : Quantity_Type;
+end Colony_Minimum;
+
+record Colony_Request is
+   key Colony;
+   key Commodity;
+   key Active : Boolean;
+   Quantity  : Quantity_Type;
+   Remaining : Quantity_Type;
+   Offer     : Price_Type;
+   unique key Colony_Request with Colony, Commodity, Active;
+end Colony_Request;
+
+record Colony_Supply is
+   key Colony_Request;
+   Quantity : Quantity_Type;
+   Price    : Price_Type;
+end Colony_Supply;
+
 end Colonies;

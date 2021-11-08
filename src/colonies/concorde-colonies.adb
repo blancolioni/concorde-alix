@@ -8,6 +8,7 @@ with Concorde.Logging;
 with Concorde.Sectors;
 
 with Accord.Colony_Edict;
+with Accord.Colony_Request;
 with Accord.Colony_Sector;
 with Accord.Colony_Sector_Module;
 with Accord.Office;
@@ -278,6 +279,26 @@ package body Concorde.Colonies is
       end return;
    end Check;
 
+   ---------------------
+   -- Current_Request --
+   ---------------------
+
+   function Current_Request
+     (Colony    : Colony_Class;
+      Commodity : Accord.Commodity.Commodity_Class)
+      return Concorde.Quantities.Quantity_Type
+   is
+      Request : constant Accord.Colony_Request.Colony_Request_Class :=
+                  Accord.Colony_Request.Get_By_Colony_Request
+                    (Colony, Commodity, True);
+   begin
+      if Request.Has_Element then
+         return Request.Quantity;
+      else
+         return Concorde.Quantities.Zero;
+      end if;
+   end Current_Request;
+
    ----------------
    -- Employment --
    ----------------
@@ -358,6 +379,24 @@ package body Concorde.Colonies is
          Message);
    end Log;
 
+   ----------------------
+   -- Minimum_Required --
+   ----------------------
+
+   function Minimum_Required
+     (Colony    : Colony_Class;
+      Commodity : Accord.Commodity.Commodity_Class)
+      return Concorde.Quantities.Quantity_Type
+   is
+   begin
+      if Commodity.Tag = "food" then
+         return Concorde.Quantities.Scale
+           (Population (Colony), 10.0);
+      else
+         return Concorde.Quantities.Zero;
+      end if;
+   end Minimum_Required;
+
    ----------------
    -- Population --
    ----------------
@@ -376,6 +415,60 @@ package body Concorde.Colonies is
          end loop;
       end return;
    end Population;
+
+   -------------
+   -- Request --
+   -------------
+
+   procedure Request
+     (Colony    : Colony_Class;
+      Commodity : Accord.Commodity.Commodity_Class;
+      Quantity  : Concorde.Quantities.Quantity_Type;
+      Offer     : Concorde.Money.Price_Type)
+   is
+      use Concorde.Quantities;
+      Request : constant Accord.Colony_Request.Colony_Request_Class :=
+                  Accord.Colony_Request.Get_By_Colony_Request
+                    (Colony, Commodity, True);
+   begin
+      if Request.Has_Element then
+         Log (Colony,
+              "requesting additional "
+              & Show (Quantity)
+              & " "
+              & Commodity.Tag
+              & " for "
+              & Concorde.Money.Show (Offer)
+              & " each (total "
+              & Concorde.Money.Show (Concorde.Money.Total (Offer, Quantity))
+              & ")");
+
+         Request.Update_Colony_Request
+           .Set_Quantity (Request.Quantity + Quantity)
+           .Set_Remaining (Request.Remaining + Quantity)
+           .Set_Offer (Offer)
+           .Done;
+      else
+         Log (Colony,
+              "requesting "
+              & Show (Quantity)
+              & " "
+              & Commodity.Tag
+              & " for "
+              & Concorde.Money.Show (Offer)
+              & " each (total "
+              & Concorde.Money.Show (Concorde.Money.Total (Offer, Quantity))
+              & ")");
+
+         Accord.Colony_Request.Create
+           (Colony    => Colony,
+            Commodity => Commodity,
+            Quantity  => Quantity,
+            Remaining => Quantity,
+            Offer     => Offer,
+            Active    => True);
+      end if;
+   end Request;
 
    -----------------------
    -- Ruling_Difficulty --

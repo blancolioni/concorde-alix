@@ -119,14 +119,36 @@ package body Concorde.Colonies.Managers is
    -------------
 
    overriding procedure Execute (Manager : in out Colony_Monthly_Manager) is
+      Colony : Accord.Colony.Colony_Handle renames Manager.Colony;
    begin
-      Updates.Stability_Check (Manager.Colony);
-      Updates.Pay_Maintenance (Manager.Colony);
-      Updates.Collect_Taxes (Manager.Colony);
-      Log (Manager.Colony,
+      Updates.Stability_Check (Colony);
+      Updates.Pay_Maintenance (Colony);
+      Updates.Collect_Taxes (Colony);
+      Log (Colony,
            "cash: "
            & Concorde.Money.Show
-             (Concorde.Agents.Cash (Manager.Colony.Faction)));
+             (Concorde.Agents.Cash (Colony.Faction)));
+
+      for Commodity of
+        Accord.Commodity.Scan_By_Tag
+      loop
+         declare
+            use Concorde.Quantities;
+            Minimum   : constant Quantity_Type :=
+                          Minimum_Required (Colony, Commodity);
+            Available : constant Quantity_Type :=
+                          Concorde.Stock.Quantity
+                            (Colony, Commodity);
+            Requested : constant Quantity_Type :=
+                          Current_Request (Colony, Commodity);
+         begin
+            if Available + Requested < Minimum then
+               Request (Colony, Commodity, Minimum - Available - Requested,
+                        Concorde.Money.Adjust_Price
+                          (Commodity.Base_Price, 2.0));
+            end if;
+         end;
+      end loop;
 
       Manager.Update_With_Delay (Concorde.Calendar.Days (30));
    end Execute;

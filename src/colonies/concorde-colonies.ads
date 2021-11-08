@@ -2,6 +2,7 @@ with Concorde.Money;
 with Concorde.Quantities;
 
 with Accord.Colony;
+with Accord.Commodity;
 with Accord.Individual;
 with Accord.Module;
 with Accord.World_Sector;
@@ -42,6 +43,22 @@ package Concorde.Colonies is
    function Employment
      (Colony : Colony_Class)
       return Concorde.Quantities.Quantity_Type;
+
+   function Minimum_Required
+     (Colony    : Colony_Class;
+      Commodity : Accord.Commodity.Commodity_Class)
+      return Concorde.Quantities.Quantity_Type;
+
+   function Current_Request
+     (Colony    : Colony_Class;
+      Commodity : Accord.Commodity.Commodity_Class)
+      return Concorde.Quantities.Quantity_Type;
+
+   procedure Request
+     (Colony    : Colony_Class;
+      Commodity : Accord.Commodity.Commodity_Class;
+      Quantity  : Concorde.Quantities.Quantity_Type;
+      Offer     : Concorde.Money.Price_Type);
 
    function Size (Colony : Colony_Class) return Positive;
    function Ruling_Difficulty (Colony : Colony_Class) return Natural;

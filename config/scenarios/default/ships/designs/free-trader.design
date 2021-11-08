@@ -10,3 +10,4 @@ sensor = { type = civilian }
 standard-berth = 10
 low-berth = 40
 fuel_tank = 21
+default-manager = default-trader

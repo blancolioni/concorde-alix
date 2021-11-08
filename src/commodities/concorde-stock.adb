@@ -52,6 +52,27 @@ package body Concorde.Stock is
       end if;
    end Get_Stock_Item;
 
+   -------------
+   -- Iterate --
+   -------------
+
+   procedure Iterate
+     (Has_Stock : Accord.Has_Stock.Has_Stock_Class;
+      Process   : not null access
+        procedure (Commodity : Accord.Commodity.Commodity_Class;
+                   Quantity  : Concorde.Quantities.Quantity_Type))
+   is
+      use type Concorde.Quantities.Quantity_Type;
+   begin
+      for Stock_Item of
+        Accord.Stock_Item.Select_By_Has_Stock (Has_Stock)
+      loop
+         if Stock_Item.Quantity > Concorde.Quantities.Zero then
+            Process (Stock_Item.Commodity, Stock_Item.Quantity);
+         end if;
+      end loop;
+   end Iterate;
+
    --------------
    -- Quantity --
    --------------

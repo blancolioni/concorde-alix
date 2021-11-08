@@ -29,6 +29,12 @@ package Concorde.Stock is
      with Pre => Concorde.Quantities."<="
        (Quantity, Concorde.Stock.Quantity (From, Commodity));
 
+   procedure Iterate
+     (Has_Stock : Accord.Has_Stock.Has_Stock_Class;
+      Process   : not null access
+        procedure (Commodity : Accord.Commodity.Commodity_Class;
+                   Quantity  : Concorde.Quantities.Quantity_Type));
+
    procedure Save_History
      (Has_Stock : Accord.Has_Stock.Has_Stock_Class);
 

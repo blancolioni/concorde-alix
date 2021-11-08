@@ -1,4 +1,5 @@
 with Concorde.Configure.Star_Systems;
+with Concorde.Elementary_Functions;
 
 with Accord.Generation;
 with Accord.Scenario;
@@ -50,6 +51,21 @@ package body Concorde.Star_Systems is
         .Set_Claimed (True)
         .Done;
    end Claim;
+
+   --------------
+   -- Distance --
+   --------------
+
+   function Distance
+     (From, To : Star_System_Class)
+      return Non_Negative_Real
+   is
+   begin
+      return Concorde.Elementary_Functions.Sqrt
+        ((From.X - To.X) ** 2
+         + (From.Y - To.Y) ** 2
+         + (From.Z - To.Z) ** 2);
+   end Distance;
 
    ----------------
    -- Find_Exact --

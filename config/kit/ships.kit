@@ -111,16 +111,17 @@ record Ship_Design : Has_Name is
    Hull_Armor;
    Stealth;
    Reinforcement;
-   Size           : Long_Float;
-   Dry_Mass       : Long_Float;
-   Hull_Points    : Long_Float;
-   Fuel_Tank      : Long_Float;
-   Cargo_Space    : Long_Float;
-   Basic_Power    : Long_Float;
-   Engine_Power   : Long_Float;
-   Jump_Power     : Long_Float;
-   Firmpoints     : Natural;
-   Hardpoints     : Natural;
+   Size            : Long_Float;
+   Dry_Mass        : Long_Float;
+   Hull_Points     : Long_Float;
+   Fuel_Tank       : Long_Float;
+   Cargo_Space     : Long_Float;
+   Basic_Power     : Long_Float;
+   Engine_Power    : Long_Float;
+   Jump_Power      : Long_Float;
+   Firmpoints      : Natural;
+   Hardpoints      : Natural;
+   Default_Manager : String (32);
 end Ship_Design;
 
 record Ship_Design_Module is
@@ -137,17 +138,24 @@ record Ship_Design_Weapon is
 end Ship_Design_Weapon;
 
 type Ship_Status is
-  (Idle, Activating, Moving, Jumping, Surveying, Training, Repairing, Destroyed);
+  (Idle, Activating, Moving_To_Jump_Point, Jumping, Moving_To_World, Surveying, Training, Repairing, Destroyed);
   
-record Ship : Has_Name, Managed, Shared, Orbiting_Object is
+record Ship : Has_Name, Managed, Shared, Orbiting_Object, Has_Stock is
    key Faction;
    key Home    : Colony;
    key World;
+   key Star_System;
    Ship_Design;
    Status      : Ship_Status;
    Training    : Long_Float;
    Fuel        : Long_Float;
    Destination : World;
+   From_X      : Long_Float;
+   From_Y      : Long_Float;
+   From_Z      : Long_Float;
+   To_X        : Long_Float;
+   To_Y        : Long_Float;
+   To_Z        : Long_Float;
    Departure   : Time;
    Arrival     : Time;
    Start       : Time;

@@ -201,7 +201,7 @@ package body Concorde.Factions.Create is
                         Home    => Home,
                         World   => Capital,
                         Design  => Design,
-                        Manager => "",
+                        Manager => Design.Default_Manager,
                         Name    => To_Ship_Name (Design_Name, I, Count));
                   end loop;
                end if;

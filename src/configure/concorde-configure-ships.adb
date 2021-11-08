@@ -196,7 +196,8 @@ package body Concorde.Configure.Ships is
                     Engine_Power       => 0.0,
                     Jump_Power         => 0.0,
                     Firmpoints         => Firm_Points,
-                    Hardpoints         => Hard_Points);
+                    Hardpoints         => Hard_Points,
+                    Default_Manager    => Config.Get ("default-manager", ""));
 
       procedure Configure_Bridge_Design
         (Config : Tropos.Configuration);

@@ -1,4 +1,5 @@
 with Concorde.Colonies.Managers;
+with Concorde.Ships.Managers;
 
 package body Concorde.Managers.Loader is
 
@@ -14,6 +15,9 @@ package body Concorde.Managers.Loader is
       Add_Manager
         ("colony-daily",
          Concorde.Colonies.Managers.Create_Daily_Update'Access);
+      Add_Manager
+        ("default-trader",
+         Concorde.Ships.Managers.Create_Default_Trader'Access);
    end Load_Managers;
 
 end Concorde.Managers.Loader;

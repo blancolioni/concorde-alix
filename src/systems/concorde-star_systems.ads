@@ -21,6 +21,10 @@ package Concorde.Star_Systems is
      (Star_System : Star_System_Class)
       return Interstellar_Position;
 
+   function Distance
+     (From, To : Star_System_Class)
+      return Non_Negative_Real;
+
    function Primary
      (Star_System : Star_System_Class)
       return Accord.Star.Star_Class;

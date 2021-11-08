@@ -4,6 +4,7 @@ with WL.Reports.Tables;
 with Concorde.Money;
 with Concorde.Quantities;
 with Concorde.Real_Images;
+with Concorde.Trigonometry;
 
 with Concorde.Agents;
 with Concorde.Colonies;
@@ -88,13 +89,15 @@ package body Concorde.Factions.Reports is
                & "km");
             declare
                Long : constant Real :=
-                        Concorde.Orbits.Calculate_Current_Longitude
-                          (Large_Mass => Ship.World.Mass,
-                           Orbit      => Ship.Semimajor_Axis,
-                           Epoch      => Ship.Epoch);
+                        Concorde.Trigonometry.To_Degrees
+                          (Concorde.Orbits.Calculate_Current_Longitude
+                             (Large_Mass => Ship.World.Mass,
+                              Orbit      => Ship.Semimajor_Axis,
+                              Epoch      => Ship.Epoch));
             begin
                Ship_Report.Append_Cell
-                 (Image (abs Long) & (if Long < 0.0 then "w" else "e"));
+                 (Image (abs Long)
+                  & (if Long < 0.0 then " west" else " east"));
             end;
          end loop;
          Ship_Report.Put;

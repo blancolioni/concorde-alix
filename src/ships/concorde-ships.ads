@@ -16,4 +16,13 @@ package Concorde.Ships is
       Manager : String;
       Name    : String);
 
+   function Current_Mass
+     (Ship : Ship_Class)
+     return Non_Negative_Real;
+
+   function Jump_Speed
+     (Ship : Ship_Class)
+      return Non_Negative_Real;
+   --  speed of light = 1
+
 end Concorde.Ships;

@@ -66,16 +66,22 @@ package body Concorde.Configure.Modules is
                   is (Concorde.Quantities.To_Quantity
                       (Real (Float'(Module_Config.Get (Tag, 0.0)))));
 
+                  function Get
+                    (Tag : String)
+                     return Real
+                  is (Real (Float'(Module_Config.Get (Tag, 0.0))));
+
                   Module : constant Accord.Module.Module_Handle :=
                              Accord.Module.Create
-                               (Tag          => Tag,
-                                Module_Group => Group,
-                                Level        => Level,
-                                Cost         =>
+                               (Tag           => Tag,
+                                Module_Group  => Group,
+                                Level         => Level,
+                                Cost          =>
                                   Concorde.Money.To_Money (Real (Cost)),
-                                Slots        => Slots,
-                                Population   => Get_Quantity ("population"),
-                                Employment   => Get_Quantity ("employment"));
+                                Slots         => Slots,
+                                Population    => Get_Quantity ("population"),
+                                Employment    => Get_Quantity ("employment"),
+                                Cost_Modifier => Get ("trade-goods-cost"));
                begin
                   Concorde.Configure.Attributes.Configure_Has_Attributes
                     (Has_Attributes    => Module,

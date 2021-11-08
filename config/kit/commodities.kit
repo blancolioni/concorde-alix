@@ -55,4 +55,8 @@ record Building_Module : Commodity is
    key Category : Building_Module_Category;
 end Building_Module;
 
+record Trade_Goods : Commodity is
+   unique key Classification : Natural;
+end Trade_Goods;
+
 end Commodities;

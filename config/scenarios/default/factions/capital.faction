@@ -5,10 +5,10 @@ capital = {
       residency-1
       residency-1
       residency-1
-      residency-1
       residency-2
       residency-2
       market-1
+      starport-1
       storehouse-1
       monument-1
       meeting-place-1
@@ -18,8 +18,19 @@ capital = {
    individuals = 100
 }
 
-districts = {
-   count = 75
+urban = {
+   modules = {
+      residency-1
+      residency-1
+      residency-1
+      market-1
+      meeting-place-1
+   }
+   count = 20
+}
+
+primary = {
+   count = 20
 }
 
 edicts = {

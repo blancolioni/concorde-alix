@@ -3,6 +3,7 @@
     modules = {
         market = { economy = 1 stability = 1 employment = 5 }
         black-market = { economy = 4 unrest = 1 employment = 20 }
+        starport = { economy = 1 employment = 10 trade-goods-cost = -1 }
     }
 }
 
@@ -11,6 +12,7 @@
     modules = {
         market = { economy = 3 stability = 1 employment = 15 }
         black-market = { economy = 8 stability = -2 unrest = 1 employment = 40 }
+        starport = { economy = 2 employment = 15 trade-goods-cost = 0 }
     }
 }
 
@@ -21,6 +23,7 @@
         market = { economy = 4 stability = 2 supply = 1 employment = 20 }
         black-market = { economy = 12 stability = -4 unrest = 1 capability = 1 law = -1 supply = 1 employment = 60 }
         bank = { economy = 3 stability = 3 law = 1 employment = 3 }
+        starport = { economy = 4 employment = 20 trade-goods-cost = 1 }
     }
 }
 
@@ -31,6 +34,7 @@
         market = { economy = 6 stability =2 supply = 2 employment = 30 }
         black-market = { economy = 14 stability = -2 unrest = 2 capability = 2 law = -2 supply = 2 employment = 70 }
         bank = { economy = 4 stability = 4 law = 1 supply = 1 employment = 4 }
+        starport = { economy = 6 employment = 30 trade-goods-cost = 2 }
     }
 }
 
@@ -41,6 +45,7 @@
         market = { economy = 6 stability = 4 supply = 4 employment = 30 }
         black-market = { economy = 16 stability = -2 unrest = 2 capability = 3 law = -2 supply = 3 employment = 80 }
         bank = { economy = 4 stability = 4 loyalty = 2 law = 2 supply = 1 capability = 1 employment = 4 }
+        starport = { economy = 8 employment = 40 trade-goods-cost = 5 }
     }
 }
 

@@ -44,12 +44,25 @@ package Concorde.Colonies is
      (Colony : Colony_Class)
       return Concorde.Quantities.Quantity_Type;
 
+   function Gdp
+     (Colony : Colony_Class)
+     return Concorde.Money.Money_Type;
+
+   function Gdp_Per_Capita
+     (Colony : Colony_Class)
+      return Concorde.Money.Price_Type;
+
    function Minimum_Required
      (Colony    : Colony_Class;
       Commodity : Accord.Commodity.Commodity_Class)
       return Concorde.Quantities.Quantity_Type;
 
    function Current_Request
+     (Colony    : Colony_Class;
+      Commodity : Accord.Commodity.Commodity_Class)
+      return Concorde.Quantities.Quantity_Type;
+
+   function Current_Supply
      (Colony    : Colony_Class;
       Commodity : Accord.Commodity.Commodity_Class)
       return Concorde.Quantities.Quantity_Type;
@@ -97,6 +110,10 @@ package Concorde.Colonies is
      (Process : not null access
         procedure (Colony : Colony_Class));
 
+   procedure Log
+     (Colony  : Colony_Class;
+      Message : String);
+
 private
 
    type Check_Result is
@@ -124,8 +141,9 @@ private
    function Major_Failure (Check : Check_Result) return Boolean
    is (Check.Total <= Check.Difficulty - 5);
 
-   procedure Log
-     (Colony  : Colony_Class;
-      Message : String);
+   function Gdp_Per_Capita
+     (Colony : Colony_Class)
+      return Concorde.Money.Price_Type
+   is (Concorde.Money.Price (Gdp (Colony), Population (Colony)));
 
 end Concorde.Colonies;

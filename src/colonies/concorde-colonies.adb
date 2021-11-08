@@ -6,6 +6,7 @@ with Concorde.Calculations;
 with Concorde.Individuals;
 with Concorde.Logging;
 with Concorde.Sectors;
+with Concorde.Stock;
 
 with Accord.Colony_Edict;
 with Accord.Colony_Request;
@@ -299,6 +300,29 @@ package body Concorde.Colonies is
       end if;
    end Current_Request;
 
+   --------------------
+   -- Current_Supply --
+   --------------------
+
+   function Current_Supply
+     (Colony    : Colony_Class;
+      Commodity : Accord.Commodity.Commodity_Class)
+      return Concorde.Quantities.Quantity_Type
+   is
+      use Concorde.Quantities;
+      Minimum   : constant Quantity_Type :=
+                    Minimum_Required (Colony, Commodity);
+      Available : constant Quantity_Type :=
+                    Concorde.Stock.Quantity
+                      (Colony, Commodity);
+   begin
+      if Available > Minimum then
+         return Available - Minimum;
+      else
+         return Zero;
+      end if;
+   end Current_Supply;
+
    ----------------
    -- Employment --
    ----------------
@@ -335,6 +359,23 @@ package body Concorde.Colonies is
          Process (Colony);
       end loop;
    end For_All_Colonies;
+
+   ---------
+   -- Gdp --
+   ---------
+
+   function Gdp
+     (Colony : Colony_Class)
+      return Concorde.Money.Money_Type
+   is
+      Base_Gdp : constant Natural :=
+                   Economy (Colony) * Stability (Colony);
+      Unrest_Penalty : constant Natural :=
+                         Natural'Min (Unrest (Colony), Base_Gdp / 2);
+
+   begin
+      return Concorde.Money.To_Money (Real (Base_Gdp - Unrest_Penalty));
+   end Gdp;
 
    -----------
    -- Level --

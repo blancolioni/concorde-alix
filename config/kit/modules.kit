@@ -16,11 +16,13 @@ end Module_Group;
 
 record Module : Localised, Has_Attributes is
    key Module_Group;
-   Level        : Positive;
-   Cost         : Money_Type;
-   Slots        : Positive;
-   Population   : Quantity_Type;
-   Employment   : Quantity_Type;
+   Level          : Positive;
+   Cost           : Money_Type;
+   Slots          : Positive;
+   Population     : Quantity_Type;
+   Employment     : Quantity_Type;
+   Cost_Modifier  : Long_Float;
+   Price_Modifier : Long_Float;
    unique key Group_Level with Module_Group, Level;
 end Module;
 

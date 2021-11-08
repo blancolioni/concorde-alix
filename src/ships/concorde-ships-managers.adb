@@ -2,6 +2,7 @@ with Concorde.Calendar;
 with Concorde.Constants;
 with Concorde.Elementary_Functions;
 with Concorde.Logging;
+with Concorde.Markets;
 with Concorde.Money;
 with Concorde.Orbits;
 with Concorde.Quantities;
@@ -10,6 +11,8 @@ with Concorde.Real_Images;
 with Concorde.Solar_System;
 with Concorde.Star_Systems;
 with Concorde.Trigonometry;
+
+with Concorde.Colonies;
 
 with Accord.Colony_Request;
 with Accord.Colony_Supply;
@@ -43,6 +46,10 @@ package body Concorde.Ships.Managers is
    procedure Accept_Request
      (Manager : in out Default_Trader'Class;
       Request : Accord.Colony_Request.Colony_Request_Class);
+
+   procedure Add_Trade_Goods_Route
+     (Manager     : in out Default_Trader'Class;
+      Destination : Accord.Colony.Colony_Class);
 
    procedure Start_Stellar_Journey
      (Manager        : in out Root_Ship_Manager'Class;
@@ -89,7 +96,10 @@ package body Concorde.Ships.Managers is
 
       Current_Star_System : constant Accord.Star_System.Star_System_Class :=
                               Manager.Ship.World.Star_System;
-      Available_Space : constant Quantity_Type :=
+      Current_Colony      : constant Accord.Colony.Colony_Class :=
+                              Accord.Colony.First_By_World
+                                (Manager.Ship.World);
+      Available_Space     : constant Quantity_Type :=
                           To_Quantity (Manager.Ship.Ship_Design.Cargo_Space);
 
       function Score
@@ -117,6 +127,9 @@ package body Concorde.Ships.Managers is
       begin
          if Request.Colony.World.Identifier
            = Manager.Ship.World.Identifier
+           or else Concorde.Colonies.Current_Supply (Current_Colony,
+                                                     Request.Commodity)
+           < Available_Space
          then
             return 0.0;
          else
@@ -154,12 +167,104 @@ package body Concorde.Ships.Managers is
                       & Best_Request.Colony.World.Name);
 
          Manager.Accept_Request (Best_Request);
-      else
-         Manager.Log ("no suitable requests");
-         Manager.Update_With_Delay (Concorde.Calendar.Days (1));
+         return;
       end if;
 
+      Manager.Log ("scanning general trade goods");
+
+      declare
+         Classification : constant Concorde.Markets.Trade_Classification :=
+                            Concorde.Markets.Classify_Colony
+                              (Accord.Colony.First_By_World
+                                 (Manager.Ship.World));
+         Cost_Of_Goods  : constant Concorde.Money.Price_Type :=
+                            Concorde.Markets.Cost_Of_Goods (Current_Colony);
+
+         Best_Score     : Non_Negative_Real := 0.0;
+         Best_Destination : Accord.Colony.Colony_Handle;
+
+         function Score
+           (Colony : Accord.Colony.Colony_Class)
+            return Non_Negative_Real;
+
+         -----------
+         -- Score --
+         -----------
+
+         function Score
+           (Colony : Accord.Colony.Colony_Class)
+            return Non_Negative_Real
+         is
+            use type Concorde.Money.Price_Type;
+            Base_Price : constant Concorde.Money.Price_Type :=
+                           Concorde.Markets.Base_Price_Of_Goods
+                             (Colony, Classification);
+         begin
+            Manager.Log
+              ("destination "
+               & Colony.World.Name
+               & ": classification "
+               & Concorde.Markets.Show (Classification)
+               & "; price of goods "
+               & Concorde.Money.Show (Base_Price));
+            if Base_Price > Cost_Of_Goods then
+               return Concorde.Money.To_Real (Base_Price)
+                 / Concorde.Money.To_Real (Cost_Of_Goods);
+            else
+               return 0.0;
+            end if;
+         end Score;
+
+      begin
+         Manager.Log ("current classification: "
+                      & Concorde.Markets.Show (Classification));
+         Manager.Log ("cost of goods: "
+                      & Concorde.Money.Show (Cost_Of_Goods));
+
+         for Colony of Accord.Colony.Scan_By_Top_Record loop
+            if Colony.Identifier /= Current_Colony.Identifier then
+               declare
+                  This_Score : constant Non_Negative_Real :=
+                                 Score (Colony);
+               begin
+                  if This_Score > Best_Score then
+                     Best_Score := This_Score;
+                     Best_Destination := Colony.To_Colony_Handle;
+                  end if;
+               end;
+            end if;
+         end loop;
+
+         if Best_Destination.Has_Element then
+            Manager.Log ("best destination:       "
+                         & Concorde.Markets.Show
+                           (Concorde.Markets.Classify_Colony
+                              (Best_Destination)));
+            Manager.Log ("trading to " & Best_Destination.World.Name);
+            Manager.Add_Trade_Goods_Route (Best_Destination);
+            return;
+         end if;
+      end;
+
+      Manager.Log ("no good destinations");
+
    end Activate;
+
+   ---------------------------
+   -- Add_Trade_Goods_Route --
+   ---------------------------
+
+   procedure Add_Trade_Goods_Route
+     (Manager     : in out Default_Trader'Class;
+      Destination : Accord.Colony.Colony_Class)
+   is
+      use Concorde.Quantities;
+      Available_Space : constant Quantity_Type :=
+                          To_Quantity (Manager.Ship.Ship_Design.Cargo_Space)
+                          with Unreferenced;
+   begin
+      Manager.Set_Destination (Destination.World);
+   end Add_Trade_Goods_Route;
 
    ---------------------
    -- Arrive_At_World --
@@ -183,6 +288,7 @@ package body Concorde.Ships.Managers is
    begin
       Manager.Ship.Update_Ship
         .Set_World (Manager.Ship.Destination)
+        .Set_Destination (Accord.World.Empty_Handle)
         .Set_Semimajor_Axis (Orbit)
         .Set_Epoch (Epoch)
         .Set_Period (Real (Period))
@@ -322,6 +428,9 @@ package body Concorde.Ships.Managers is
         .Set_Status (Accord.Db.Moving_To_Jump_Point)
         .Set_Departure (Concorde.Calendar.Clock)
         .Set_Arrival (Concorde.Calendar.Clock + Journey_Duration)
+        .Set_World (Accord.World.Empty_Handle)
+        .Set_Semimajor_Axis (0.0)
+        .Set_Period (0.0)
         .Set_From_X (Cos (Stellar_Long) * Cos (Stellar_Lat) * Current_Distance)
         .Set_From_Y (Sin (Stellar_Long) * Cos (Stellar_Lat) * Current_Distance)
         .Set_From_Z (Sin (Stellar_Lat) * Current_Distance)
@@ -568,6 +677,9 @@ package body Concorde.Ships.Managers is
         .Set_Status (New_Status)
         .Set_Departure (Concorde.Calendar.Clock)
         .Set_Arrival (Concorde.Calendar.Clock + Journey_Duration)
+        .Set_World (Accord.World.Empty_Handle)
+        .Set_Semimajor_Axis (0.0)
+        .Set_Period (0.0)
         .Set_From_X (X1)
         .Set_From_Y (Y1)
         .Set_From_Z (Z1)

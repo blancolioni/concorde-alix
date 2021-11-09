@@ -99,13 +99,23 @@ package body Concorde.Colonies.Managers is
               "food: available " & Show (Available)
               & "; required " & Show (Required));
          if Available < Required then
-            Concorde.Attributes.Increase
-              (Colony, "unrest",
-               Natural (To_Real (Required - Available)) + 1);
-            Log (Colony,
-                 "base unrest changed to"
-                 & Concorde.Attributes.Get (Colony, "unrest")'Image);
+            declare
+               Current_Unrest : constant Natural :=
+                                  Concorde.Attributes.Get (Colony, "unrest");
+               Minimum_Unrest : constant Natural :=
+                                  Natural (To_Real (Required - Available)) + 1;
+            begin
+               if Current_Unrest < Minimum_Unrest then
+                  Concorde.Attributes.Increase
+                    (Colony, "unrest",
+                     Minimum_Unrest - Current_Unrest);
+                  Log (Colony,
+                       "base unrest changed to"
+                       & Concorde.Attributes.Get (Colony, "unrest")'Image);
+               end if;
+            end;
          end if;
+
          if Available > Zero then
             Concorde.Stock.Remove (Colony, Food, Min (Available, Required));
          end if;

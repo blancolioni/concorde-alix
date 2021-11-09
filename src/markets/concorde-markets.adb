@@ -1,5 +1,7 @@
 with Ada.Strings.Unbounded;
 
+with WL.Random;
+
 with Concorde.Colonies;
 with Concorde.Quantities;
 
@@ -126,6 +128,43 @@ package body Concorde.Markets is
                             | Non_Agricultural | Rich => 1.0,
                           others                      => 0.0),
         others        => (others => 0.0));
+
+   Actual_Price_Table : constant array (2 .. 15) of Non_Negative_Real :=
+                          (2 => 0.4,
+                           3 => 0.5,
+                           4 => 0.7,
+                           5 => 0.8,
+                           6 => 0.9,
+                           7 => 1.0,
+                           8 => 1.1,
+                           9 => 1.2,
+                           10 => 1.3,
+                           11 => 1.5,
+                           12 => 1.7,
+                           13 => 2.0,
+                           14 => 3.0,
+                           15 => 4.0);
+
+   ---------------------------
+   -- Actual_Price_Of_Goods --
+   ---------------------------
+
+   function Actual_Price_Of_Goods
+     (Colony         : Accord.Colony.Colony_Class;
+      Classification : Trade_Classification;
+      Broker_Level   : Natural)
+      return Concorde.Money.Price_Type
+   is
+      Roll : constant Positive :=
+               WL.Random.Random_Number (1, 6)
+               + WL.Random.Random_Number (1, 6);
+      Index : constant Positive := Positive'Min (Roll + Broker_Level,
+                                                 Actual_Price_Table'Last);
+   begin
+      return Concorde.Money.Adjust_Price
+        (Base_Price_Of_Goods (Colony, Classification),
+         Actual_Price_Table (Index));
+   end Actual_Price_Of_Goods;
 
    -------------------------
    -- Base_Price_Of_Goods --
@@ -291,6 +330,19 @@ package body Concorde.Markets is
    begin
       return Concorde.Colonies.Gdp_Per_Capita (Colony) > To_Price (2.0);
    end Is_Rich;
+
+   ------------------------------
+   -- Is_Trade_Goods_Commodity --
+   ------------------------------
+
+   function Is_Trade_Goods_Commodity
+     (Commodity : Accord.Commodity.Commodity_Class)
+      return Boolean
+   is
+      use type Accord.Db.Record_Type;
+   begin
+      return Commodity.Top_Record = Accord.Db.R_Trade_Goods;
+   end Is_Trade_Goods_Commodity;
 
    ----------
    -- Show --

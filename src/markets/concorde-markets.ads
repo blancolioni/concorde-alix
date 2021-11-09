@@ -20,6 +20,14 @@ package Concorde.Markets is
      (Colony : Accord.Colony.Colony_Class)
       return Trade_Classification;
 
+   function Get_Trade_Goods_Commodity
+     (Colony : Accord.Colony.Colony_Class)
+      return Accord.Commodity.Commodity_Class;
+
+   function Is_Trade_Goods_Commodity
+     (Commodity : Accord.Commodity.Commodity_Class)
+      return Boolean;
+
    function Cost_Of_Goods
      (Colony : Accord.Colony.Colony_Class)
       return Concorde.Money.Price_Type;
@@ -29,6 +37,12 @@ package Concorde.Markets is
       Classification : Trade_Classification)
       return Concorde.Money.Price_Type;
 
+   function Actual_Price_Of_Goods
+     (Colony         : Accord.Colony.Colony_Class;
+      Classification : Trade_Classification;
+      Broker_Level   : Natural)
+      return Concorde.Money.Price_Type;
+
    function To_Commodity
      (Classification : Trade_Classification)
       return Accord.Commodity.Commodity_Class;
@@ -36,5 +50,12 @@ package Concorde.Markets is
    function To_Trade_Classification
      (Commodity : Accord.Commodity.Commodity_Class)
       return Trade_Classification;
+
+private
+
+   function Get_Trade_Goods_Commodity
+     (Colony : Accord.Colony.Colony_Class)
+      return Accord.Commodity.Commodity_Class
+   is (To_Commodity (Classify_Colony (Colony)));
 
 end Concorde.Markets;

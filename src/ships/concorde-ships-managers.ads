@@ -14,6 +14,10 @@ package Concorde.Ships.Managers is
      (Manager : in out Root_Ship_Manager)
    is abstract;
 
+   procedure On_World_Arrival
+     (Manager : in out Root_Ship_Manager)
+   is null;
+
    procedure Set_Destination
      (Manager     : in out Root_Ship_Manager'Class;
       Destination : Accord.World.World_Class);

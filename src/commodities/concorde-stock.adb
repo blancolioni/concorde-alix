@@ -170,4 +170,33 @@ package body Concorde.Stock is
         .Done;
    end Set_Quantity;
 
+   ------------
+   -- Update --
+   ------------
+
+   procedure Update
+     (Has_Stock : Accord.Has_Stock.Has_Stock_Class;
+      Process   : not null access
+        procedure (Commodity : Accord.Commodity.Commodity_Class;
+                   Quantity  : in out Concorde.Quantities.Quantity_Type))
+   is
+   begin
+      for Stock_Item of
+        Accord.Stock_Item.Select_By_Has_Stock (Has_Stock)
+      loop
+         declare
+            use type Concorde.Quantities.Quantity_Type;
+            Quantity : Concorde.Quantities.Quantity_Type :=
+                         Stock_Item.Quantity;
+         begin
+            Process (Stock_Item.Commodity, Quantity);
+            if Quantity /= Stock_Item.Quantity then
+               Stock_Item.Update_Stock_Item
+                 .Set_Quantity (Quantity)
+                 .Done;
+            end if;
+         end;
+      end loop;
+   end Update;
+
 end Concorde.Stock;

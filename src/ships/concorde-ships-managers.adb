@@ -1,3 +1,4 @@
+with Concorde.Agents;
 with Concorde.Calendar;
 with Concorde.Constants;
 with Concorde.Elementary_Functions;
@@ -10,12 +11,14 @@ with Concorde.Random;
 with Concorde.Real_Images;
 with Concorde.Solar_System;
 with Concorde.Star_Systems;
+with Concorde.Stock;
 with Concorde.Trigonometry;
 
 with Concorde.Colonies;
 
 with Accord.Colony_Request;
 with Accord.Colony_Supply;
+with Accord.Commodity;
 with Accord.Star_System;
 
 package body Concorde.Ships.Managers is
@@ -43,12 +46,16 @@ package body Concorde.Ships.Managers is
    overriding procedure Activate
      (Manager : in out Default_Trader);
 
+   overriding procedure On_World_Arrival
+     (Manager : in out Default_Trader);
+
    procedure Accept_Request
      (Manager : in out Default_Trader'Class;
       Request : Accord.Colony_Request.Colony_Request_Class);
 
    procedure Add_Trade_Goods_Route
      (Manager     : in out Default_Trader'Class;
+      Current     : Accord.Colony.Colony_Class;
       Destination : Accord.Colony.Colony_Class);
 
    procedure Start_Stellar_Journey
@@ -241,7 +248,9 @@ package body Concorde.Ships.Managers is
                            (Concorde.Markets.Classify_Colony
                               (Best_Destination)));
             Manager.Log ("trading to " & Best_Destination.World.Name);
-            Manager.Add_Trade_Goods_Route (Best_Destination);
+            Manager.Add_Trade_Goods_Route
+              (Current     => Current_Colony,
+               Destination => Best_Destination);
             return;
          end if;
       end;
@@ -256,13 +265,32 @@ package body Concorde.Ships.Managers is
 
    procedure Add_Trade_Goods_Route
      (Manager     : in out Default_Trader'Class;
+      Current     : Accord.Colony.Colony_Class;
       Destination : Accord.Colony.Colony_Class)
    is
       use Concorde.Quantities;
       Available_Space : constant Quantity_Type :=
-                          To_Quantity (Manager.Ship.Ship_Design.Cargo_Space)
-                          with Unreferenced;
+                          To_Quantity (Manager.Ship.Ship_Design.Cargo_Space);
+      Goods_Price     : constant Concorde.Money.Price_Type :=
+                          Concorde.Markets.Cost_Of_Goods
+                            (Current);
+      Total_Cost      : constant Concorde.Money.Money_Type :=
+                          Concorde.Money.Total (Goods_Price, Available_Space);
    begin
+      Concorde.Stock.Add
+        (To        => Manager.Ship,
+         Commodity =>
+           Concorde.Markets.Get_Trade_Goods_Commodity
+             (Current),
+         Quantity  => Available_Space);
+      Concorde.Agents.Add_Cash
+        (Agent => Current,
+         Cash  => Total_Cost,
+         Tag   => "sell-trade-goods");
+      Concorde.Agents.Remove_Cash
+        (Agent => Manager.Ship.Faction,
+         Cash  => Total_Cost,
+         Tag   => "buy-trade-goods");
       Manager.Set_Destination (Destination.World);
    end Add_Trade_Goods_Route;
 
@@ -292,7 +320,8 @@ package body Concorde.Ships.Managers is
         .Set_Semimajor_Axis (Orbit)
         .Set_Epoch (Epoch)
         .Set_Period (Real (Period))
-        .Done;
+          .Done;
+      Manager.On_World_Arrival;
       Manager.Idle;
    end Arrive_At_World;
 
@@ -536,6 +565,85 @@ package body Concorde.Ships.Managers is
          To_Longitude   => Target_Longitude,
          To_Latitude    => From_Degrees (0.0));
    end Move_To_World;
+
+   ----------------------
+   -- On_World_Arrival --
+   ----------------------
+
+   overriding procedure On_World_Arrival
+     (Manager : in out Default_Trader)
+   is
+
+      Colony : constant Accord.Colony.Colony_Class :=
+                 Accord.Colony.First_By_World (Manager.Ship.World);
+
+      procedure Sell
+        (Commodity : Accord.Commodity.Commodity_Class;
+         Quantity  : in out Concorde.Quantities.Quantity_Type);
+
+      procedure Sell_Trade_Goods
+        (Commodity : Accord.Commodity.Commodity_Class;
+         Quantity  : in out Concorde.Quantities.Quantity_Type)
+        with Pre => Concorde.Markets.Is_Trade_Goods_Commodity (Commodity);
+
+      ----------
+      -- Sell --
+      ----------
+
+      procedure Sell
+        (Commodity : Accord.Commodity.Commodity_Class;
+         Quantity  : in out Concorde.Quantities.Quantity_Type)
+      is
+      begin
+         if Concorde.Markets.Is_Trade_Goods_Commodity (Commodity) then
+            Sell_Trade_Goods (Commodity, Quantity);
+         end if;
+      end Sell;
+
+      ----------------------
+      -- Sell_Trade_Goods --
+      ----------------------
+
+      procedure Sell_Trade_Goods
+        (Commodity : Accord.Commodity.Commodity_Class;
+         Quantity  : in out Concorde.Quantities.Quantity_Type)
+      is
+         use Concorde.Money;
+         Classification : constant Concorde.Markets.Trade_Classification :=
+                            Concorde.Markets.To_Trade_Classification
+                              (Commodity);
+
+         Base_Price     : constant Price_Type :=
+                            Concorde.Markets.Base_Price_Of_Goods
+                              (Colony, Classification);
+         Price          : constant Price_Type :=
+                            Concorde.Markets.Actual_Price_Of_Goods
+                              (Colony, Classification, 0);
+         Total          : constant Money_Type :=
+                            Concorde.Money.Total (Price, Quantity);
+      begin
+         Manager.Log ("selling " & Concorde.Quantities.Show (Quantity)
+                      & " " & Concorde.Markets.Show (Classification));
+         Manager.Log ("base price "
+                      & Show (Base_Price)
+                      & "; sell price "
+                      & Show (Price)
+                      & "; total "
+                      & Show (Total));
+         Concorde.Agents.Add_Cash
+           (Agent => Manager.Ship.Faction,
+            Cash  => Total,
+            Tag   => "sell-trade-goods");
+         Concorde.Agents.Remove_Cash
+           (Agent => Colony,
+            Cash  => Total,
+            Tag   => "buy-trade-goods");
+         Quantity := Concorde.Quantities.Zero;
+      end Sell_Trade_Goods;
+
+   begin
+      Concorde.Stock.Update (Manager.Ship, Sell'Access);
+   end On_World_Arrival;
 
    ---------------------
    -- Set_Destination --

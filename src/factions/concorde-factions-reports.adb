@@ -8,6 +8,7 @@ with Concorde.Trigonometry;
 
 with Concorde.Agents;
 with Concorde.Colonies;
+with Concorde.Markets;
 with Concorde.Orbits;
 with Concorde.Ships;
 
@@ -43,6 +44,9 @@ package body Concorde.Factions.Reports is
             use Concorde.Colonies;
          begin
             Put_Line (Faction.Name & " colony on " & Colony.World.Name);
+            Put_Line ("Market:      "
+                      & Concorde.Markets.Show
+                        (Concorde.Markets.Classify_Colony (Colony)));
             Put_Line ("GDP:         "
                       & Concorde.Money.Show (Gdp (Colony)));
             Put_Line ("GDP-PC:      "

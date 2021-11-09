@@ -114,6 +114,17 @@ package body Concorde.Markets is
         Asteroid_Belt => (Asteroid_Belt => 1.0, Industrial => 1.0,
                           Non_Agricultural => 1.0, Rich => 1.0,
                           Vacuum_World     => 1.0, others => 0.0),
+        Barren_World  => (Agricultural => 1.0, Industrial => 1.0,
+                          others       => 0.0),
+        High_Population => (High_Population | Low_Population | Rich => 1.0,
+                            others                                  => 1.0),
+        Low_Population  => (Industrial | Rich => 1.0, others => 0.0),
+        Non_Industrial  => (Industrial => 1.0, Non_Industrial => -1.0,
+                            others => 0.0),
+        Rich          => (Agricultural | Desert_World
+                            | High_Population | Industrial
+                            | Non_Agricultural | Rich => 1.0,
+                          others                      => 0.0),
         others        => (others => 0.0));
 
    -------------------------

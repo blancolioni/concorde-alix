@@ -55,6 +55,7 @@ end Colony_Request;
 
 record Colony_Supply is
    key Colony_Request;
+   key Agent;
    Quantity : Quantity_Type;
    Price    : Price_Type;
 end Colony_Supply;

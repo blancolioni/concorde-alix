@@ -77,18 +77,40 @@ package body Concorde.Ships.Managers is
       Request : Accord.Colony_Request.Colony_Request_Class)
    is
       use Concorde.Quantities;
-      Available_Space : constant Quantity_Type :=
+      Current_Colony      : constant Accord.Colony.Colony_Class :=
+                              Accord.Colony.First_By_World
+                                (Manager.Ship.World);
+      Available_Space     : constant Quantity_Type :=
                           To_Quantity (Manager.Ship.Ship_Design.Cargo_Space);
       Transport       : constant Quantity_Type :=
                           Min (Available_Space, Request.Remaining);
+      Goods_Price     : constant Concorde.Money.Price_Type :=
+                          Request.Commodity.Base_Price;
+      Total_Cost      : constant Concorde.Money.Money_Type :=
+                          Concorde.Money.Total (Goods_Price, Transport);
    begin
+      Concorde.Stock.Add
+        (To        => Manager.Ship,
+         Commodity => Request.Commodity,
+         Quantity  => Transport);
+      Concorde.Agents.Add_Cash
+        (Agent => Current_Colony,
+         Cash  => Total_Cost,
+         Tag   => "sell-" & Request.Commodity.Tag);
+      Concorde.Agents.Remove_Cash
+        (Agent => Manager.Ship.Faction,
+         Cash  => Total_Cost,
+         Tag   => "buy-" & Request.Commodity.Tag);
+
       Request.Update_Colony_Request
         .Set_Remaining (Request.Remaining - Transport)
         .Done;
       Accord.Colony_Supply.Create
         (Colony_Request => Request,
+         Agent          => Manager.Ship,
          Quantity       => Transport,
          Price          => Request.Offer);
+
       Manager.Set_Destination (Request.Colony.World);
    end Accept_Request;
 
@@ -642,6 +664,38 @@ package body Concorde.Ships.Managers is
       end Sell_Trade_Goods;
 
    begin
+      for Supply of Accord.Colony_Supply.Select_By_Agent (Manager.Ship) loop
+         if Supply.Colony_Request.Colony.Identifier
+           = Colony.Identifier
+         then
+            declare
+               Commodity : constant Accord.Commodity.Commodity_Class :=
+                             Supply.Colony_Request.Commodity;
+               Quantity  : constant Concorde.Quantities.Quantity_Type :=
+                             Concorde.Stock.Quantity
+                               (Manager.Ship, Commodity);
+               Price     : constant Concorde.Money.Price_Type :=
+                             Supply.Price;
+               Total     : constant Concorde.Money.Money_Type :=
+                             Concorde.Money.Total (Price, Quantity);
+            begin
+               Manager.Log
+                 ("supplying " & Concorde.Quantities.Show (Quantity)
+                  & " " & Commodity.Tag
+                  & " for " & Concorde.Money.Show (Price)
+                  & " each; total "
+                  & Concorde.Money.Show (Total));
+
+               Concorde.Stock.Remove (Manager.Ship, Commodity, Quantity);
+               Concorde.Stock.Add (Colony, Commodity, Quantity);
+               Concorde.Agents.Add_Cash
+                 (Manager.Ship.Faction, Total, Commodity.Tag);
+               Concorde.Agents.Remove_Cash
+                 (Colony, Total, Commodity.Tag);
+            end;
+         end if;
+      end loop;
+
       Concorde.Stock.Update (Manager.Ship, Sell'Access);
    end On_World_Arrival;
 

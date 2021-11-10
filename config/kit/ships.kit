@@ -1,3 +1,4 @@
+with Agents;
 with Colonies;
 with Factions;
 with Locations;
@@ -140,7 +141,7 @@ end Ship_Design_Weapon;
 type Ship_Status is
   (Idle, Activating, Moving_To_Jump_Point, Jumping, Moving_To_World, Surveying, Training, Repairing, Destroyed);
   
-record Ship : Has_Name, Managed, Shared, Orbiting_Object, Has_Stock is
+record Ship : Has_Name, Managed, Shared, Orbiting_Object, Has_Stock, Agent is
    key Faction;
    key Home    : Colony;
    key World;

@@ -1,10 +1,12 @@
 with Concorde.Calendar;
 with Concorde.Identifiers;
+with Concorde.Money;
 with Concorde.Orbits;
 with Concorde.Quantities;
 with Concorde.Random;
 with Concorde.Stock;
 
+with Concorde.Agents;
 with Concorde.Ship_Designs;
 
 with Accord.Db;
@@ -55,6 +57,9 @@ package body Concorde.Ships is
                   Period          => Real (Period),
                   Identifier      => Concorde.Identifiers.Next_Identifier,
                   Mass            => Concorde.Ship_Designs.Dry_Mass (Design),
+                  Account         =>
+                    Concorde.Agents.New_Account
+                      (Concorde.Money.Zero, Owner.Account),
                   Ship_Design     => Design,
                   Faction         => Owner,
                   Home            => Home,

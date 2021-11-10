@@ -189,11 +189,13 @@ package body Concorde.Stock is
             Quantity : Concorde.Quantities.Quantity_Type :=
                          Stock_Item.Quantity;
          begin
-            Process (Stock_Item.Commodity, Quantity);
-            if Quantity /= Stock_Item.Quantity then
-               Stock_Item.Update_Stock_Item
-                 .Set_Quantity (Quantity)
-                 .Done;
+            if Quantity > Concorde.Quantities.Zero then
+               Process (Stock_Item.Commodity, Quantity);
+               if Quantity /= Stock_Item.Quantity then
+                  Stock_Item.Update_Stock_Item
+                    .Set_Quantity (Quantity)
+                    .Done;
+               end if;
             end if;
          end;
       end loop;

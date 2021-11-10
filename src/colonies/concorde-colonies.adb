@@ -3,6 +3,7 @@ with WL.String_Sets;
 
 with Concorde.Attributes;
 with Concorde.Calculations;
+with Concorde.Elementary_Functions;
 with Concorde.Individuals;
 with Concorde.Logging;
 with Concorde.Sectors;
@@ -208,7 +209,18 @@ package body Concorde.Colonies is
             Concorde.Calculations.Show (Calculation));
       end if;
 
-      return Integer'Max (Concorde.Calculations.Total (Calculation), 0);
+      declare
+         Base_Value : constant Non_Negative_Real :=
+                        Non_Negative_Real
+                          (Integer'Max
+                             (Concorde.Calculations.Total (Calculation), 0));
+         Pop        : constant Non_Negative_Real :=
+                        Concorde.Quantities.To_Real (Population (Colony));
+         Pop_Points : constant Non_Negative_Real :=
+                        Concorde.Elementary_Functions.Log (Pop, 10.0);
+      begin
+         return Natural (Base_Value / Pop_Points);
+      end;
 
    end Calculate_Attribute;
 
@@ -368,13 +380,15 @@ package body Concorde.Colonies is
      (Colony : Colony_Class)
       return Concorde.Money.Money_Type
    is
-      Base_Gdp : constant Natural :=
-                   Economy (Colony) * Stability (Colony);
-      Unrest_Penalty : constant Natural :=
-                         Natural'Min (Unrest (Colony), Base_Gdp / 2);
+      Base_Gdp : constant Non_Negative_Real :=
+                   Real (Economy (Colony) * Stability (Colony))
+                   * Concorde.Quantities.To_Real (Employment (Colony));
+      Unrest_Penalty : constant Non_Negative_Real :=
+                         Real'Min (Real (Unrest (Colony)),
+                                   Base_Gdp / 2.0);
 
    begin
-      return Concorde.Money.To_Money (Real (Base_Gdp - Unrest_Penalty));
+      return Concorde.Money.To_Money (Base_Gdp - Unrest_Penalty);
    end Gdp;
 
    -----------

@@ -54,7 +54,8 @@ package body Concorde.Colonies.Updates is
                         (if Collection > 0
                          then To_Money
                            (Real (Collection)
-                            * Colony_Edict.Edict.Revenue)
+                            * Colony_Edict.Edict.Revenue
+                            * To_Real (Gdp (Colony)) * 0.01)
                          else Zero);
       begin
          if Major_Failure (Result) then

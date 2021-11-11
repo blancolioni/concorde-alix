@@ -1,8 +1,10 @@
+with Identifiers;
+
 package Attributes is
 
 record Attribute : Localised;
 
-record Has_Attributes;
+record Has_Attributes : Has_Identifier;
 
 record Attribute_Value is
     key Has_Attributes;

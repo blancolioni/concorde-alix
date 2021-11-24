@@ -36,6 +36,7 @@ depend = { project = nazargtk version = any }
 depend = { project = reiko version = any }
 depend = { project = tarana version = any }
 depend = { project = rho version = any }
+depend = { project = agora version = any }
 language = Ada
 language = C
 main_unit = concorde-driver
